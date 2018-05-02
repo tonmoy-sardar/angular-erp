@@ -16,7 +16,11 @@ const routes: Routes = [
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-            { path: 'company', loadChildren: './company/company.module#CompanyModule' }
+            { path: 'company', loadChildren: './company/company.module#CompanyModule' },
+            { path: 'purchase-organization', loadChildren: './purchase-organization/purchase-organization.module#PurchaseOrganizationModule' },
+            { path: 'purchase-group', loadChildren: './purchase-group/purchase-group.module#PurchaseGroupModule' },
+            { path: 'sale-organization', loadChildren: './sale-organization/sale-organization.module#SaleOrganizationModule' },
+            { path: 'sale-group', loadChildren: './sale-group/sale-group.module#SaleGroupModule' }
         ]
     }
 ];

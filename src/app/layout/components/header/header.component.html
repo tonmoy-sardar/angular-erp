@@ -1,32 +1,75 @@
 <nav class="navbar navbar-expand-lg fixed-top">
-    <a class="navbar-brand" href="#">Shyam ERP </a>
+    <a class="navbar-brand" href="#">ERP System</a>
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>
     </button>
     <div class="collapse navbar-collapse">       
-        <ul class="navbar-nav ml-auto">           
+        <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item dropdown" ngbDropdown>
+                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-cog"></i><b class="caret"></b>
+                </a>
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> States
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> GST Rates
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> Vendors
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Terms & Conditions
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-truck" aria-hidden="true"></i> Transporters
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-university" aria-hidden="true"></i> Banks
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-sitemap" aria-hidden="true"></i> Department
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-address-card" aria-hidden="true"></i> Designation
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-users" aria-hidden="true"></i> Employees
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-list" aria-hidden="true"></i> Material
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-list" aria-hidden="true"></i> Party Types
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <i class="fa fa-list" aria-hidden="true"></i> Other Party
+                    </a>
+                </div>
+            </li>         
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <i class="fa fa-building-o"></i><b class="caret"></b>
                 </a>
                 <div class="dropdown-menu-right" ngbDropdownMenu>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/company']">
                         <i class="fa fa-university" aria-hidden="true"></i> Company
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/purchase-organization']">
                         <i class="fa fa-university" aria-hidden="true"></i> Purchase Org
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/purchase-group']">
                         <i class="fa fa-university" aria-hidden="true"></i> Purchase Group
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">
                         <i class="fa fa-university" aria-hidden="true"></i> Purchase Org Group Mapping
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    </a> -->
+                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/sale-organization']">
                         <i class="fa fa-university" aria-hidden="true"></i> Sale Org
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/sale-group']">
                         <i class="fa fa-university" aria-hidden="true"></i> Sale Group
                     </a>
                     

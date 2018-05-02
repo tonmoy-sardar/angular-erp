@@ -1,4 +1,4 @@
-<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+<!-- <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <div class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
@@ -121,5 +121,97 @@
                 </li>
             </div>
         </div>
+    </div>
+</nav> -->
+
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <div class="list-group">
+        <a routerLink="/company" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-university"></i>&nbsp;Company
+        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('Purchase')">
+                <span><i class="fa fa-shopping-cart"></i>&nbsp;Purchase </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'Purchase'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-pencil"></i>&nbsp;Purchase Requisition</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-shopping-basket"></i>&nbsp;Purchase Orders</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-truck"></i>&nbsp;GRN</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-money"></i>&nbsp;Purchase Invoice</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-money"></i>&nbsp;Payments</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <a href="javascript:void(0)" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-rupee"></i>&nbsp;Customer Invoice
+        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('Stocks')">
+                <span><i class="fa fa-briefcase"></i>&nbsp;Stocks</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'Stocks'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-list"></i>&nbsp;Stock List</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-list"></i>&nbsp;Stock Transfer</span></a>
+                    </li>       
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('Reports')">
+                <span><i class="fa fa-list-alt"></i>&nbsp;Reports </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'Reports'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-pencil"></i>&nbsp;Purchase Requisition</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-pencil"></i>&nbsp;Purchase order</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-pencil"></i>&nbsp;GRN</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-pencil"></i>&nbsp;Transfer Material</span></a>
+                    </li>       
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('Expenses')">
+                <span><i class="fa fa-list-alt"></i>&nbsp;Expenses</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'Expenses'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-list-alt"></i>&nbsp;Employee Expense</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span><i class="fa fa-list-alt"></i>&nbsp;My Expense</span></a>
+                    </li> 
+                </ul>
+            </li>
+        </div>
+        <a href="javascript:void(0)" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-list-alt"></i>&nbsp;Transactions 
+        </a>
+        <a href="javascript:void(0)" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-list-alt"></i>&nbsp;Accounting
+        </a>
     </div>
 </nav>

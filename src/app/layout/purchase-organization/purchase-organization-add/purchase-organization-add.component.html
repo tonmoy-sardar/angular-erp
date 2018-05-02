@@ -1,0 +1,34 @@
+<div>
+    <app-page-header [heading]="'Purchase Organization Add'" [icon]="'fa fa-university'"></app-page-header>
+    <div>
+      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-organization')"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">
+          <div class="col-md-12">
+              <form role="form">
+                  <div class="row">
+                      <div class="form-group col-md-6">
+                          <label>Pruchase Organization Name</label>
+                          <input class="form-control" placeholder="Pruchase Organization Name">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label>Organization Description</label>
+                          <textarea class="form-control" rows="1" placeholder="Organization Description"></textarea>
+                      </div>
+                      <div class="form-group col-md-12" style="text-align: right">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+        </div>
+    </div>
+</div>
