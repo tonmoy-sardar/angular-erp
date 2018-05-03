@@ -20,7 +20,9 @@ const routes: Routes = [
             { path: 'purchase-organization', loadChildren: './purchase-organization/purchase-organization.module#PurchaseOrganizationModule' },
             { path: 'purchase-group', loadChildren: './purchase-group/purchase-group.module#PurchaseGroupModule' },
             { path: 'sale-organization', loadChildren: './sale-organization/sale-organization.module#SaleOrganizationModule' },
-            { path: 'sale-group', loadChildren: './sale-group/sale-group.module#SaleGroupModule' }
+            { path: 'sale-group', loadChildren: './sale-group/sale-group.module#SaleGroupModule' },
+            { path: 'purchase-requisition', loadChildren: './purchase-requisition/purchase-requisition.module#PurchaseRequisitionModule' },
+            { path: 'purchase-orders', loadChildren: './purchase-orders/purchase-orders.module#PurchaseOrdersModule' }
         ]
     }
 ];

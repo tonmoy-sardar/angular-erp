@@ -1,0 +1,221 @@
+<div>
+    <app-page-header [heading]="'Purchase Requisition Add'" [icon]="'fa fa-university'"></app-page-header>
+    <div>
+      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-requisition')"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">                      
+            <div class="col-md-12">
+                <form role="form">
+                  <div class="card bg-light mb-3">
+                      <div class="card-header" style="background-color:#868e96; color: #fff;">Purchase Requisition Add</div>
+                      <div class="card-body">
+                          <div class="card bg-light mb-3">
+                              <div class="card-header">Header Line</div>
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="form-group col-md-3">
+                                          <label>Purchase Organization</label>
+                                          <select class="form-control">
+                                              <option>Select Organization</option>
+                                              <option>Testorg</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                          <label>Purchase Group</label>
+                                          <select class="form-control">
+                                              <option>Select Group</option>
+                                              <option>Asset Purchase</option>
+                                              <option>Material Purchase</option>
+                                              <option>Purchase Group Name</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                          <label>Company</label>
+                                          <select class="form-control">
+                                              <option>Select Company</option>
+                                              <option>Shyam Futuretech</option>  
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                          <label>PR Date</label>
+                                          <input class="form-control" placeholder="Date">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card bg-light mb-3">
+                              <div class="card-header">Material Line</div>
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="form-group col-md-2">
+                                          <label>Material</label>
+                                          <select class="form-control">
+                                              <option>RM002 - Sand</option>
+                                              <option>RM004 - TMT rebar</option>
+                                              <option>SI007 - PLY</option>
+                                              <option>FG008 - Stationary</option>
+                                              <option>FG008 - Stationary</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Quantity</label>
+                                          <input class="form-control" placeholder="Quantity">
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>UOM</label>
+                                          <select class="form-control">
+                                              <option>SQFT</option>
+                                              <option>SQMT</option>
+                                              <option>PCS</option>
+                                              <option>CFT</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Plant</label>
+                                          <select class="form-control">
+                                              <option>MATLA BDS BRIDGE</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <label>Storage</label>
+                                          <select class="form-control">
+                                              <option>Kolkata, kolkata, WEST BENGAL - 741258</option>
+                                              <option>Kolkata, Kolkata, WEST BENGAL - 789852</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Bin</label>
+                                          <select class="form-control">
+                                              <option>Bin 1</option>
+                                              <option>Bin 2</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Vendor</label>
+                                          <select class="form-control">
+                                              <option>Select Vendor</option>
+                                              <option>Shyam FT</option>
+                                              <option>Demo Name</option>
+                                              <option>Vendor Name</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <label>Vendor Address</label>
+                                          <select class="form-control">
+                                              <option>kolkata, kolkata, WEST BENGAL- 700012, India</option>
+                                              <option>kolkata, kolkata, WEST BENGAL- 700012, India</option>                    
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1"  style="padding-top:30px;">
+                                          <a href="javascript:void(0);" title="Edit" name="Edit"><i class="fa fa-plus"></i> Add More</a>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="form-group col-md-2">
+                                          <label>Material</label>
+                                          <select class="form-control">
+                                              <option>RM002 - Sand</option>
+                                              <option>RM004 - TMT rebar</option>
+                                              <option>SI007 - PLY</option>
+                                              <option>FG008 - Stationary</option>
+                                              <option>FG008 - Stationary</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Quantity</label>
+                                          <input class="form-control" placeholder="Quantity">
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>UOM</label>
+                                          <select class="form-control">
+                                              <option>SQFT</option>
+                                              <option>SQMT</option>
+                                              <option>PCS</option>
+                                              <option>CFT</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Plant</label>
+                                          <select class="form-control">
+                                              <option>MATLA BDS BRIDGE</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <label>Storage</label>
+                                          <select class="form-control">
+                                              <option>Kolkata, kolkata, WEST BENGAL - 741258</option>
+                                              <option>Kolkata, Kolkata, WEST BENGAL - 789852</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Bin</label>
+                                          <select class="form-control">
+                                              <option>Bin 1</option>
+                                              <option>Bin 2</option> 
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1">
+                                          <label>Vendor</label>
+                                          <select class="form-control">
+                                              <option>Select Vendor</option>
+                                              <option>Shyam FT</option>
+                                              <option>Demo Name</option>
+                                              <option>Vendor Name</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                          <label>Vendor Address</label>
+                                          <select class="form-control">
+                                              <option>kolkata, kolkata, WEST BENGAL- 700012, India</option>
+                                              <option>kolkata, kolkata, WEST BENGAL- 700012, India</option>                    
+                                          </select>
+                                      </div>
+                                      <div class="form-group col-md-1" style="padding-top:30px;">
+                                          <a href="javascript:void(0);" title="Edit" name="Edit"><i class="fa fa-times-circle fa-2"></i> Delete</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">     
+                            <div class="form-group col-md-12">
+                                <label>Special Note</label>
+                                <textarea class="form-control" rows="3" placeholder="Special Note"></textarea>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-md-12" style="text-align: right">
+                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </form>
+            </div>
+                <!-- <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Pruchase Group Name</label>
+                        <input class="form-control" placeholder="Pruchase Group Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Group Description</label>
+                        <textarea class="form-control" rows="1" placeholder="Group Description"></textarea>
+                    </div>
+                    <div class="form-group col-md-12" style="text-align: right">
+                      <button type="submit" class="btn btn-success">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </div> -->
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div>
+    <app-page-header [heading]="'Purchase Order Add'" [icon]="'fa fa-university'"></app-page-header>
+    <div>
+      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-orders')"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">
+          <div class="col-md-12">
+              <form role="form">
+                <div class="card bg-light mb-3">
+                    <div class="card-header" style="background-color:#868e96; color: #fff;">Pruchase Order Add</div>
+                    <div class="card-body" style="height: 400px;">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label>Requisition No.</label>
+                                <select class="form-control">
+                                    <option>Select Requisition</option>
+                                    <option>17-18/02/I-0003</option>
+                                    <option>17-18/02/I-0004</option> 
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>PO. Date</label>
+                                <div class="input-group datepicker-input">
+                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                        name="po_date" [(ngModel)]="model" ngbDatepicker #po_date="ngbDatepicker">
+                                    <button class="input-group-addon" (click)="po_date.toggle()" type="button">
+                                        <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                        <span class="fa fa-calendar"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Quotation No.</label>
+                                <input class="form-control" placeholder="Quotation No.">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Quotation Date</label>
+                                <div class="input-group datepicker-input">
+                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                        name="quotation_date" [(ngModel)]="model" ngbDatepicker #quotation_date="ngbDatepicker">
+                                    <button class="input-group-addon" (click)="quotation_date.toggle()" type="button">
+                                        <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                        <span class="fa fa-calendar"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12" style="text-align: right">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+    </div>
+</div>
