@@ -1,0 +1,67 @@
+<div>
+  <app-page-header [heading]="'Terms & Condition List'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('terms-condition/add')"><i class="fa fa-plus"></i> New Terms & Condition</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+    
+  <hr/>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">Terms & Condition</div>
+      <table class="card-body table table-hover">
+          <thead>
+          <tr>
+              <th>Sl.No.</th>
+              <th>Terms & Condition</th>
+              <th>Company Name</th>
+              <th>Created Date</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Terms and conditions for delivery</td>
+            <td>Shyam Steel Industries Limited</td>
+            <td>27-01-2018</td>
+            <td><i class="fa fa-thumbs-up"></i> Active</td>
+            <td>
+              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/terms-condition/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Terms and conditions for delivery</td>
+            <td>Shyam Steel Industries Limited</td>
+            <td>27-01-2018</td>
+            <td><i class="fa fa-thumbs-up"></i> Active</td>
+            <td>
+              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/terms-condition/edit', 2]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Terms and conditions for delivery</td>
+            <td>Shyam Steel Industries Limited</td>
+            <td>27-01-2018</td>
+            <td><i class="fa fa-thumbs-up"></i> Active</td>
+            <td>
+              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/terms-condition/edit', 3]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>

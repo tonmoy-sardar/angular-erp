@@ -1,0 +1,80 @@
+<div>
+  <app-page-header [heading]="'Transport Add'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('transport')"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+      <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+              <div class="card bg-light mb-3">
+                  <div class="card-header" style="background-color:#868e96; color: #fff;">Transport Add</div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="form-group col-md-3">
+                              <label>Transporter Name</label>
+                              <input class="form-control" [(ngModel)]="transport.transporter_name" name="transporter_name" placeholder="Transporter Name">
+                          </div>
+                          <div class="form-group col-md-3">
+                              <label>Email</label>
+                              <input class="form-control" [(ngModel)]="transport.email" name="tin_number" placeholder="Email">
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Contact No</label>
+                            <input class="form-control" [(ngModel)]="transport.contact_no" name="contact_no" placeholder="Contact No">
+                          </div>
+
+                          <div class="form-group col-md-3">
+                            <label>State</label>
+                              <select class="form-control">
+                                  <option value="0">Select State</option>
+                                  <option value="71">ANDHRA PRADESH</option>
+                                  <option value="72">ASSAM</option>
+                                  <option value="73">ARUNACHAL PRADESH</option>
+                                  <option value="74">GUJRAT</option>
+                                  <option value="75">BIHAR</option>
+                                  <option value="76">HARYANA</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>City</label>
+                            <input class="form-control" [(ngModel)]="transport.city" name="city" placeholder="City">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>Pincode</label>
+                            <input class="form-control" [(ngModel)]="transport.pincode" name="pincode" placeholder="Pincode">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>PAN</label>
+                            <input class="form-control" [(ngModel)]="transport.pan" name="pan" placeholder="PAN">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>GSTIN</label>
+                            <input class="form-control" [(ngModel)]="transport.gstin" name="gstin" placeholder="GSTIN">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>Amount Credit</label>
+                            <input class="form-control" [(ngModel)]="transport.amount_credit" name="amount_credit" placeholder="Amount Credit">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label>Amount Debit</label>
+                            <input class="form-control" [(ngModel)]="transport.amount_debit" name="amount_debit" placeholder="Amount Debit">
+                          </div>
+                          <div class="form-group col-md-12" style="text-align: right">
+                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="reset" class="btn btn-secondary">Reset</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

@@ -22,7 +22,14 @@ const routes: Routes = [
             { path: 'sale-organization', loadChildren: './sale-organization/sale-organization.module#SaleOrganizationModule' },
             { path: 'sale-group', loadChildren: './sale-group/sale-group.module#SaleGroupModule' },
             { path: 'purchase-requisition', loadChildren: './purchase-requisition/purchase-requisition.module#PurchaseRequisitionModule' },
-            { path: 'purchase-orders', loadChildren: './purchase-orders/purchase-orders.module#PurchaseOrdersModule' }
+            { path: 'purchase-orders', loadChildren: './purchase-orders/purchase-orders.module#PurchaseOrdersModule' },
+            { path: 'states', loadChildren: './states/states.module#StatesModule' },
+            { path: 'gst-rates', loadChildren: './gst-rates/gst-rates.module#GstRatesModule' },
+            { path: 'terms-condition', loadChildren: './terms-condition/terms-condition.module#TermsConditionModule' },
+            { path: 'transport', loadChildren: './transport/transport.module#TransportModule' },
+            { path: 'banks', loadChildren: './banks/banks.module#BanksModule' },
+            { path: 'department', loadChildren: './department/department.module#DepartmentModule' }
+            
         ]
     }
 ];

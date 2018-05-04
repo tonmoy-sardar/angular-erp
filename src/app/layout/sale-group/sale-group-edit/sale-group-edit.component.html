@@ -1,0 +1,39 @@
+<div>
+  <app-page-header [heading]="'Sale Group Edit'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('sale-group')"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+      <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+                <div class="card bg-light mb-3">
+                    <div class="card-header" style="background-color:#868e96; color: #fff;">Sale Group Edit</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Sale Group Name</label>
+                                <input class="form-control" [(ngModel)]="saleGroup.sale_group_name" name="sale_group_name" placeholder="Sale Group Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Group Description</label>
+                                <textarea class="form-control" [(ngModel)]="saleGroup.sale_group_description" name="sale_group_description" rows="1" placeholder="Group Description">{{saleGroup.sale_group_description}}</textarea>
+                            </div>
+                            <div class="form-group col-md-12" style="text-align: right">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

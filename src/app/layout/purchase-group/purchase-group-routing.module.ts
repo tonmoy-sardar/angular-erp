@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PurchaseGroupComponent } from './purchase-group.component';
 import { PurchaseGroupAddComponent } from './purchase-group-add/purchase-group-add.component';
+import { PurchaseGroupEditComponent } from './purchase-group-edit/purchase-group-edit.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,12 @@ const routes: Routes = [
     component: PurchaseGroupComponent
   },
   {
-    path: 'add-purchase-group',
+    path: 'add',
     component: PurchaseGroupAddComponent
+  },
+  {
+    path: 'edit/:id',
+    component: PurchaseGroupEditComponent
   }
 ];
 

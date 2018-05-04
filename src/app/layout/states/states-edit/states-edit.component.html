@@ -1,0 +1,43 @@
+<div>
+  <app-page-header [heading]="'State Edit'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('states')"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+      <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+              <div class="card bg-light mb-3">
+                  <div class="card-header" style="background-color:#868e96; color: #fff;">State Edit</div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="form-group col-md-4">
+                              <label>State Name</label>
+                              <input class="form-control" [(ngModel)]="states.state_name" name="state_name" placeholder="State Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label>Tin Number</label>
+                              <input class="form-control" [(ngModel)]="states.tin_number" name="tin_number" placeholder="Tin Number">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>State Code</label>
+                            <input class="form-control" [(ngModel)]="states.state_code" name="state_code" placeholder="State Code">
+                        </div>
+                          <div class="form-group col-md-12" style="text-align: right">
+                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="reset" class="btn btn-secondary">Reset</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

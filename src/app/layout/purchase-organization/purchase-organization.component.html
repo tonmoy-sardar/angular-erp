@@ -4,7 +4,7 @@
     <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
         <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
         <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-        <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-organization/add-purchase-organization')"><i class="fa fa-plus"></i> New Purchase Organization</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-organization/add')"><i class="fa fa-plus"></i> New Purchase Organization</button>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -31,7 +31,7 @@
               <td>Demo Organization Description</td>
               <td><i class="fa fa-thumbs-up"></i> Active</td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/purchase-organization/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
                 <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
               </td>
               
@@ -42,7 +42,7 @@
               <td>Demo Organization Description 2</td>
               <td><i class="fa fa-thumbs-down"></i> Inactive</td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0);" title="Edit" name="Edit"  [routerLink]="['/purchase-organization/edit', 2]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
                 <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
               </td>
           </tr>
