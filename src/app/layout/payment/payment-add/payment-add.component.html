@@ -1,0 +1,83 @@
+<div>
+    <app-page-header [heading]="'Payment Add'" [icon]="'fa fa-university'"></app-page-header>
+    <div>
+      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav('payment')"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">
+          <div class="col-md-12">
+              <form role="form">
+                <div class="card bg-light mb-3">
+                    <div class="card-header" style="background-color:#868e96; color: #fff;">Payment Add</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label>Company</label>
+                                <select class="form-control">
+                                    <option>Select Company</option>
+                                    <option>Shyam Futuretech</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Select PO INV</label>
+                                <select class="form-control">
+                                    <option>Select PO INV</option>
+                                    <option>Shyam Futuretech</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label>Total Amount</label>
+                              <input class="form-control"  name="total_amount" placeholder="Total Amount">
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label>Select Bank</label>
+                              <select class="form-control">
+                                  <option>Select Bank</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Party inovice Date</label>
+                                <div class="input-group datepicker-input">
+                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                        name="quotation_date" [(ngModel)]="model" ngbDatepicker #inovice_date="ngbDatepicker">
+                                    <button class="input-group-addon" (click)="inovice_date.toggle()" type="button">
+                                        <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                        <span class="fa fa-calendar"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label>Mode of Payment</label>
+                              <select class="form-control">
+                                  <option>Select Mode of Payment</option>
+                                  <option>Cheque</option>
+                                  <option>Cash</option>
+                                  <option>Online</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label>Payment Refrence</label>
+                              <input class="form-control"  name="payment_refrence" placeholder="Payment Refrence">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Special Note</label>
+                                <textarea class="form-control" rows="4" placeholder="Special Note"></textarea>
+                            </div>
+                            <div class="form-group col-md-12" style="text-align: right">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+    </div>
+  </div>

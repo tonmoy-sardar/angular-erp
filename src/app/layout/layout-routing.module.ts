@@ -28,7 +28,13 @@ const routes: Routes = [
             { path: 'terms-condition', loadChildren: './terms-condition/terms-condition.module#TermsConditionModule' },
             { path: 'transport', loadChildren: './transport/transport.module#TransportModule' },
             { path: 'banks', loadChildren: './banks/banks.module#BanksModule' },
-            { path: 'department', loadChildren: './department/department.module#DepartmentModule' }
+            { path: 'department', loadChildren: './department/department.module#DepartmentModule' },
+            { path: 'designation', loadChildren: './designation/designation.module#DesignationModule' },
+            { path: 'employees', loadChildren: './employees/employees.module#EmployeesModule' },
+            { path: 'grn', loadChildren: './grn/grn.module#GrnModule' },
+            { path: 'grn-reverse', loadChildren: './grn-reverse/grn-reverse.module#GrnReverseModule' },
+            { path: 'payment', loadChildren: './payment/payment.module#PaymentModule' },
+            { path: 'purchase-invoice', loadChildren: './purchase-invoice/purchase-invoice.module#PurchaseInvoiceModule' },
             
         ]
     }

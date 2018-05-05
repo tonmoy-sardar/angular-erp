@@ -1,0 +1,49 @@
+<div>
+  <app-page-header [heading]="'Designation Add'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('designation')"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+      <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+              <div class="card bg-light mb-3">
+                  <div class="card-header" style="background-color:#868e96; color: #fff;">Designation Add</div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="form-group col-md-4">
+                            <label>Company</label>
+                              <select class="form-control">
+                                  <option value="0">Select Company</option>
+                                  <option value="1">Shyam Futuretech</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label>Department Name</label>
+                              <select class="form-control">
+                                <option value="0">Select Department</option>
+                                <option value="1">Demo Department</option>
+                             </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Designation Name</label>
+                            <input class="form-control" [(ngModel)]="designation.designation_name" name="designation_name" placeholder="Designation Name">
+                          </div>
+                          <div class="form-group col-md-12" style="text-align: right">
+                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="reset" class="btn btn-secondary">Reset</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

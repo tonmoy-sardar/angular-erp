@@ -1,0 +1,50 @@
+<div>
+  <app-page-header [heading]="'Employee List'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('employees/add')"><i class="fa fa-plus"></i> New Employee</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+    
+  <hr/>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">Employee</div>
+      <table class="card-body table table-hover table-sm table-bordered">
+          <thead>
+          <tr>
+              <th>Sl.No.</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Company</th>
+              <th>Department</th>
+              <th>Designation</th>
+              <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Suraj</td>
+            <td>Mondol</td>
+            <td>suraj@gmail.com</td>
+            <td>9088856614</td>
+            <td>Shyam Futuretech</td>
+            <td>Demo Department</td>
+            <td>Demo Designation</td>
+            <td>
+              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/employees/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>

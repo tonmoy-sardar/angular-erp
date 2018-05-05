@@ -8,7 +8,7 @@ const routes: Routes = [
     component: PurchaseOrdersComponent
   },
   {
-    path: 'add-purchase-order',
+    path: 'add',
     component: PurchaseOrdersAddComponent
   }
 ];

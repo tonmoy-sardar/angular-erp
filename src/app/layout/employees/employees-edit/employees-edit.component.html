@@ -1,0 +1,95 @@
+<div>
+  <app-page-header [heading]="'Employee Edit'" [icon]="'fa fa-university'"></app-page-header>
+  <div>
+    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('employees')"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+      <div class="row">
+        <div class="col-md-12">
+            <form role="form">
+              <div class="card bg-light mb-3">
+                  <div class="card-header" style="background-color:#868e96; color: #fff;">Employee Edit</div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="form-group col-md-4">
+                            <label>First Name</label>
+                            <input class="form-control" [(ngModel)]="employee.first_name" name="first_name" placeholder="First Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Last Name</label>
+                            <input class="form-control" [(ngModel)]="employee.last_name" name="last_name" placeholder="Last Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Email</label>
+                            <input class="form-control" [(ngModel)]="employee.email" name="email" placeholder="Email">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Contact No.</label>
+                            <input class="form-control" [(ngModel)]="employee.contact_no" name="contact_no" placeholder="Contact No.">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Alternate Contact No.</label>
+                            <input class="form-control" [(ngModel)]="employee.alternate_contact_no" name="alternate_contact_no" placeholder="Alternate Contact No.">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>DOB</label>
+                            <div class="input-group datepicker-input">
+                              <input class="form-control" placeholder="yyyy-mm-dd"
+                                  name="quotation_date" [(ngModel)]="model" ngbDatepicker #quotation_date="ngbDatepicker">
+                              <button class="input-group-addon" (click)="quotation_date.toggle()" type="button">
+                                  <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                  <span class="fa fa-calendar"></span>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>PAN Number</label>
+                            <input class="form-control" [(ngModel)]="employee.pan_number" name="pan_number" placeholder="PAN Number">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>AADHAAR Number</label>
+                            <input class="form-control" [(ngModel)]="employee.aadhaar_name" name="aadhaar_name" placeholder="AADHAAR Number">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Company</label>
+                              <select class="form-control">
+                                  <option value="0">Select Company</option>
+                                  <option value="1">Shyam Futuretech</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label>Department Name</label>
+                              <select class="form-control">
+                                <option value="0">Select Department</option>
+                                <option value="1">Demo Department</option>
+                             </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label>Position</label>
+                            <select class="form-control">
+                              <option value="0">Select Position</option>
+                              <option value="1">Demo Position</option>
+                           </select>
+                        </div>
+                          <div class="form-group col-md-4">
+                            <label>Amount Given</label>
+                            <input class="form-control" [(ngModel)]="employee.amount_given" name="amount_given" placeholder="Amount Given">
+                          </div>
+                          <div class="form-group col-md-12" style="text-align: right">
+                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="reset" class="btn btn-secondary">Reset</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>

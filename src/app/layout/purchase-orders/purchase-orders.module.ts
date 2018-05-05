@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { PurchaseOrdersRoutingModule } from './purchase-orders-routing.module';
 import { PurchaseOrdersComponent } from './purchase-orders.component';
@@ -19,6 +20,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
+    HttpClientModule,
     BsComponentModule
   ],
   declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent]

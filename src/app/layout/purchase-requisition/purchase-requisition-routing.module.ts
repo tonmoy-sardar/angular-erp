@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PurchaseRequisitionComponent
   },
   {
-    path: 'add-purchase-requisition',
+    path: 'add',
     component: PurchaseRequisitionAddComponent
   }
 ];
