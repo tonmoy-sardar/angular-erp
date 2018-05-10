@@ -10,6 +10,7 @@ import { PaymentAddComponent } from './payment-add/payment-add.component';
 import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
+import { PaymentService } from './payment.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     PageHeaderModule,
     BsComponentModule
   ],
-  declarations: [PaymentComponent, PaymentAddComponent]
+  declarations: [PaymentComponent, PaymentAddComponent],
+  providers: [PaymentService]
 })
 export class PaymentModule { }

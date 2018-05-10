@@ -10,6 +10,7 @@ import { PageHeaderModule } from '../../shared';
 import { PurchaseRequisitionAddComponent } from './purchase-requisition-add/purchase-requisition-add.component';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
+import { PurchaseRequisitionService } from './purchase-requisition.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     HttpClientModule,
     BsComponentModule
   ],
-  declarations: [PurchaseRequisitionComponent, PurchaseRequisitionAddComponent]
+  declarations: [PurchaseRequisitionComponent, PurchaseRequisitionAddComponent],
+  providers: [PurchaseRequisitionService]
 })
 export class PurchaseRequisitionModule { }

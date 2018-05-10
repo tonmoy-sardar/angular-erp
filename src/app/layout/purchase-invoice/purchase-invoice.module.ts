@@ -7,6 +7,7 @@ import { PurchaseInvoiceRoutingModule } from './purchase-invoice-routing.module'
 import { PurchaseInvoiceComponent } from './purchase-invoice.component';
 import { PurchaseInvoiceAddComponent } from './purchase-invoice-add/purchase-invoice-add.component';
 import { PageHeaderModule } from '../../shared';
+import { PurchaseInvoiceService } from './purchase-invoice.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { PageHeaderModule } from '../../shared';
     PurchaseInvoiceRoutingModule,
     PageHeaderModule
   ],
-  declarations: [PurchaseInvoiceComponent, PurchaseInvoiceAddComponent]
+  declarations: [PurchaseInvoiceComponent, PurchaseInvoiceAddComponent],
+  providers: [PurchaseInvoiceService]
 })
 export class PurchaseInvoiceModule { }

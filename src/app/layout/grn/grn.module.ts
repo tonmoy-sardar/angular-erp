@@ -10,6 +10,7 @@ import { GrnAddComponent } from './grn-add/grn-add.component';
 import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
+import { GrnService } from './grn.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     PageHeaderModule,
     BsComponentModule
   ],
-  declarations: [GrnComponent, GrnAddComponent]
+  declarations: [GrnComponent, GrnAddComponent],
+  providers: [GrnService]
 })
 export class GrnModule { }

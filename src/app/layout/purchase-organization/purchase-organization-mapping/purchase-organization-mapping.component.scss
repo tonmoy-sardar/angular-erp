@@ -1,7 +1,11 @@
-.companyList  {    background-color: #dff0d8;
-    border-color: #d6e9c6;  padding: 13px;     border-left: 2px solid #6da252;}
+.companyList  {    
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.125);  
+    padding: 13px; 
+    border-radius: 0.25rem;   
+    }
 .companyList li {     list-style: none;
-    border-bottom: 1px solid #d0e2c9;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     padding: 5px 0;
-    font-size: 16px;}
+    font-size: 14px;}
 .companyList li ul li {  padding: 7px 22px; }

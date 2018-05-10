@@ -37,9 +37,7 @@ export class PurchaseOrganizationMappingComponent implements OnInit {
   
   updatePurchaseOrganizationMapping = function(){
 
-    //this.companyBranchOptions.filter(opt => opt.checked).map(opt => opt.value);
-
-    //this.companyBranchTree[0].company_branch.filter(item => { return item.checked; });
+    
 
     for(var i=0; i<this.companyBranchTree.length;i++)
     {

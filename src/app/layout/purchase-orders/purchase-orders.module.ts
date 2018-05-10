@@ -10,6 +10,7 @@ import { PurchaseOrdersAddComponent } from './purchase-orders-add/purchase-order
 import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
+import { PurchaseOrdersService } from './purchase-orders.service';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     HttpClientModule,
     BsComponentModule
   ],
-  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent]
+  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent],
+  providers: [PurchaseOrdersService]
 })
 export class PurchaseOrdersModule { }

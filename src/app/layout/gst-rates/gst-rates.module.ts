@@ -8,6 +8,7 @@ import { GstRatesComponent } from './gst-rates.component';
 import { GstRatesAddComponent } from './gst-rates-add/gst-rates-add.component';
 import { GstRatesEditComponent } from './gst-rates-edit/gst-rates-edit.component';
 import { PageHeaderModule } from '../../shared';
+import { GstRatesService } from './gst-rates.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageHeaderModule } from '../../shared';
     GstRatesRoutingModule,
     PageHeaderModule
   ],
-  declarations: [GstRatesComponent, GstRatesAddComponent, GstRatesEditComponent]
+  declarations: [GstRatesComponent, GstRatesAddComponent, GstRatesEditComponent],
+  providers: [GstRatesService]
 })
 export class GstRatesModule { }

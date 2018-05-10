@@ -8,6 +8,7 @@ import { TransportComponent } from './transport.component';
 import { TransportAddComponent } from './transport-add/transport-add.component';
 import { TransportEditComponent } from './transport-edit/transport-edit.component';
 import { PageHeaderModule } from '../../shared';
+import { TransportService } from './transport.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageHeaderModule } from '../../shared';
     TransportRoutingModule,
     PageHeaderModule
   ],
-  declarations: [TransportComponent, TransportAddComponent, TransportEditComponent]
+  declarations: [TransportComponent, TransportAddComponent, TransportEditComponent],
+  providers: [TransportService]
 })
 export class TransportModule { }

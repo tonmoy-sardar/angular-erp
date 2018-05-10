@@ -11,6 +11,7 @@ import { EmployeesAddComponent } from './employees-add/employees-add.component';
 import { EmployeesEditComponent } from './employees-edit/employees-edit.component';
 import { PageHeaderModule } from '../../shared';
 import { BsComponentModule } from '../bs-component/bs-component.module';
+import { EmployeesService } from './employees.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
     NgbModule.forRoot(),
     BsComponentModule
   ],
-  declarations: [EmployeesComponent, EmployeesAddComponent, EmployeesEditComponent]
+  declarations: [EmployeesComponent, EmployeesAddComponent, EmployeesEditComponent],
+  providers: [EmployeesService]
 })
 export class EmployeesModule { }

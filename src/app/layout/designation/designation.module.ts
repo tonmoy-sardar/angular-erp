@@ -8,6 +8,7 @@ import { DesignationComponent } from './designation.component';
 import { DesignationAddComponent } from './designation-add/designation-add.component';
 import { DesignationEditComponent } from './designation-edit/designation-edit.component';
 import { PageHeaderModule } from '../../shared';
+import { DesignationService } from './designation.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageHeaderModule } from '../../shared';
     DesignationRoutingModule,
     PageHeaderModule
   ],
-  declarations: [DesignationComponent, DesignationAddComponent, DesignationEditComponent]
+  declarations: [DesignationComponent, DesignationAddComponent, DesignationEditComponent],
+  providers: [DesignationService]
 })
 export class DesignationModule { }

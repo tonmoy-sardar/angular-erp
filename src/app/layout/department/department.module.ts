@@ -8,6 +8,7 @@ import { DepartmentComponent } from './department.component';
 import { DepartmentAddComponent } from './department-add/department-add.component';
 import { DepartmentEditComponent } from './department-edit/department-edit.component';
 import { PageHeaderModule } from '../../shared';
+import { DepartmentService } from './department.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageHeaderModule } from '../../shared';
     DepartmentRoutingModule,
     PageHeaderModule
   ],
-  declarations: [DepartmentComponent, DepartmentAddComponent, DepartmentEditComponent]
+  declarations: [DepartmentComponent, DepartmentAddComponent, DepartmentEditComponent],
+  providers: [DepartmentService]
 })
 export class DepartmentModule { }
