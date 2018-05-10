@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SaleOrganizationService } from '../sale-organization.service';
 
 @Component({
   selector: 'app-sale-organization-add',
@@ -7,12 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./sale-organization-add.component.scss']
 })
 export class SaleOrganizationAddComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  saleOrganization;
+  constructor(private saleOrganizationService: SaleOrganizationService, private router: Router) { }
 
   ngOnInit() {
+
+    this.saleOrganization = {
+      name: '',
+      description: ''
+    };
   }
 
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+  addNewSaleOrganization = function(){
+    this.saleOrganizationService.addNewSaleOrganization(this.saleOrganization).subscribe(
+      response => {
+        this.goToList('sale-organization');
+      },
+      error => console.log('error',error)
+    );
+  }
+  
   btnClickNav= function (toNav) {
     this.router.navigateByUrl('/'+toNav);
   };

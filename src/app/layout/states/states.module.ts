@@ -8,6 +8,7 @@ import { StatesComponent } from './states.component';
 import { StatesAddComponent } from './states-add/states-add.component';
 import { StatesEditComponent } from './states-edit/states-edit.component';
 import { PageHeaderModule } from '../../shared';
+import { StatesService } from './states.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PageHeaderModule } from '../../shared';
     StatesRoutingModule,
     PageHeaderModule
   ],
-  declarations: [StatesComponent, StatesAddComponent, StatesEditComponent]
+  declarations: [StatesComponent, StatesAddComponent, StatesEditComponent],
+  providers: [StatesService]
 })
 export class StatesModule { }

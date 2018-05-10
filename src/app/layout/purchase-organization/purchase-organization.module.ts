@@ -8,6 +8,8 @@ import { PurchaseOrganizationComponent } from './purchase-organization.component
 import { PageHeaderModule } from '../../shared';
 import { PurchaseOrganizationAddComponent } from './purchase-organization-add/purchase-organization-add.component';
 import { PurchaseOrganizationEditComponent } from './purchase-organization-edit/purchase-organization-edit.component';
+import { PurchaseOrganizationMappingComponent } from './purchase-organization-mapping/purchase-organization-mapping.component';
+import { PurchaseOrganizationService } from './purchase-organization.service';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { PurchaseOrganizationEditComponent } from './purchase-organization-edit/
     PurchaseOrganizationRoutingModule,
     PageHeaderModule
   ],
-  declarations: [PurchaseOrganizationComponent, PurchaseOrganizationAddComponent, PurchaseOrganizationEditComponent]
+  declarations: [PurchaseOrganizationComponent, PurchaseOrganizationAddComponent, PurchaseOrganizationEditComponent, PurchaseOrganizationMappingComponent],
+  providers: [PurchaseOrganizationService]
 })
 export class PurchaseOrganizationModule { }

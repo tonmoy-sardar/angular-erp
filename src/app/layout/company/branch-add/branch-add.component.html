@@ -1,0 +1,75 @@
+<div>
+    
+    <div  style="padding-top: 20px;">
+      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav()"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">
+          <div class="col-md-12">
+              <form role="form">
+                <div class="card bg-light mb-3">
+                    <div class="card-header" style="background-color:#868e96; color: #fff;">Company Branch Add</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Branch Name</label>
+                                <input class="form-control" [(ngModel)]="companyBranch.branch_name" name="branch_name" placeholder="Branch Name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Email</label>
+                                <input class="form-control" [(ngModel)]="companyBranch.branch_email" name="branch_email" placeholder="Email" >
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label>Phone</label>
+                              <input class="form-control" [(ngModel)]="companyBranch.branch_contact_no" name="branch_contact_no" placeholder="Phone">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Branch Address</label>
+                                <textarea class="form-control" [(ngModel)]="companyBranch.branch_address" name="branch_address" rows="3" placeholder="Branch Address">{{companyBranch.branch_address}}</textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>State</label>
+                                <select class="form-control"  [(ngModel)]="companyBranch.branch_state" name="branch_state">
+                                    <option value="0">Select State</option>
+                                    <option *ngFor="let state of stateList;" value="{{state.id}}">{{state.state_name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>City</label>
+                                <input class="form-control" placeholder="City Name" [(ngModel)]="companyBranch.branch_city" name="branch_city">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Pin</label>
+                                <input class="form-control" placeholder="Pin" [(ngModel)]="companyBranch.branch_pincode" name="branch_pincode">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>GSTIN</label>
+                                <input class="form-control" placeholder="GSTIN" [(ngModel)]="companyBranch.branch_gstin" name="branch_gstin">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>PAN</label>
+                                <input class="form-control" placeholder="PAN" [(ngModel)]="companyBranch.branch_pan" name="branch_pan">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>CIN</label>
+                                <input class="form-control" placeholder="CIN" [(ngModel)]="companyBranch.branch_cin" name="branch_cin">
+                            </div>
+
+                            <div class="form-group col-md-12" style="text-align: right">
+                                <button type="submit" class="btn btn-success" (click)="addNewCompanyBranch()">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+    </div>
+  </div>

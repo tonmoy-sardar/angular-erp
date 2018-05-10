@@ -19,14 +19,14 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Pruchase Group Name</label>
-                                <input class="form-control" placeholder="Pruchase Group Name">
+                                <input class="form-control" placeholder="Pruchase Group Name" [(ngModel)]="purchaseGroup.name" name="name">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Group Description</label>
-                                <textarea class="form-control" rows="1" placeholder="Group Description"></textarea>
+                                <textarea class="form-control" rows="1" placeholder="Group Description" [(ngModel)]="purchaseGroup.description" name="description">{{purchaseGroup.description}}</textarea>
                             </div>
                             <div class="form-group col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success" (click)="addNewPurchaseGroup()">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </div>

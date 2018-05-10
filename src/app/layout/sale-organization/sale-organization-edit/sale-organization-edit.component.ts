@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
+import { SaleOrganizationService } from '../sale-organization.service';
 
 @Component({
   selector: 'app-sale-organization-edit',
@@ -10,18 +11,38 @@ import { HttpClient } from '@angular/common/http';
 export class SaleOrganizationEditComponent implements OnInit {
   saleOrganization;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private saleOrganizationService: SaleOrganizationService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getSaleOrganization(this.route.snapshot.params['id']);
+    this.saleOrganization = {
+      id:'',
+      name: '',
+      description: ''
+    };
+    this.getSaleOrganizationDetails(this.route.snapshot.params['id']);
   }
 
-  getSaleOrganization(id) {
-    this.saleOrganization = {
-      sale_organization_name: 'Demo Organization',
-      sale_organization_description: 'Demo Organization Description'
-    };
+  getSaleOrganizationDetails = function(id) {
 
+    this.saleOrganizationService.getSaleOrganizationDetails(id).subscribe(
+      (data: any[]) =>{  
+        this.saleOrganization = data;
+      }
+     );
+  }
+ 
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+
+  updateSaleOrganization = function(){
+    this.saleOrganizationService.updateSaleOrganization(this.saleOrganization).subscribe(
+      response => {
+        this.goToList('sale-organization');
+      },
+      error => console.log('error',error)
+    );
   }
 
   btnClickNav= function (toNav) {

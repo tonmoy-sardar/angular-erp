@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PurchaseOrganizationComponent } from './purchase-organization.component';
 import { PurchaseOrganizationAddComponent } from './purchase-organization-add/purchase-organization-add.component';
 import { PurchaseOrganizationEditComponent } from './purchase-organization-edit/purchase-organization-edit.component';
+import { PurchaseOrganizationMappingComponent } from './purchase-organization-mapping/purchase-organization-mapping.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,6 +17,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: PurchaseOrganizationEditComponent
+  },
+  {
+    path: 'mapping/:id',
+    component: PurchaseOrganizationMappingComponent
   }
 ];
 

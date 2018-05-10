@@ -26,37 +26,17 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>ANDHRA PRADESH</td>
-            <td>0</td>
-            <td>AP</td>
-            <td><i class="fa fa-thumbs-up"></i> Active</td>
+          <tr  *ngFor="let state of stateList ; let i = index" >
+            <th scope="row">{{i +1}}</th>
+            <td>{{state.state_name}}</td>
+            <td>{{state.tin_number}}</td>
+            <td>{{state.state_code}}</td>
             <td>
-              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/states/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>KARNATAKA</td>
-            <td>0</td>
-            <td></td>
-            <td><i class="fa fa-thumbs-up"></i> Active</td>
+              <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveState(state.id)" *ngIf="state.status==true"><i class="fa fa-thumbs-up"></i> Active</a>
+              <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activeState(state.id)" *ngIf="state.status==false"><i class="fa fa-thumbs-down"></i> Inactive</a></td>
             <td>
-              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/states/edit', 2]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>JAMMU & KASHMIR</td>
-            <td>0</td>
-            <td></td>
-            <td><i class="fa fa-thumbs-up"></i> Active</td>
-            <td>
-              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/states/edit', 3]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-              <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-trash-o"></i></a>
+              <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/states/edit', state.id]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="javascript:void(0);" title="Map" name="Map" (click)="deleteState(state.id)"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           </tbody>

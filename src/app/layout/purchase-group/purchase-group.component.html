@@ -25,27 +25,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Demo Group</td>
-                <td>Demo Group Description</td>
-                <td><i class="fa fa-thumbs-up"></i> Active</td>
-                <td>
-                  <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/purchase-group/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-                  <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
-                </td>
-                
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Demo Group 2</td>
-                <td>Demo Group Description 2</td>
-                <td><i class="fa fa-thumbs-down"></i> Inactive</td>
-                <td>
-                  <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/purchase-group/edit', 2]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-                  <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
-                </td>
-            </tr>
+                <tr *ngFor="let purchaseGroup of purchaseGroupList ; let i = index">
+                    <th scope="row">{{i +1}}</th>
+                    <td>{{purchaseGroup.name}}</td>
+                    <td>{{purchaseGroup.description}}</td>
+                    <td>
+                        <a href="javascript:void(0);" title="Active" name="Active" (click)="inactivePurchaseGroup(purchaseGroup.id)" *ngIf="purchaseGroup.status==true"><i class="fa fa-thumbs-up"></i> Active</a>
+                        <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activePurchaseGroup(purchaseGroup.id)" *ngIf="purchaseGroup.status==false"><i class="fa fa-thumbs-down"></i> Inactive</a>
+                    </td>
+                    <td>
+                      <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/purchase-group/edit', purchaseGroup.id]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                      
+                    </td>
+                </tr>
             </tbody>
         </table>
       </div>

@@ -8,6 +8,7 @@ import { PurchaseGroupComponent } from './purchase-group.component';
 import { PurchaseGroupAddComponent } from './purchase-group-add/purchase-group-add.component';
 import { PageHeaderModule } from '../../shared';
 import { PurchaseGroupEditComponent } from './purchase-group-edit/purchase-group-edit.component';
+import { PurchaseGroupService } from './purchase-group.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PurchaseGroupEditComponent } from './purchase-group-edit/purchase-group
     PurchaseGroupRoutingModule,
     PageHeaderModule
   ],
-  declarations: [PurchaseGroupComponent, PurchaseGroupAddComponent, PurchaseGroupEditComponent]
+  declarations: [PurchaseGroupComponent, PurchaseGroupAddComponent, PurchaseGroupEditComponent],
+  providers: [PurchaseGroupService]
 })
 export class PurchaseGroupModule { }

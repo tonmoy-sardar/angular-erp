@@ -25,27 +25,22 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-              <th scope="row">1</th>
-              <td>Demo Organization</td>
-              <td>Demo Organization Description</td>
-              <td><i class="fa fa-thumbs-up"></i> Active</td>
-              <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/sale-organization/edit', 1]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
-              </td>
-              
-          </tr>
-          <tr>
-              <th scope="row">2</th>
-              <td>Demo Organization 2</td>
-              <td>Demo Organization Description 2</td>
-              <td><i class="fa fa-thumbs-down"></i> Inactive</td>
-              <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/sale-organization/edit', 2]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="javascript:void(0);" title="Map" name="Map"><i class="fa fa-map-signs"></i></a>
-              </td>
-          </tr>
+
+            <tr *ngFor="let saleOrganization of saleOrganizationList ; let i = index">
+                <th scope="row">{{i +1}}</th>
+                <td>{{saleOrganization.name}}</td>
+                <td>{{saleOrganization.description}}</td>
+                <td>
+                    <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveSaleOrganization(saleOrganization.id)" *ngIf="saleOrganization.status==true"><i class="fa fa-thumbs-up"></i> Active</a>
+                    <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activeSaleOrganization(saleOrganization.id)" *ngIf="saleOrganization.status==false"><i class="fa fa-thumbs-down"></i> Inactive</a>
+                </td>
+                <td>
+                  <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/sale-organization/edit', saleOrganization.id]"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                 
+                </td>
+                
+            </tr>
+          
           </tbody>
       </table>
     </div>

@@ -8,6 +8,7 @@ import { SaleOrganizationComponent } from './sale-organization.component';
 import { SaleOrganizationAddComponent } from './sale-organization-add/sale-organization-add.component';
 import { PageHeaderModule } from '../../shared';
 import { SaleOrganizationEditComponent } from './sale-organization-edit/sale-organization-edit.component';
+import { SaleOrganizationService } from './sale-organization.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { SaleOrganizationEditComponent } from './sale-organization-edit/sale-org
     SaleOrganizationRoutingModule,
     PageHeaderModule
   ],
-  declarations: [SaleOrganizationComponent, SaleOrganizationAddComponent, SaleOrganizationEditComponent]
+  declarations: [SaleOrganizationComponent, SaleOrganizationAddComponent, SaleOrganizationEditComponent],
+  providers: [SaleOrganizationService]
 })
 export class SaleOrganizationModule { }

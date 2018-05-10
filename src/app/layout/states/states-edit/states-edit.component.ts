@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { StatesService} from '../states.service';
+
 
 @Component({
   selector: 'app-states-edit',
@@ -9,23 +10,45 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StatesEditComponent implements OnInit {
   states;
-
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  state;
+  constructor(private statesService: StatesService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getStates(this.route.snapshot.params['id']);
+    this.states = {
+      id: '',
+      state_name: '',
+      tin_number: '',
+      state_code:''
+    };
+    this.getStateDetails(this.route.snapshot.params['id']);
   }
 
-  getStates(id) {
-    this.states = {
-      state_name: 'ANDHRA PRADESH',
-      tin_number: '0',
-      state_code:'AP'
-    };
+  getStateDetails = function(id) {
 
+    this.statesService.getStateDetails(id).subscribe(
+      (data: any[]) =>{  
+        this.states = data;
+      }
+     );
+  }
+
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+
+  updateState = function(){
+    this.statesService.updateState(this.states).subscribe(
+      response => {
+        this.goToList('states');
+      },
+      error => console.log('error',error)
+    );
   }
 
   btnClickNav= function (toNav) {
     this.router.navigateByUrl('/'+toNav);
   };
 }
+
+

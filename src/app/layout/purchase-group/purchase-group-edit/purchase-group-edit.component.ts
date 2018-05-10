@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
+import { PurchaseGroupService } from '../purchase-group.service';
 
 @Component({
   selector: 'app-purchase-group-edit',
@@ -10,18 +11,38 @@ import { HttpClient } from '@angular/common/http';
 export class PurchaseGroupEditComponent implements OnInit {
   purchaseGroup;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private purchaseGroupService: PurchaseGroupService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getPurchaseGroup(this.route.snapshot.params['id']);
+    this.purchaseGroup = {
+      id:'',
+      name: '',
+      description: ''
+    };
+    this.getPurchaseGroupDetails(this.route.snapshot.params['id']);
   }
 
-  getPurchaseGroup(id) {
-    this.purchaseGroup = {
-      pruchase_group_name: 'Demo Group',
-      pruchase_group_description: 'Demo Group Description'
-    };
+  getPurchaseGroupDetails = function(id) {
 
+    this.purchaseGroupService.getPurchaseGroupDetails(id).subscribe(
+      (data: any[]) =>{  
+        this.purchaseGroup = data;
+      }
+     );
+  }
+ 
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+
+  updatePurchaseGroup = function(){
+    this.purchaseGroupService.updatePurchaseGroup(this.purchaseGroup).subscribe(
+      response => {
+        this.goToList('purchase-group');
+      },
+      error => console.log('error',error)
+    );
   }
 
   btnClickNav= function (toNav) {

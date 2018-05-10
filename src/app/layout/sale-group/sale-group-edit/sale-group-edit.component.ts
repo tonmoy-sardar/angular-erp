@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { SaleGroupService } from '../sale-group.service';
 
 @Component({
   selector: 'app-sale-group-edit',
@@ -8,20 +8,40 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sale-group-edit.component.scss']
 })
 export class SaleGroupEditComponent implements OnInit {
-  saleGroup;
+ saleGroup;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private saleGroupService: SaleGroupService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getSaleGroup(this.route.snapshot.params['id']);
+    this.saleGroup = {
+      id:'',
+      name: '',
+      description: ''
+    };
+    this.getSaleGroupDetails(this.route.snapshot.params['id']);
   }
 
-  getSaleGroup(id) {
-    this.saleGroup = {
-      sale_group_name: 'Demo Group',
-      sale_group_description: 'Demo Group Description'
-    };
+  getSaleGroupDetails = function(id) {
 
+    this.saleGroupService.getSaleGroupDetails(id).subscribe(
+      (data: any[]) =>{  
+        this.purchaseGroup = data;
+      }
+     );
+  }
+ 
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+
+  updateSaleGroup = function(){
+    this.saleGroupService.updateSaleGroup(this.saleGroup).subscribe(
+      response => {
+        this.goToList('sale-group');
+      },
+      error => console.log('error',error)
+    );
   }
 
   btnClickNav= function (toNav) {

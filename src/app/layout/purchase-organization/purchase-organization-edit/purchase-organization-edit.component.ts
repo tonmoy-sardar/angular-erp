@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
+import { PurchaseOrganizationService } from '../purchase-organization.service';
 
 @Component({
   selector: 'app-purchase-organization-edit',
@@ -10,23 +11,41 @@ import { HttpClient } from '@angular/common/http';
 export class PurchaseOrganizationEditComponent implements OnInit {
   purchaseOrganization;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private purchaseOrganizationService: PurchaseOrganizationService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getPurchaseOrganization(this.route.snapshot.params['id']);
-  }
-
-  getPurchaseOrganization(id) {
     this.purchaseOrganization = {
-      pruchase_organization_name: 'Demo Organization',
-      pruchase_organization_description: 'Demo Organization Description'
+      id:'',
+      name: '',
+      description: ''
     };
-
+    this.getPurchaseOrganizationDetails(this.route.snapshot.params['id']);
   }
 
+  getPurchaseOrganizationDetails = function(id) {
+
+    this.purchaseOrganizationService.getPurchaseOrganizationDetails(id).subscribe(
+      (data: any[]) =>{  
+        this.purchaseOrganization = data;
+      }
+     );
+  }
+ 
+  goToList= function (toNav) {
+    this.router.navigateByUrl('/'+toNav);
+  };
+
+
+  updatePurchaseOrganization = function(){
+    this.purchaseOrganizationService.updatePurchaseOrganization(this.purchaseOrganization).subscribe(
+      response => {
+        this.goToList('purchase-organization');
+      },
+      error => console.log('error',error)
+    );
+  }
 
   btnClickNav= function (toNav) {
     this.router.navigateByUrl('/'+toNav);
   };
-
 }
