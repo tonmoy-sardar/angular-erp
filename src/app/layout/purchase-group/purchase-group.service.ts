@@ -15,8 +15,8 @@ export class PurchaseGroupService {
     })
   }
 
-  getPurchaseGroupList(): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'all_purchase_group/', {
+  getPurchaseGroupList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_purchase_group/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
