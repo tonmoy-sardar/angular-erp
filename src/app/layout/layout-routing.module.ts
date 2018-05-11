@@ -35,6 +35,7 @@ const routes: Routes = [
             { path: 'grn-reverse', loadChildren: './grn-reverse/grn-reverse.module#GrnReverseModule' },
             { path: 'payment', loadChildren: './payment/payment.module#PaymentModule' },
             { path: 'purchase-invoice', loadChildren: './purchase-invoice/purchase-invoice.module#PurchaseInvoiceModule' },
+            { path: 'material', loadChildren: './material/material.module#MaterialModule' },
             
         ]
     }
