@@ -50,9 +50,9 @@ export class BranchAddComponent implements OnInit {
   };
 
   getStateList= function(){
-    this.statesService.getStateList().subscribe(
+    this.statesService.getStateActiveList().subscribe(
       (data: any[]) =>{   
-        this.stateList = data['results'];
+        this.stateList = data;
       }
      );
   };

@@ -41,6 +41,13 @@ export class CompanyService {
     })
   }
 
+  getCompanyDropdownList(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_dropdownlist/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  
   // Company Services End
 
   // Branch Services Start

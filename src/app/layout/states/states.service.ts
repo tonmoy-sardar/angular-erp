@@ -21,6 +21,12 @@ export class StatesService {
     })
   }
 
+  getStateActiveList(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'active_states/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
   getStateDetails(id): Observable<any>{
     return this.http.get(environment.apiEndpoint+'states/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
