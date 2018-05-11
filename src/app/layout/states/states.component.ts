@@ -21,18 +21,19 @@ export class StatesComponent implements OnInit {
 
   ngOnInit() {
     this.defaultPagination = 1;
-    this.getStateList(this.defaultPagination);
+    this.getStateList();
   }
 
   dataSearch() {
-    this.getStateList(this.defaultPagination);
+    this.defaultPagination = 1;
+    this.getStateList();
   }
 
   btnClickNav = function (toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
 
-  getStateList = function (pageNo) {
+  getStateList = function () {
     let params: URLSearchParams = new URLSearchParams();
     params.set('page', this.defaultPagination.toString());
     params.set('search', this.search_key.toString());
@@ -56,7 +57,7 @@ export class StatesComponent implements OnInit {
         this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
         });
-        this.getStateList(this.defaultPagination);
+        this.getStateList();
       },
       error => {
         console.log('error', error)
@@ -80,7 +81,7 @@ export class StatesComponent implements OnInit {
         this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
         });
-        this.getStateList(this.defaultPagination);
+        this.getStateList();
       },
       error => {
         console.log('error', error)
@@ -103,7 +104,7 @@ export class StatesComponent implements OnInit {
         this.toastr.success('State deleted successfully', '', {
           timeOut: 3000,
         });
-        this.getStateList(this.defaultPagination);
+        this.getStateList();
       },
       error => {
         console.log('error', error)
@@ -115,7 +116,7 @@ export class StatesComponent implements OnInit {
   };
 
   pagination = function () {
-    this.getStateList(this.defaultPagination);
+    this.getStateList();
   };
 
 
