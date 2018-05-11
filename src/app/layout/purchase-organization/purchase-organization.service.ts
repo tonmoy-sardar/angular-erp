@@ -14,9 +14,9 @@ export class PurchaseOrganizationService {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
-
-  getPurchaseOrganizationList(): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'all_purchase_organization/', {
+  
+  getPurchaseOrganizationList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_purchase_organization/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
