@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BsComponentModule } from '../bs-component/bs-component.module';
 import { StatesRoutingModule } from './states-routing.module';
 import { StatesComponent } from './states.component';
 import { StatesAddComponent } from './states-add/states-add.component';
@@ -14,9 +15,12 @@ import { StatesService } from './states.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     StatesRoutingModule,
-    PageHeaderModule
+    PageHeaderModule,
+    BsComponentModule
   ],
   declarations: [StatesComponent, StatesAddComponent, StatesEditComponent],
   providers: [StatesService]

@@ -9,20 +9,26 @@ import { StatesService} from './states.service';
 })
 export class StatesComponent implements OnInit {
   stateList;
+  defaultPagination: number;
+  totalstateList:number;
 
-  constructor(private statesService: StatesService, private router: Router) { }
+  constructor(private statesService: StatesService, private router: Router) { 
+  }
+
 
   ngOnInit() {
-    this.getStateList();
+    this.defaultPagination = 1;
+    this.getStateList(this.defaultPagination);
   }
 
   btnClickNav= function (toNav) {
     this.router.navigateByUrl('/'+toNav);
   };
 
-  getStateList= function(){
-    this.statesService.getStateList().subscribe(
-      (data: any[]) =>{   
+  getStateList= function(pageNo){
+    this.statesService.getStateList(pageNo).subscribe(
+      (data: any[]) =>{ 
+        this.totalstateList = data['count']; 
         this.stateList = data['results'];
       }
      );
@@ -72,6 +78,10 @@ export class StatesComponent implements OnInit {
       },
       error => console.log('error',error)
     );
+  };
+
+  pagination = function() {
+    this.getStateList(this.defaultPagination);
   };
 
 }
