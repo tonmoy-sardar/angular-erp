@@ -1,28 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SaleGroupService } from './sale-group.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-sale-group',
   templateUrl: './sale-group.component.html',
   styleUrls: ['./sale-group.component.scss']
 })
 export class SaleGroupComponent implements OnInit {
-  saleGroupList;
-
-  constructor(private saleGroupService: SaleGroupService,private router: Router) { }
+  saleGroupList = [];
+  defaultPagination: number;
+  totalsaleGroupList: number;
+  search_key = '';
+  constructor(
+    private saleGroupService: SaleGroupService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
+    this.defaultPagination = 1;
     this.getSaleGroupList();
   }
-
+  dataSearch() {
+    this.defaultPagination = 1;
+    this.getSaleGroupList();
+  }
   btnClickNav= function (toNav) {
     this.router.navigateByUrl('/'+toNav);
   };
 
   getSaleGroupList= function(){
-    this.saleGroupService.getSaleGroupList().subscribe(
-      (data: any[]) =>{   
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('page', this.defaultPagination.toString());
+    params.set('search', this.search_key.toString());
+    this.saleGroupService.getSaleGroupList(params).subscribe(
+      (data: any[]) =>{
+        this.totalsaleGroupList = data['count'];   
         this.saleGroupList = data['results'];
       }
      );
@@ -37,9 +51,17 @@ export class SaleGroupComponent implements OnInit {
     };
     this.saleGroupService.activeInactivePurchaseGroup(saleGroup).subscribe(
       response => {
+        this.toastr.success('Status changed successfully', '', {
+          timeOut: 3000,
+        });
         this.getSaleGroupList();
       },
-      error => console.log('error',error)
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
     );
   };
 
@@ -53,9 +75,21 @@ export class SaleGroupComponent implements OnInit {
 
     this.saleGroupService.activeInactiveSaleGroup(saleGroup).subscribe(
       response => {
+        this.toastr.success('Status changed successfully', '', {
+          timeOut: 3000,
+        });
         this.getSaleGroupList();
       },
-      error => console.log('error',error)
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
     );
+  };
+
+  pagination = function () {
+    this.getSaleGroupList();
   };
 }

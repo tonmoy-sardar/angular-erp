@@ -15,8 +15,8 @@ export class SaleOrganizationService {
     })
   }
 
-  getSaleOrganizationList(): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'all_sales_organization/', {
+  getSaleOrganizationList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_sales_organization/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

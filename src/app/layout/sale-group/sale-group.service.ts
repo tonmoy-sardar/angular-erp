@@ -14,8 +14,8 @@ export class SaleGroupService {
     })
   }
 
-  getSaleGroupList(): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'all_sales_group/', {
+  getSaleGroupList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_sales_group/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

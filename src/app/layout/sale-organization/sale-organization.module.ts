@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsComponentModule } from '../bs-component/bs-component.module';
 import { SaleOrganizationRoutingModule } from './sale-organization-routing.module';
 import { SaleOrganizationComponent } from './sale-organization.component';
 import { SaleOrganizationAddComponent } from './sale-organization-add/sale-organization-add.component';
@@ -14,9 +15,12 @@ import { SaleOrganizationService } from './sale-organization.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     SaleOrganizationRoutingModule,
-    PageHeaderModule
+    PageHeaderModule,
+    BsComponentModule,
+    NgbModule.forRoot()
   ],
   declarations: [SaleOrganizationComponent, SaleOrganizationAddComponent, SaleOrganizationEditComponent],
   providers: [SaleOrganizationService]

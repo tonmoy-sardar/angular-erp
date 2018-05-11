@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./states-add.component.scss']
 })
 export class StatesAddComponent implements OnInit {
-  states;
   form: FormGroup;
   constructor(
     private statesService: StatesService,
