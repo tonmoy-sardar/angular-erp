@@ -1,3 +1,161 @@
-<p>
-  material-add works!
-</p>
+<div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="page-header">Material Add</h4>
+      </div>
+      <div class="col-md-6 pull-right" style="text-align: right">
+          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+          <button type="button" class="btn btn-success" (click)="btnClickNav('material')"><i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div>
+        <div class="row">
+          <div class="col-md-12">
+              <form role="form">
+                <div class="card bg-light mb-3">
+                    <div class="card-header" style="background-color:#868e96; color: #fff;">Material Add</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                              <label>Material Type</label>
+                                <select class="form-control">
+                                    <option value="0">Select Material</option>
+                                    <option value="1">Type 1</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Material Name</label>
+                                <input class="form-control" [(ngModel)]="material.material_name" name="material_name" placeholder="Material Name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Unit of Measurement</label>
+                                <select class="form-control"  [(ngModel)]="material.base_uom" name="base_uom">
+                                    <option value="0">Select UOM</option>
+                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Unit Per UOM</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.unit_per_uom" name="material_name" placeholder="Material Name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>UOM</label>
+                                <select class="form-control"  [(ngModel)]="material.unit_uom" name="unit_uom">
+                                    <option value="0">Select UOM</option>
+                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value=""> For sale Material
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Unit of Measurement</label>
+                                <select class="form-control"  [(ngModel)]="material.sale_base_uom" name="sale_base_uom">
+                                    <option value="0">Select UOM</option>
+                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Unit Per UOM</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.sale_unit_per_uom" name="sale_unit_per_uom" placeholder="Unit per UOM">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>UOM</label>
+                                <select class="form-control"  [(ngModel)]="material.sale_unit_uom" name="sale_unit_uom">
+                                    <option value="0">Select UOM</option>
+                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Tax:</label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="" checked=true> Taxable
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value=""> Non taxable
+                                </label>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Purchase IGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.purchase_igst" name="purchase_igst" placeholder="Purchase IGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Purchase CGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.purchase_cgst" name="purchase_cgst" placeholder="Purchase CGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Purchase SGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.purchase_sgst" name="purchase_sgst" placeholder="Purchase SGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Purchase HSN</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.purchase_hsn" name="purchase_hsn" placeholder="Purchase HSN">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Sale IGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.sale_igst" name="sale_igst" placeholder="Sale IGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Sale CGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.sale_cgst" name="sale_cgst" placeholder="Sale CGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Sale SGST</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.sale_sgst" name="sale_sgst" placeholder="Sale SGST">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Sale HSN</label>
+                                <input class="form-control" type="number" [(ngModel)]="material.sale_hsn" name="sale_hsn" placeholder="Sale HSN">
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Purchase Org: </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"> orgname 
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"> Testorg
+                                </label>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Purchase Group: </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"> Asset Purchase 
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"> Material Purchase
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox"> Purchase 
+                                </label>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Description</label>
+                                <textarea class="form-control" rows="2" placeholder="Description" [(ngModel)]="material.description" name="description">{{material.description}}</textarea>
+                            </div>
+                            <div class="form-group col-md-12" style="text-align: right">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+    </div>
+  </div>
