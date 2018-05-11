@@ -11,7 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 export class StatesAddComponent implements OnInit {
   states;
   form: FormGroup;
-  constructor(private statesService: StatesService, private router: Router, private formBuilder: FormBuilder, private toastr: ToastrService) { }
+  constructor(
+    private statesService: StatesService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -24,7 +29,6 @@ export class StatesAddComponent implements OnInit {
   goToList = function (toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
-
 
   addState = function () {
     if (this.form.valid) {
@@ -49,9 +53,8 @@ export class StatesAddComponent implements OnInit {
       });
     }
   }
+  
   reSet() {
-
-
     this.form.reset();
   }
 

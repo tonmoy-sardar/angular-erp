@@ -15,8 +15,8 @@ export class StatesService {
     })
   }
 
-  getStateList(pageNo): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'states/?page='+pageNo, {
+  getStateList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'states/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

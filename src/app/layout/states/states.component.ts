@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatesService} from './states.service';
-
+import { StatesService } from './states.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-states',
   templateUrl: './states.component.html',
   styleUrls: ['./states.component.scss']
 })
 export class StatesComponent implements OnInit {
-  stateList;
+  stateList = [];
   defaultPagination: number;
-  totalstateList:number;
-
-  constructor(private statesService: StatesService, private router: Router) { 
-  }
+  totalstateList: number;
+  search_key = '';
+  constructor(
+    private statesService: StatesService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
 
   ngOnInit() {
@@ -21,20 +24,27 @@ export class StatesComponent implements OnInit {
     this.getStateList(this.defaultPagination);
   }
 
-  btnClickNav= function (toNav) {
-    this.router.navigateByUrl('/'+toNav);
+  dataSearch() {
+    this.getStateList(this.defaultPagination);
+  }
+
+  btnClickNav = function (toNav) {
+    this.router.navigateByUrl('/' + toNav);
   };
 
-  getStateList= function(pageNo){
-    this.statesService.getStateList(pageNo).subscribe(
-      (data: any[]) =>{ 
-        this.totalstateList = data['count']; 
+  getStateList = function (pageNo) {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('page', this.defaultPagination.toString());
+    params.set('search', this.search_key.toString());
+    this.statesService.getStateList(params).subscribe(
+      (data: any[]) => {
+        this.totalstateList = data['count'];
         this.stateList = data['results'];
       }
-     );
+    );
   };
 
-  activeState = function(id){
+  activeState = function (id) {
     let state;
 
     state = {
@@ -43,13 +53,21 @@ export class StatesComponent implements OnInit {
     };
     this.statesService.activeInactiveState(state).subscribe(
       response => {
-        this.getStateList();
+        this.toastr.success('Status changed successfully', '', {
+          timeOut: 3000,
+        });
+        this.getStateList(this.defaultPagination);
       },
-      error => console.log('error',error)
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
     );
   };
 
-  inactiveState = function(id){
+  inactiveState = function (id) {
     let state;
 
     state = {
@@ -59,13 +77,21 @@ export class StatesComponent implements OnInit {
 
     this.statesService.activeInactiveState(state).subscribe(
       response => {
-        this.getStateList();
+        this.toastr.success('Status changed successfully', '', {
+          timeOut: 3000,
+        });
+        this.getStateList(this.defaultPagination);
       },
-      error => console.log('error',error)
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
     );
   };
 
-  deleteState = function(id){
+  deleteState = function (id) {
     let state;
 
     state = {
@@ -74,14 +100,23 @@ export class StatesComponent implements OnInit {
 
     this.statesService.deleteState(state).subscribe(
       response => {
-        this.getStateList();
+        this.toastr.success('State deleted successfully', '', {
+          timeOut: 3000,
+        });
+        this.getStateList(this.defaultPagination);
       },
-      error => console.log('error',error)
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
     );
   };
 
-  pagination = function() {
+  pagination = function () {
     this.getStateList(this.defaultPagination);
   };
+
 
 }
