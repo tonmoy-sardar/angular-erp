@@ -24,7 +24,7 @@ export class CompanyAddComponent implements OnInit {
       company_email: '',
       company_contact: '',
       company_address:'',
-      company_state:'',
+      company_state:0,
       company_city:'',
       company_pin:'',
       company_gst:'',
@@ -50,10 +50,10 @@ export class CompanyAddComponent implements OnInit {
   }
 
   getStateList= function(){
-    this.statesService.getStateList().subscribe(
+    this.statesService.getStateActiveList().subscribe(
       (data: any[]) =>{   
-        this.stateList = data['results'];
-        
+        this.stateList = data;
+        console.log(this.stateList);
       }
      );
   };
@@ -61,7 +61,7 @@ export class CompanyAddComponent implements OnInit {
   getCompanyDropdownList= function(){
     this.companyService.getCompanyDropdownList().subscribe(
       (data: any[]) =>{   
-        this.companyList = data['results'];
+        this.companyList = data;
         console.log(this.companyList);
       }
      );
