@@ -1,3 +1,81 @@
-<p>
-  material works!
-</p>
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="page-header">Material List</h4>
+    </div>
+    <div class="col-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('material/add')"><i class="fa fa-plus"></i> New Material</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+    
+  <hr/>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+            <div class="col-md-9">
+              <h5>Material</h5>
+            </div>
+            <div class="col-md-3">
+              <form role="form" (ngSubmit)="dataSearch()">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search_key">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+      </div>
+      <table class="card-body table table-hover table-sm table-bordered">
+          <thead>
+              <tr>
+                  <th>Sl.No.</th>
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>UOM<small>(Purchase)</small> </th>
+                  <th>UOM<small>(Sale)</small></th>
+                  <th>Tax<small>(Purchase % IGST,CGST,SGST,HSN)</small></th>
+                  <th>Tax<small>(Sale % IGST,CGST,SGST,HSN)</small></th>
+                  <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                  <th scope="row">1</th>
+                  <td>Raw material</td>
+                  <td>Raw product</td>
+                  <td>PCS-5.00 BAG</td>
+                  <td>PCS-1.00 BAG</td>
+                  <td>12.00% -6.00% -6.00 % -hsn123</td>
+                  <td>12.00% -6.00% -6.00% -hsn123</td>
+                  <td>
+                    <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/material/edit', 1]"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0);" title="Map" name="Map">
+                        <i class="fa fa-trash-o"></i>
+                      </a>
+                  </td>
+                  
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  <div class="row" *ngIf="totalMaterialList > 10">
+    <div class="col-md-12">
+      <div class="card-body pull-right">
+        <ngb-pagination [collectionSize]="totalMaterialList" [(page)]="defaultPagination" (pageChange)="pagination()" size="sm"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+  
+</div>

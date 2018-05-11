@@ -12,6 +12,7 @@ import { MaterialComponent } from './material.component';
 import { PageHeaderModule } from '../../shared';
 
 import { MaterialService } from './material.service';
+import { CompanyService} from '../company/company.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { MaterialService } from './material.service';
     PageHeaderModule
   ],
   declarations: [MaterialAddComponent, MaterialEditComponent, MaterialComponent],
-  providers: [MaterialService]
+  providers: [MaterialService,CompanyService]
 })
 export class MaterialModule { }

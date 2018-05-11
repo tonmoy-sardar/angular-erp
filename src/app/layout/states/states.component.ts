@@ -12,6 +12,8 @@ export class StatesComponent implements OnInit {
   defaultPagination: number;
   totalstateList: number;
   search_key = '';
+
+  
   constructor(
     private statesService: StatesService,
     private router: Router,
