@@ -151,7 +151,7 @@ export class CompanyService {
 
 
   // UOM Services Start
-  getUOMList(id): Observable<any>{
+  getUOMList(): Observable<any>{
     return this.http.get(environment.apiEndpoint+'uom/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
