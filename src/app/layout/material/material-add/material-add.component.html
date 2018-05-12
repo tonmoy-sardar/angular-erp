@@ -52,23 +52,23 @@
                             <div class="form-group col-md-12">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" value="" [(ngModel)]="material.for_sale_material" name="unit_uom" > For Sale Material
+                                        <input type="checkbox" value="" [(ngModel)]="material.is_sale" name="is_sale" > For Sale Material
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-4" *ngIf="material.for_sale_material==true">
+                            <div class="form-group col-md-4" *ngIf="material.is_sale==true">
                                 <label>Unit of Measurement</label>
                                 <select class="form-control"  [(ngModel)]="material.sale_base_uom" name="sale_base_uom">
                                     <option value="0">Select UOM</option>
                                     <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-4"  *ngIf="material.for_sale_material==true">
+                            <div class="form-group col-md-4"  *ngIf="material.is_sale==true">
                                 <label>Unit Per UOM</label>
                                 <input class="form-control" type="number" [(ngModel)]="material.sale_unit_per_uom" name="sale_unit_per_uom" placeholder="Unit per UOM">
                             </div>
-                            <div class="form-group col-md-4" *ngIf="material.for_sale_material==true">
+                            <div class="form-group col-md-4" *ngIf="material.is_sale==true">
                                 <label>UOM</label>
                                 <select class="form-control"  [(ngModel)]="material.sale_unit_uom" name="sale_unit_uom">
                                     <option value="0">Select UOM</option>
@@ -79,10 +79,10 @@
                             <div class="form-group col-md-12">
                                 <label>Tax:</label>
                                 <label class="radio-inline">
-                                    <input type="radio" value="true" [(ngModel)]="material.is_taxable" name="is_taxable"> Taxable
+                                    <input type="radio" value=true [(ngModel)]="material.is_taxable" name="is_taxable"> Taxable
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" value="false" [(ngModel)]="material.is_taxable" name="is_taxable"> Non taxable
+                                    <input type="radio" value=false [(ngModel)]="material.is_taxable" name="is_taxable"> Non taxable
                                 </label>
                             </div>
 
@@ -103,19 +103,19 @@
                                 <input class="form-control" type="number" [(ngModel)]="material.purchase_hsn" name="purchase_hsn" placeholder="Purchase HSN">
                             </div>
 
-                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.for_sale_material==true">
+                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.is_sale==true">
                                 <label>Sale IGST</label>
                                 <input class="form-control" type="number" [(ngModel)]="material.sale_igst" name="sale_igst" placeholder="Sale IGST">
                             </div>
-                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.for_sale_material==true">
+                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.is_sale==true">
                                 <label>Sale CGST</label>
                                 <input class="form-control" type="number" [(ngModel)]="material.sale_cgst" name="sale_cgst" placeholder="Sale CGST">
                             </div>
-                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.for_sale_material==true">
+                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.is_sale==true">
                                 <label>Sale SGST</label>
                                 <input class="form-control" type="number" [(ngModel)]="material.sale_sgst" name="sale_sgst" placeholder="Sale SGST">
                             </div>
-                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.for_sale_material==true">
+                            <div class="form-group col-md-3" *ngIf="material.is_taxable=='true' && material.is_sale==true">
                                 <label>Sale HSN</label>
                                 <input class="form-control" type="number" [(ngModel)]="material.sale_hsn" name="sale_hsn" placeholder="Sale HSN">
                             </div>
@@ -140,7 +140,7 @@
                             </div>
 
                             <div class="form-group col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success" (click)="addMaterial()">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
