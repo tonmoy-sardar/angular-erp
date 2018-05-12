@@ -57,4 +57,10 @@ export class PurchaseOrganizationService {
     })
   }
 
+  getPurchaseOrganizationActiveList(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'purchase_org_active_list/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
 }

@@ -45,4 +45,10 @@ export class PurchaseGroupService {
     })
   }
 
+  getPurchaseGroupActiveList(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'purchase_grp_active_list/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
 }

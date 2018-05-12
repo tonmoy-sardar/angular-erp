@@ -13,6 +13,8 @@ import { PageHeaderModule } from '../../shared';
 
 import { MaterialService } from './material.service';
 import { CompanyService} from '../company/company.service';
+import { PurchaseOrganizationService} from '../purchase-organization/purchase-organization.service';
+import { PurchaseGroupService} from '../purchase-group/purchase-group.service';
 
 @NgModule({
   imports: [
@@ -25,6 +27,6 @@ import { CompanyService} from '../company/company.service';
     PageHeaderModule
   ],
   declarations: [MaterialAddComponent, MaterialEditComponent, MaterialComponent],
-  providers: [MaterialService,CompanyService]
+  providers: [MaterialService,CompanyService,PurchaseOrganizationService,PurchaseGroupService]
 })
 export class MaterialModule { }
