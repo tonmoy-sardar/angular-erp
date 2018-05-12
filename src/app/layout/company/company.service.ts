@@ -57,8 +57,8 @@ export class CompanyService {
     })
   }
 
-  getCompanyBranchList(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'company_branch/'+id+'/', {
+  getCompanyBranchList(id,params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_branch/'+id+'/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
@@ -90,8 +90,8 @@ export class CompanyService {
     })
   }
 
-  getCompanyStorageList(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'company_storage/'+id+'/', {
+  getCompanyStorageList(id,params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_storage/'+id+'/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
@@ -123,8 +123,8 @@ export class CompanyService {
     })
   }
 
-  getCompanyStorageBinList(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'company_storagebin/'+id+'/', {
+  getCompanyStorageBinList(id,params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_storagebin/'+id+'/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

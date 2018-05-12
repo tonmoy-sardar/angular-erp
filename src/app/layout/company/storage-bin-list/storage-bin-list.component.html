@@ -13,7 +13,25 @@
       <div class="row">
         <div class="col-md-12">
         <div class="card">
-          <div class="card-header">Storage Bin</div>
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-9">
+                <h5>Storage Bin</h5>
+              </div>
+              <div class="col-md-3">
+                <form role="form" (ngSubmit)="dataSearch()">
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search_key">
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <table class="card-body table table-hover table-sm table-bordered">
               <thead>
               <tr>
@@ -34,10 +52,20 @@
                   <a href="javascript:void(0);" title="Edit" name="Edit" (click)="showStorageBinEdit(companyStorageBin.id)"><i class="fa fa-edit"></i></a>
                 </td>
               </tr>
+              <tr *ngIf="companyStorageBinList.length == 0">
+                <td colspan="9" class="text-center">No record found</td>
+              </tr>
               </tbody>
           </table>
         </div>
       </div>
+      </div>
+      <div class="row" *ngIf="totalcompanyStorageBinList > 10">
+        <div class="col-md-12">
+          <div class="card-body pull-right">
+            <ngb-pagination [collectionSize]="totalcompanyStorageBinList" [(page)]="defaultPagination" (pageChange)="pagination()" size="sm"></ngb-pagination>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="companyStorageBinCompShow.showAdd==true">

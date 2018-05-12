@@ -20,7 +20,7 @@ export class CompanyTreeComponent implements OnInit {
     this.companyService.getCompanyList().subscribe(
       (data: any[]) =>{   
         this.companyList = data;
-        console.log(this.companyList);
+        // console.log(this.companyList);
       }
      );
   };

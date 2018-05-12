@@ -46,8 +46,11 @@ export class CompanyDetailsComponent implements OnInit {
     this.companyService.getCompanyDetails(id).subscribe(
       (data: any[]) =>{
         this.company = data;
-
-        this.getStateDetails(this.company.company_state);
+       
+        if(this.company.company_state)
+        {
+          this.getStateDetails(this.company.company_state);
+        }
       }
      );
   }
