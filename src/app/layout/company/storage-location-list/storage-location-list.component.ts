@@ -82,11 +82,11 @@ export class StorageLocationListComponent implements OnInit {
 
   dataSearch() {
     this.defaultPagination = 1;
-    this.reloadStorageList();
+    this.getCompanyStorageList(this.route.snapshot.params['id']);
   }
 
   pagination = function () {
-    this.reloadStorageList();
+    this.getCompanyStorageList(this.route.snapshot.params['id']);
   };
 
 }

@@ -82,11 +82,11 @@ export class BranchListComponent implements OnInit {
 
   dataSearch() {
     this.defaultPagination = 1;
-    this.reloadBranchList();
+    this.getCompanyBranchList(this.route.snapshot.params['id']);
   }
 
   pagination = function () {
-    this.reloadBranchList();
+    this.getCompanyBranchList(this.route.snapshot.params['id']);
   };
 
 }
