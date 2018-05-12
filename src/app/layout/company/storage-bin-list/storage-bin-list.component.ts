@@ -2,37 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CompanyService } from '../company.service';
-import { StatesService} from '../../states/states.service';
-
+import { StatesService } from '../../states/states.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-storage-bin-list',
   templateUrl: './storage-bin-list.component.html',
   styleUrls: ['./storage-bin-list.component.scss']
 })
 export class StorageBinListComponent implements OnInit {
-  companyStorageBinList;
+  companyStorageBinList = [];
   states;
   companyStorageBinCompShow;
   companyStorageBinId;
-
-  constructor(private companyService: CompanyService, private statesService: StatesService, private router: Router, private route: ActivatedRoute) { }
+  defaultPagination: number;
+  totalcompanyStorageBinList: number;
+  search_key = '';
+  constructor(
+    private companyService: CompanyService,
+    private statesService: StatesService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
-
+    this.defaultPagination = 1;
     this.companyStorageBinCompShow = {
       showList: true,
       showAdd: false,
       showEdit: false
     };
-    
+
     this.getCompanyStorageBinList(this.route.snapshot.params['id']);
   }
 
-  btnClickNav= function (toNav) {
-    this.router.navigateByUrl('/'+toNav);
+  btnClickNav = function (toNav) {
+    this.router.navigateByUrl('/' + toNav);
   };
 
-  showStorageBinAdd= function () {
+  showStorageBinAdd = function () {
     this.companyStorageBinCompShow = {
       showList: false,
       showAdd: true,
@@ -40,7 +48,7 @@ export class StorageBinListComponent implements OnInit {
     };
   };
 
-  showStorageBinEdit= function (id) {
+  showStorageBinEdit = function (id) {
     this.companyStorageBinId = id;
     this.companyStorageBinCompShow = {
       showList: false,
@@ -49,8 +57,7 @@ export class StorageBinListComponent implements OnInit {
     };
   };
 
-  reloadStorageBinList = function()
-  {
+  reloadStorageBinList = function () {
     this.companyStorageBinCompShow = {
       showList: true,
       showAdd: false,
@@ -60,13 +67,25 @@ export class StorageBinListComponent implements OnInit {
     this.getCompanyStorageBinList(this.route.snapshot.params['id']);
   }
 
-  getCompanyStorageBinList= function(id){
-    this.companyService.getCompanyStorageBinList(id).subscribe(
-      (data: any[]) =>{   
+  getCompanyStorageBinList = function (id) {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('page', this.defaultPagination.toString());
+    params.set('search', this.search_key.toString());
+    this.companyService.getCompanyStorageBinList(id,params).subscribe(
+      (data: any[]) => {
         this.companyStorageBinList = data['results'];
         console.log(this.companyStorageBinList);
       }
-     );
+    );
+  };
+
+  dataSearch() {
+    this.defaultPagination = 1;
+    this.getCompanyStorageBinList(this.route.snapshot.params['id']);
+  }
+
+  pagination = function () {
+    this.getCompanyStorageBinList(this.route.snapshot.params['id']);
   };
 
 
