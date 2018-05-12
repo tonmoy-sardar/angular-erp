@@ -19,7 +19,7 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <form role="form" [formGroup]="form">
+                <form role="form" [formGroup]="form" novalidate>
                     <div class="card bg-light mb-3">
                         <div class="card-header" style="background-color:#868e96; color: #fff;">Company Edit</div>
                         <div class="card-body">
@@ -43,9 +43,13 @@
                                 <div class="form-group col-md-4">
                                     <label>Email</label>
                                     <input type="email" class="form-control" [(ngModel)]="company.company_email" name="company_email" placeholder="Email" formControlName="company_email"
-                                        [ngClass]="displayFieldCss('company_email')">
-                                    <div class="invalid-feedback" *ngIf="isFieldValid('company_email')">
-                                        Please enter email
+                                    [ngClass]="{
+                                        'is-invalid': company_email.invalid && (company_email.dirty || company_email.touched),
+                                        'is-valid': company_email.valid && (company_email.dirty || company_email.touched)
+                                   }">
+                                    <div class="invalid-feedback"*ngIf="company_email.errors && (company_email.dirty || company_email.touched)">
+                                            <p *ngIf="company_email.errors.required">Email is required</p>
+                                            <p *ngIf="company_email.errors.pattern">The email address must contain at least the @ character</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
