@@ -48,13 +48,13 @@ export class GstRatesComponent implements OnInit {
   };
 
   activeState (id) {
-    let state;
+    let gstRate;
 
-    state = {
+    gstRate = {
       id: id,
       status: true
     };
-    this.gstRatesService.activeInactiveGST(state).subscribe(
+    this.gstRatesService.activeInactiveGST(gstRate).subscribe(
       response => {
         this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
@@ -71,14 +71,14 @@ export class GstRatesComponent implements OnInit {
   };
 
   inactiveState (id) {
-    let state;
+    let gstRate;
 
-    state = {
+    gstRate = {
       id: id,
       status: false
     };
 
-    this.gstRatesService.activeInactiveGST(state).subscribe(
+    this.gstRatesService.activeInactiveGST(gstRate).subscribe(
       response => {
         this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
@@ -95,13 +95,13 @@ export class GstRatesComponent implements OnInit {
   };
 
   deleteGST (id) {
-    let state;
+    let gstRate;
 
-    state = {
+    gstRate = {
       id: id
     };
 
-    this.gstRatesService.deleteGST(state).subscribe(
+    this.gstRatesService.deleteGST(gstRate).subscribe(
       response => {
         this.toastr.success('GST rate deleted successfully', '', {
           timeOut: 3000,
