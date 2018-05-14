@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { StatesService } from '../../states/states.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-company-add',
@@ -17,24 +17,33 @@ export class CompanyAddComponent implements OnInit {
     private companyService: CompanyService,
     private statesService: StatesService,
     private router: Router,
-    private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      parent: ['', Validators.required],
-      company_name: [null, Validators.required],
-      company_url: [null, Validators.required],
-      company_email: [null, [Validators.required,Validators.email]],
-      company_contact: [null, Validators.required],
-      company_address: [null, Validators.required],
-      company_state: ['', Validators.required],
-      company_city: [null, Validators.required],
-      company_pin: [null, Validators.required],
-      company_gst: [null, Validators.required],
-      company_pan: [null, Validators.required],
-      company_cin: [null, Validators.required]
+    this.form = new FormGroup({
+      parent: new FormControl('', Validators.required),
+      company_name: new FormControl('', Validators.required),
+      company_url: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
+      ]),
+      company_email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+      ]),
+      company_contact: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(12)
+      ]),
+      company_address: new FormControl('', Validators.required),
+      company_state: new FormControl('', Validators.required),
+      company_city: new FormControl('', Validators.required),
+      company_pin: new FormControl('', Validators.required),
+      company_gst: new FormControl('', Validators.required),
+      company_pan: new FormControl('', Validators.required),
+      company_cin: new FormControl('', Validators.required)
     });
     this.getCompanyDropdownList();
     this.getStateList();
@@ -68,7 +77,7 @@ export class CompanyAddComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       });
     }
-    
+
   }
 
   getStateList = function () {
@@ -97,14 +106,10 @@ export class CompanyAddComponent implements OnInit {
     this.form.reset();
   }
 
-  isFieldValid(field: string) {
-    return !this.form.get(field).valid && this.form.get(field).touched;
-  }
-
   displayFieldCss(field: string) {
     return {
-      'is-invalid': !this.form.get(field).valid && this.form.get(field).touched,
-      'is-valid': this.form.get(field).valid
+      'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
+      'is-valid': this.form.controls[field].valid && (this.form.controls[field].dirty || this.form.controls[field].touched)
     };
   }
 
