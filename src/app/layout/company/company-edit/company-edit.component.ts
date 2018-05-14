@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { StatesService } from '../../states/states.service';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-company-edit',
@@ -13,42 +13,38 @@ export class CompanyEditComponent implements OnInit {
   company;
   stateList;
   form: FormGroup;
-  company_name: FormControl;
-  company_url: FormControl;
-  company_email: FormControl;
-  company_contact: FormControl;
-  company_address: FormControl;
-  company_state: FormControl;
-  company_city: FormControl;
-  company_pin: FormControl;
-  company_gst: FormControl;
-  company_pan: FormControl;
-  company_cin: FormControl;
   constructor(
     private companyService: CompanyService,
     private statesService: StatesService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    // this.form = this.formBuilder.group({
-    //   company_name: [null, Validators.required],
-    //   company_url: [null, Validators.required],
-    //   company_email: [null, [Validators.required,Validators.email]],
-    //   company_contact: [null, Validators.required],
-    //   company_address: [null, Validators.required],
-    //   company_state: ['', Validators.required],
-    //   company_city: [null, Validators.required],
-    //   company_pin: [null, Validators.required],
-    //   company_gst: [null, Validators.required],
-    //   company_pan: [null, Validators.required],
-    //   company_cin: [null, Validators.required]
-    // });
-    this.createFormControls();
-    this.createForm();
+    this.form = new FormGroup({
+      company_name: new FormControl('', Validators.required),
+      company_url: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
+      ]),
+      company_email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+      ]),
+      company_contact: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(12)
+      ]),
+      company_address: new FormControl('', Validators.required),
+      company_state: new FormControl('', Validators.required),
+      company_city: new FormControl('', Validators.required),
+      company_pin: new FormControl('', Validators.required),
+      company_gst: new FormControl('', Validators.required),
+      company_pan: new FormControl('', Validators.required),
+      company_cin: new FormControl('', Validators.required)
+    });
     this.company = {
       id: '',
       company_name: '',
@@ -65,41 +61,6 @@ export class CompanyEditComponent implements OnInit {
     };
     this.getCompanyDetails(this.route.snapshot.params['id']);
     this.getStateList();
-  }
-  createFormControls() {
-    this.company_name = new FormControl('', Validators.required);
-    this.company_url = new FormControl('', Validators.required);
-    this.company_email = new FormControl('', [
-      Validators.required,
-      Validators.pattern("[^ @]*@[^ @]*")
-    ]);
-    this.company_contact = new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(12)
-    ]);
-    this.company_address = new FormControl('', Validators.required);
-    this.company_state = new FormControl('', Validators.required);
-    this.company_city = new FormControl('', Validators.required);
-    this.company_pin = new FormControl('', Validators.required);
-    this.company_gst = new FormControl('', Validators.required);
-    this.company_pan = new FormControl('', Validators.required);
-    this.company_cin = new FormControl('', Validators.required);
-  }
-  createForm() {
-    this.form = new FormGroup({
-      company_name: this.company_name,
-      company_url: this.company_url,
-      company_email: this.company_email,
-      company_contact: this.company_contact,
-      company_address: this.company_address,
-      company_state: this.company_state,
-      company_city: this.company_city,
-      company_pin: this.company_pin,
-      company_gst: this.company_gst,
-      company_pan: this.company_pan,
-      company_cin: this.company_cin
-    });
   }
   getCompanyDetails = function (id) {
 
@@ -155,16 +116,12 @@ export class CompanyEditComponent implements OnInit {
 
   reSet() {
     this.form.reset();
-  }
-
-  isFieldValid(field: string) {
-    return !this.form.get(field).valid && this.form.get(field).touched;
-  }
+  }  
 
   displayFieldCss(field: string) {
     return {
-      'is-invalid': !this.form.get(field).valid && this.form.get(field).touched,
-      'is-valid': this.form.get(field).valid
+      'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
+      'is-valid': this.form.controls[field].valid && (this.form.controls[field].dirty || this.form.controls[field].touched)
     };
   }
 
