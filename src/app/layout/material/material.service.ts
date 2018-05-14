@@ -10,13 +10,13 @@ export class MaterialService {
   constructor(private http: HttpClient) { }
 
   addNewMaterial(data): Observable<any>{
-    return this.http.post(environment.apiEndpoint+'states/', data, {
+    return this.http.post(environment.apiEndpoint+'create_material_master/', data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   getMaterialList(params): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'states/?'+params, {
+    return this.http.get(environment.apiEndpoint+'all_material_master/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
@@ -47,6 +47,12 @@ export class MaterialService {
 
   getMaterialTypeList(): Observable<any>{
     return this.http.get(environment.apiEndpoint+'all_material_type/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getMaterialTypeDetails(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_material_type/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MaterialComponent implements OnInit {
 
+  materialList = [];
   defaultPagination: number;
   totalMaterialList: number;
   search_key = '';
@@ -22,18 +23,35 @@ export class MaterialComponent implements OnInit {
 
   ngOnInit() {
     this.defaultPagination = 1;
-    this.totalMaterialList = 20;
+    this.defaultPagination = 1;
+    this.getMaterialList();
   }
 
   dataSearch() {
-    
+    this.defaultPagination = 1;
+    this.getMaterialList();
   }
 
-  btnClickNav = function (toNav) {
+  getMaterialList() {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('page', this.defaultPagination.toString());
+    params.set('search', this.search_key.toString());
+    this.materialService.getMaterialList(params).subscribe(
+      (data: any[]) => {
+        this.totalMaterialList = data['count'];
+        
+        this.materialList = data['results']
+
+      }
+    );
+  };
+
+ 
+  btnClickNav(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
 
-  pagination = function () {
-    
+  pagination() {
+    this.getMaterialList();
   };
 }
