@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./company-add.component.scss']
 })
 export class CompanyAddComponent implements OnInit {
-  companyList;
+  companyList=[];
   stateList;
   form: FormGroup;
   constructor(

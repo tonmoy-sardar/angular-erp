@@ -41,7 +41,7 @@ export class MaterialComponent implements OnInit {
         this.totalMaterialList = data['count'];
         
         this.materialList = data['results']
-
+        console.log(this.materialList);
       }
     );
   };

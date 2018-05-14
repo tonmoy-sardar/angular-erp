@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormArray, Validators, } from '@angular/forms';
 
 import { CompanyService } from '../../company/company.service';
 import { PurchaseOrganizationService} from '../../purchase-organization/purchase-organization.service';
 import { PurchaseGroupService} from '../../purchase-group/purchase-group.service';
 import { MaterialService } from '../material.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-material-add',
   templateUrl: './material-add.component.html',
@@ -17,16 +18,28 @@ export class MaterialAddComponent implements OnInit {
   UOMList=[];
   purchaseGroupList=[];
   purchaseOrganizationList=[];
+  form: FormGroup;
+  material_uom_arr;
 
   constructor(
       private materialService: MaterialService,
       private purchaseOrganizationService: PurchaseOrganizationService, 
       private purchaseGroupService: PurchaseGroupService, 
       private companyService: CompanyService, 
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService,
+      private formBuilder: FormBuilder,
     ) { }
 
   ngOnInit() {
+    
+
+   
+    this.form = this.formBuilder.group({
+      material_type: [null, Validators.required],
+      material_fullname: [null, Validators.required]
+    });
+  
     this.material = {
       material_type: 0,               
       material_name: '',
@@ -54,6 +67,14 @@ export class MaterialAddComponent implements OnInit {
     this.getPurchaseGroupActiveList();
     this.getPurchaseOrganizationActiveList();                                                      
   }
+
+  // createItem(): FormGroup {
+  //   return this.material_uom_arr({
+  //     base_uom:new FormControl('', Validators.required),
+  //     unit_per_uom:new FormControl('', Validators.required),
+  //     unit_uom:new FormControl('', Validators.required)
+  //   });
+  // }
 
   getMaterialTypeList()
   {
@@ -97,34 +118,23 @@ export class MaterialAddComponent implements OnInit {
 
   addMaterial(){
 
-    console.log(this.material);
+    if (this.form.valid) {
 
-    // let materialData  =  {
-    //   material_fullname:this.material.material_name,
-    // }
-    let materialData: any;
-    materialData.material_fullname = this.material.material_name;
+    }
+    else{
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+   
+  }
 
-    console.log(materialData)
-
-      // {
-      // 'material_fullname': 'Shoes',
-      // 'material_type': 1,
-      // 'material_code':'SH001',
-      // 'description':'Demo Desc',
-      // 'is_taxable':'true',
-      // 'is_sale':'true',
-      // 'material_uom': [
-      //       {'material_for': '1', 'base_uom': 1, 'unit_per_uom': 245.00,'unit_uom':1},
-      //       {'material_for': '2', 'base_uom': 1, 'unit_per_uom': 245.00,'unit_uom':1}
-      //     ],
-      // 'material_tax': [
-      //     {'tax_for': '1', 'igst': 18.00, 'cgst': 9.00,'sgst':9.00,'hsn':'hsn12541542'},
-      //       {'tax_for': '2', 'igst': 18.00, 'cgst': 9.00,'sgst':9.00,'hsn':'hsn12541542'}
-      //     ],
-      // 'material_pur_org': [{'pur_org': 1},{'pur_org':2}],
-      // 'material_pur_grp': {'pur_group': 1}
-      // }
+  displayFieldCss(field: string) {
+    return {
+      'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
+      'is-valid': this.form.controls[field].valid && (this.form.controls[field].dirty || this.form.controls[field].touched)
+    };
   }
 
 }
