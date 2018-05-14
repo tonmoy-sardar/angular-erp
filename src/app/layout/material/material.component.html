@@ -46,17 +46,17 @@
                   <th>Tax<small> (Purchase % IGST,CGST,SGST,HSN)</small></th>
                   <th>Tax<small> (Sale % IGST,CGST,SGST,HSN)</small></th>
                   <th>Action</th>
-              </tr>
+              </tr> 
               </thead>
               <tbody>
-              <tr>
+              <tr *ngFor="let  material of materialList ; let i = index">
                   <th scope="row">1</th>
-                  <td>Raw material</td>
-                  <td>Raw product</td>
-                  <td>PCS-5.00 BAG</td>
-                  <td>PCS-1.00 BAG</td>
-                  <td>12.00% -6.00% -6.00 % -hsn123</td>
-                  <td>12.00% -6.00% -6.00% -hsn123</td>
+                  <td>{{material.material_type.material_type}}</td>
+                  <td>{{material.material_fullname}}</td>
+                  <td>{{material.material_uom[0].base_uom.name}} - {{material.material_uom[0]['unit_per_uom']}} {{material.material_uom[0].unit_uom.name}}</td>
+                  <td><span *ngIf="material.is_sales==true">{{material.material_uom[1].base_uom.name}} - {{material.material_uom[1]['unit_per_uom']}} {{material.material_uom[1].unit_uom.name}}</span></td>
+                  <td>{{material.material_tax[0]['igst']}} - {{material.material_tax[0]['cgst']}} - {{material.material_tax[0]['sgst']}} - {{material.material_tax[0]['hsn']}}</td>
+                  <td><span *ngIf="material.is_taxable==true">{{material.material_tax[1]['igst']}} - {{material.material_tax[1]['cgst']}} - {{material.material_tax[1]['sgst']}} - {{material.material_tax[1]['hsn']}}</span></td>
                   <td>
                     <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/material/edit', 1]"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0);" title="Map" name="Map">
