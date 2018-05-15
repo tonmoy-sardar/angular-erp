@@ -38,7 +38,7 @@
                                 <div class="form-group col-md-6">
                                     <label>Company</label>
                                     <select class="form-control" name="company" formControlName="company" [ngClass]="displayFieldCss('company')">
-                                        <option value="">Select Type</option>
+                                        <option value="">Select company</option>
                                         <option value="{{country.id}}" *ngFor="let country of companyList">{{country.company_name}}</option>
                                     </select>
                                     <div class="invalid-feedback" *ngIf="form.controls['company'].hasError('required')">

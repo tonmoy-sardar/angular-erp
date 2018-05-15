@@ -10,7 +10,8 @@ import { TransportAddComponent } from './transport-add/transport-add.component';
 import { TransportEditComponent } from './transport-edit/transport-edit.component';
 import { PageHeaderModule } from '../../shared';
 import { TransportService } from './transport.service';
-
+import { CompanyService } from '../company/company.service';
+import { StatesService} from '../states/states.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +24,6 @@ import { TransportService } from './transport.service';
     NgbModule.forRoot()
   ],
   declarations: [TransportComponent, TransportAddComponent, TransportEditComponent],
-  providers: [TransportService]
+  providers: [TransportService,CompanyService,StatesService]
 })
 export class TransportModule { }

@@ -40,7 +40,7 @@ export class TransportComponent implements OnInit {
       (data: any[]) => {
         this.totaltransportList = data['count'];
         this.transportList = data['results'];
-        console.log(this.transportList)
+        // console.log(this.transportList)
       }
     );
   };
@@ -101,7 +101,7 @@ export class TransportComponent implements OnInit {
 
     this.transportService.deleteTransporter(transporter).subscribe(
       response => {
-        this.toastr.success('Terms deleted successfully', '', {
+        this.toastr.success('Transporter deleted successfully', '', {
           timeOut: 3000,
         });
         this.gettransportList();
