@@ -9,38 +9,43 @@ export class VendorService {
   constructor(private http: HttpClient) { }
 
   addNewVendor(data): Observable<any>{
-    return this.http.post(environment.apiEndpoint+'vendor/', data, {
+    return this.http.post(environment.apiEndpoint+'vendor_master/', data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   getVendorList(params): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'vendor/?'+params, {
+    return this.http.get(environment.apiEndpoint+'vendor_master/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
   
+  getVendorTypeList(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_vendor_type/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
 
   getVendorDetails(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'vendor/'+id+'/', {
+    return this.http.get(environment.apiEndpoint+'vendor_master/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   updateVendor(data): Observable<any>{
-    return this.http.put(environment.apiEndpoint+'vendor/'+data.id+'/',data, {
+    return this.http.put(environment.apiEndpoint+'vendor_master/'+data.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   activeInactiveVendor(data): Observable<any>{
-    return this.http.patch(environment.apiEndpoint+'vendor/'+data.id+'/',data, {
+    return this.http.patch(environment.apiEndpoint+'vendor_master/'+data.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   deleteVendor(data): Observable<any>{
-    return this.http.delete(environment.apiEndpoint+'vendor/'+data.id+'/', {
+    return this.http.delete(environment.apiEndpoint+'vendor_master/'+data.id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

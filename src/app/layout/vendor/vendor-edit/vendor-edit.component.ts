@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { StatesService } from '../../states/states.service';
+import { VendorService } from '../vendor.service';
 @Component({
   selector: 'app-vendor-edit',
   templateUrl: './vendor-edit.component.html',
@@ -11,31 +12,69 @@ import { StatesService } from '../../states/states.service';
 export class VendorEditComponent implements OnInit {
 
   form: FormGroup;
-  contact_info: FormArray;
-  bank_info: FormArray;
+  vendor_address: any[] = [];
+  vendor_account: any[] = [];
   stateList = [];
+  vendorTypeList = [];
+  vendor_details;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private statesService: StatesService
+    private statesService: StatesService,
+    private vendorService: VendorService
   ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      vendor_name: ['', Validators.required],
-      pan: ['', Validators.required],
-      cin: ['', Validators.required],
-      gstin: ['', Validators.required],
-      note: ['', Validators.required],
+      vendor_fullname: ['', Validators.required],
+      vendor_type: ['', Validators.required],
+      pan_no: ['', Validators.required],
+      cin_no: ['', Validators.required],
+      gst_no: ['', Validators.required],
       amount_credit: ['', Validators.required],
       amount_debit: ['', Validators.required],
-      contact_info: this.formBuilder.array([this.createContactInfo()]),
-      bank_info: this.formBuilder.array([this.createBankInfo()])
+      vendor_address: this.formBuilder.array([this.createContactInfo()]),
+      vendor_account: this.formBuilder.array([this.createBankInfo()])
     });
+    this.vendor_details = {
+      id: '',
+      vendor_fullname: '',
+      vendor_type: '',
+      pan_no: '',
+      cin_no: '',
+      amount_credit: '',
+      amount_debit: '',
+      vendor_address: [
+        {
+          email: '',
+          mobile: '',
+          contact_person: '',
+          designation: '',
+          address: '',
+          state: '',
+          city: '',
+          pincode: ''
+        }
+      ],
+      vendor_account: [
+        {
+          bank_name: '',
+          branch_name: '',
+          account_no: '',
+          ifsc_code: ''
+        }
+      ]
+    }
+    this.getVendorTypeList()
     this.getStateList()
     this.getVendorDetails(this.route.snapshot.params['id']);
+  }
+  getVendorTypeList() {
+    this.vendorService.getVendorTypeList().subscribe(res => {
+      this.vendorTypeList = res.results;
+    })
   }
   getStateList() {
     this.statesService.getStateActiveList().subscribe(res => {
@@ -44,58 +83,116 @@ export class VendorEditComponent implements OnInit {
     }
     );
   };
-  getVendorDetails(id){
-
+  getVendorDetails(id) {
+    this.vendorService.getVendorDetails(id).subscribe(res => {
+      this.vendor_details = res
+    })
   }
   createContactInfo() {
     return this.formBuilder.group({
       email: ['', Validators.required],
-      phone: ['', Validators.required],
+      mobile: ['', Validators.required],
       contact_person: ['', Validators.required],
       designation: ['', Validators.required],
       address: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      pin: ['', Validators.required]
+      pincode: ['', Validators.required]
     });
   }
 
   createBankInfo() {
     return this.formBuilder.group({
       bank_name: ['', Validators.required],
-      branch: ['', Validators.required],
+      branch_name: ['', Validators.required],
       account_no: ['', Validators.required],
-      ifsc: ['', Validators.required]
+      ifsc_code: ['', Validators.required]
     });
   }
 
   addContact() {
-    this.contact_info = this.form.get('contact_info') as FormArray;
-    this.contact_info.push(this.createContactInfo());
+    
+    const control = <FormArray>this.form.controls['vendor_address'];
+    control.push(this.createContactInfo());
+    // var vndr_addrs = {
+    //   email: '',
+    //   mobile: '',
+    //   contact_person: '',
+    //   designation: '',
+    //   address: '',
+    //   state: '',
+    //   city: '',
+    //   pincode: ''
+    // }
+    // this.vendor_details.vendor_address.push(vndr_addrs)
+  }
+
+  deleteContact(index: number) {
+    const control = <FormArray>this.form.controls['vendor_address'];
+    control.removeAt(index);
+    // var arrIndx = this.vendor_details.vendor_address.indexOf(index);
+    // if (arrIndx > -1) {
+    //   this.vendor_details.vendor_address.splice(arrIndx, 1)
+    // }
+
   }
   addBank() {
-    this.bank_info = this.form.get('bank_info') as FormArray;
-    this.bank_info.push(this.createBankInfo());
+    
+    const control = <FormArray>this.form.controls['vendor_account'];
+    control.push(this.createBankInfo());
+    // var vndr_accnt = {
+    //   bank_name: '',
+    //   branch_name: '',
+    //   account_no: '',
+    //   ifsc_code: ''
+    // }
+    // this.vendor_details.vendor_account.push(vndr_accnt)
   }
-  btnClickNav = function (toNav) {
+  deleteBank(index: number) {
+    const control = <FormArray>this.form.controls['vendor_account'];
+    control.removeAt(index);
+    // var arrIndx = this.vendor_details.vendor_account.indexOf(index);
+    // if (arrIndx > -1) {
+    //   this.vendor_details.vendor_account.splice(arrIndx, 1)
+    // }
+  }
+  btnClickNav(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
   goToList(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
   updateVendor() {
-    console.log(this.form.value)
     if (this.form.valid) {
-
+      console.log(this.vendor_details)
+      this.vendorService.updateVendor(this.vendor_details).subscribe(
+        response => {
+          // console.log(response)
+          this.toastr.success('Vendor updated successfully', '', {
+            timeOut: 3000,
+          });
+          this.goToList('vendor');
+        },
+        error => {
+          console.log('error', error)
+          // this.toastr.error('everything is broken', '', {
+          //   timeOut: 3000,
+          // });
+        }
+      );
     } else {
-      Object.keys(this.form.controls).forEach(field => {
-        const control = this.form.get(field);
-        control.markAsTouched({ onlySelf: true });
-      });
+      this.markFormGroupTouched(this.form)
     }
 
   }
-
+  markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control.controls) {
+        control.controls.forEach(c => this.markFormGroupTouched(c));
+      }
+    });
+  }
   reSet() {
     this.form.reset();
   }

@@ -20,7 +20,7 @@ export class VendorComponent implements OnInit {
 
   ngOnInit() {
     this.defaultPagination = 1;
-    // this.getVendorList();
+    this.getVendorList();
   }
 
   btnClickNav= function (toNav) {
@@ -40,7 +40,7 @@ export class VendorComponent implements OnInit {
       (data: any[]) => {
         this.totalvendorList = data['count'];
         this.vendorList = data['results'];
-        // console.log(this.transportList)
+        // console.log(this.vendorList)
       }
     );
   };
