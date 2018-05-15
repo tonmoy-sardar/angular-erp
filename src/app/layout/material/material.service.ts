@@ -10,7 +10,7 @@ export class MaterialService {
   constructor(private http: HttpClient) { }
 
   addNewMaterial(data): Observable<any>{
-    return this.http.post(environment.apiEndpoint+'create_material_master/', data, {
+    return this.http.post(environment.apiEndpoint+'material_master/', data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
@@ -20,27 +20,21 @@ export class MaterialService {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
-
-  getMaterialActiveList(): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'active_states/', {
-      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
-    })
-  }
-
+  
   getMaterialDetails(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'states/'+id+'/', {
+    return this.http.get(environment.apiEndpoint+'material_master/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   updateMaterial(data): Observable<any>{
-    return this.http.put(environment.apiEndpoint+'states/'+data.id+'/',data, {
+    return this.http.put(environment.apiEndpoint+'material_master/'+data.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
   deleteMaterial(data): Observable<any>{
-    return this.http.delete(environment.apiEndpoint+'states/'+data.id+'/', {
+    return this.http.delete(environment.apiEndpoint+'material_master/'+data.id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormArray, Validators, } from '@angular/forms';
 
 import { CompanyService } from '../../company/company.service';
 import { PurchaseOrganizationService} from '../../purchase-organization/purchase-organization.service';
 import { PurchaseGroupService} from '../../purchase-group/purchase-group.service';
 import { MaterialService } from '../material.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-material-add',
   templateUrl: './material-add.component.html',
@@ -17,42 +18,137 @@ export class MaterialAddComponent implements OnInit {
   UOMList=[];
   purchaseGroupList=[];
   purchaseOrganizationList=[];
+  form: FormGroup;
+  is_taxable_value=false;
+  
 
   constructor(
       private materialService: MaterialService,
       private purchaseOrganizationService: PurchaseOrganizationService, 
       private purchaseGroupService: PurchaseGroupService, 
       private companyService: CompanyService, 
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService,
+      private formBuilder: FormBuilder,
     ) { }
 
   ngOnInit() {
-    this.material = {
-      material_type: 0,               
-      material_name: '',
-      base_uom:0,
-      unit_per_uom:'',
-      unit_uom:0,
-      sale_base_uom:0,
-      sale_unit_per_uom:'',
-      sale_unit_uom:0,
-      is_sale: false,
-      is_taxable: false,
-      purchase_igst:'',
-      purchase_cgst:'',
-      purchase_sgst:'',
-      purchase_hsn:'',
-      sale_igst:'',
-      sale_cgst:'',
-      sale_sgst:'',
-      sale_hsn:'',
-      purchase_organization:[],
-      purchase_group:[],
-    };
+   
+    this.form = this.formBuilder.group({
+      material_type: [null, Validators.required],
+      material_code:  [null, Validators.required],
+      material_fullname: [null, Validators.required],
+      material_purchase_org:[null, Validators.required],
+      material_purchase_grp:[null, Validators.required],
+      description:[null, Validators.required],
+      material_uom:this.formBuilder.array([ this.createmMaterialUom(1) ]),
+      is_sales: [false],
+      is_taxable: [false],
+      material_tax:this.formBuilder.array([ this.createmMaterialTax(1) ])
+    });
+    
     this.getUOMList();
     this.getMaterialTypeList();
     this.getPurchaseGroupActiveList();
     this.getPurchaseOrganizationActiveList();                                                      
+  }
+
+  
+
+  createmMaterialUom(for_id) {
+    return this.formBuilder.group({
+      material_for: for_id,
+      base_uom: ['', Validators.required],
+      unit_per_uom: ['', Validators.required],
+      unit_uom: ['', Validators.required]
+    });
+  }
+
+  addMaterialUom(){
+
+    const control = <FormArray>this.form.controls['material_uom'];
+    control.push(this.createmMaterialUom(2));
+
+    // this.material_uom_arr = this.form.get('material_uom') as FormArray;
+    // this.material_uom_arr.push(this.createmMaterialUom(2));
+  }
+
+  deleteMaterialUom(index:number)
+  {
+    const control = <FormArray>this.form.controls['material_uom'];
+    control.removeAt(index);
+
+    // this.material_uom_arr.controls.splice(index);
+    // this.form.value.material_uom.splice(index);
+  }
+
+  showHideMaterialUOM()
+  {
+    if(this.form.value.is_sales!=true)
+    {
+      this.addMaterialUom();
+      if(this.form.value.is_taxable==true)
+      {
+        this.addMateriaTax();
+      }
+    }
+    else{
+      this.deleteMaterialUom(1);
+      if(this.form.value.is_taxable==true)
+      {
+        this.deleteMaterialTax(1);
+      }
+    }
+  }
+
+  createmMaterialTax(for_id) {
+    return this.formBuilder.group({
+      tax_for: for_id,
+      igst: [''],
+      cgst: [''],
+      sgst: [''],
+      hsn: ['']
+    });
+  }
+
+  addMateriaTax(){
+
+    const control = <FormArray>this.form.controls['material_tax'];
+    control.push(this.createmMaterialTax(2));
+
+    // this.material_tax_arr = this.form.get('material_tax') as FormArray;
+    // this.material_tax_arr.push(this.createmMaterialTax(2));
+  }
+
+  deleteMaterialTax(index:number)
+  {
+    const control = <FormArray>this.form.controls['material_tax'];
+    control.removeAt(index);
+
+    // this.material_tax_arr.controls.splice(index);
+    // this.form.value.material_tax.splice(index);
+  }
+
+  showHideMaterialTax()
+  {
+    
+    if(this.form.value.is_taxable!=true)
+    {
+      this.is_taxable_value = true;
+      if(this.form.value.is_sales==true)
+      {
+        this.addMateriaTax();
+      }
+     
+    }
+    else{
+      this.is_taxable_value = false;
+      if(this.form.value.is_sales==true)
+      {
+        this.deleteMaterialTax(1);
+      }
+      
+    }
   }
 
   getMaterialTypeList()
@@ -95,36 +191,68 @@ export class MaterialAddComponent implements OnInit {
      );
   }
 
-  addMaterial(){
+  
 
-    console.log(this.material);
+  addMaterial = function () {
 
-    // let materialData  =  {
-    //   material_fullname:this.material.material_name,
-    // }
-    let materialData: any;
-    materialData.material_fullname = this.material.material_name;
+    if (this.form.valid) {
 
-    console.log(materialData)
+      let material_purchase_org_arr = [];
+      for (let i=0; i<this.form.value.material_purchase_org.length; i++)
+      {
+        material_purchase_org_arr.push({pur_org:this.form.value.material_purchase_org[i]});
+      }
 
-      // {
-      // 'material_fullname': 'Shoes',
-      // 'material_type': 1,
-      // 'material_code':'SH001',
-      // 'description':'Demo Desc',
-      // 'is_taxable':'true',
-      // 'is_sale':'true',
-      // 'material_uom': [
-      //       {'material_for': '1', 'base_uom': 1, 'unit_per_uom': 245.00,'unit_uom':1},
-      //       {'material_for': '2', 'base_uom': 1, 'unit_per_uom': 245.00,'unit_uom':1}
-      //     ],
-      // 'material_tax': [
-      //     {'tax_for': '1', 'igst': 18.00, 'cgst': 9.00,'sgst':9.00,'hsn':'hsn12541542'},
-      //       {'tax_for': '2', 'igst': 18.00, 'cgst': 9.00,'sgst':9.00,'hsn':'hsn12541542'}
-      //     ],
-      // 'material_pur_org': [{'pur_org': 1},{'pur_org':2}],
-      // 'material_pur_grp': {'pur_group': 1}
-      // }
+      let material_purchase_grp_arr = [];
+      for (let i=0; i<this.form.value.material_purchase_grp.length; i++)
+      {
+        material_purchase_grp_arr.push({pur_group:this.form.value.material_purchase_grp[i]});
+      }
+
+      this.form.value.material_purchase_org = material_purchase_org_arr;
+      this.form.value.material_purchase_grp = material_purchase_grp_arr;
+
+      if(this.is_taxable_value==false)
+      {
+        this.form.value.material_tax = [];
+      }
+
+      
+      this.materialService.addNewMaterial(this.form.value).subscribe(
+        response => {
+          this.toastr.success('Material added successfully', '', {
+            timeOut: 3000,
+          });
+          this.goToList('material');          
+        },
+        error => {
+          console.log('error', error)
+          // this.toastr.error('everything is broken', '', {
+          //   timeOut: 3000,
+          // });
+        }
+      );
+    } else {
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
   }
+
+  goToList(toNav) {
+    this.router.navigateByUrl('/' + toNav);
+  };
+  
+  displayFieldCss(field: string) {
+    return {
+      'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
+      'is-valid': this.form.controls[field].valid && (this.form.controls[field].dirty || this.form.controls[field].touched)
+    };
+  }
+
+ 
+
+ 
 
 }
