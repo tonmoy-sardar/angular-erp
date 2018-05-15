@@ -1,160 +1,196 @@
 <div>
-    <div class="row">
-      <div class="col-md-6">
-        <h4 class="page-header">Material Edit</h4>
-      </div>
-      <div class="col-md-6 pull-right" style="text-align: right">
-          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
-          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-          <button type="button" class="btn btn-success" (click)="btnClickNav('material')"><i class="fa fa-arrow-left"></i> Back</button>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    <hr/>
-    <div>
+
         <div class="row">
-          <div class="col-md-12">
-              <form role="form">
-                <div class="card bg-light mb-3">
-                    <div class="card-header" style="background-color:#868e96; color: #fff;">Material Edit</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                              <label>Material Type</label>
-                                <select class="form-control">
-                                    <option value="0">Select Material</option>
-                                    <option value="1">Type 1</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Material Name</label>
-                                <input class="form-control" [(ngModel)]="material.material_name" name="material_name" placeholder="Material Name">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label>Unit of Measurement</label>
-                                <select class="form-control"  [(ngModel)]="material.base_uom" name="base_uom">
-                                    <option value="0">Select UOM</option>
-                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label>Unit Per UOM</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.unit_per_uom" name="material_name" placeholder="Material Name">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label>UOM</label>
-                                <select class="form-control"  [(ngModel)]="material.unit_uom" name="unit_uom">
-                                    <option value="0">Select UOM</option>
-                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value=""> For sale Material
-                                    </label>
+            <div class="col-md-6">
+                <h4 class="page-header">Material Edit</h4>
+            </div>
+            <div class="col-md-6 pull-right" style="text-align: right">
+                <button type="button" class="btn btn-secondary">
+                    <i class="fa fa-question" aria-hidden="true"></i> Help</button>
+                <button type="button" class="btn btn-secondary">
+                    <i class="fa fa-refresh"></i> Reload</button>
+                <button type="button" class="btn btn-success" (click)="btnClickNav('material')">
+                    <i class="fa fa-arrow-left"></i> Back</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr/>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form" [formGroup]="form" novalidate>
+                        <div class="card bg-light mb-3">
+                            <div class="card-header" style="background-color:#868e96; color: #fff;">Material Edit</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>Material Type</label>
+                                        <select class="form-control" formControlName="material_type" [ngClass]="displayFieldCss('material_type')" [(ngModel)]="material.material_type" name="material_type">
+                                            <option value="">Select Material Type</option>
+                                            <option *ngFor="let materialType of materialTypeList;" value="{{materialType.id}}">{{materialType.material_type}}</option>
+                                        </select>
+                                        <div class="invalid-feedback" *ngIf="form.controls['material_type'].hasError('required')">
+                                            Please select material Type
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Material Name</label>
+                                        <input class="form-control" formControlName="material_fullname" [ngClass]="displayFieldCss('material_fullname')" placeholder="Material Name" [(ngModel)]="material.material_fullname" name="material_fullname">
+                                        <div class="invalid-feedback" *ngIf="form.controls['material_fullname'].hasError('required')">
+                                            Please enter material name
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Material Code</label>
+                                        <input class="form-control" formControlName="material_code" [ngClass]="displayFieldCss('material_code')" placeholder="Material Code" [(ngModel)]="material.material_code" name="material_code">
+                                        <div class="invalid-feedback" *ngIf="form.controls['material_code'].hasError('required')">
+                                            Please enter material cose
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group col-md-12" formArrayName="material_uom">
+                                        <div *ngFor="let material_uoms of form.controls['material_uom'].controls; let i = index;">
+                                            <div class="row" [formGroupName]="i">
+                                                <div class="form-group col-md-4">
+                                                    <label>Unit of Measurement</label>
+                                                    <select class="form-control" formControlName="base_uom" [ngClass]="{
+                                                        'is-invalid': form.controls['material_uom'].controls[i].controls['base_uom'].invalid && (form.controls['material_uom'].controls[i].controls['base_uom'].dirty || form.controls['material_uom'].controls[i].controls['base_uom'].touched),
+                                                        'is-valid': form.controls['material_uom'].controls[i].controls['base_uom'].valid && (form.controls['material_uom'].controls[i].controls['base_uom'].dirty || form.controls['material_uom'].controls[i].controls['base_uom'].touched)
+                                                      }"  [(ngModel)]="material.material_uom[i].base_uom" name="base_uom">
+                                                        <option value="0">Select UOM</option>
+                                                        <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                                    </select>
+                                                    <div class="invalid-feedback" *ngIf="form.controls['material_uom'].controls[i].controls['base_uom'].hasError('required')">
+                                                        Please enter unit of Measurement
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Unit Per UOM</label>
+                                                    <input class="form-control" type="number" formControlName="unit_per_uom" placeholder="Material Name" [ngClass]="{
+                                                        'is-invalid': form.controls['material_uom'].controls[i].controls['unit_per_uom'].invalid && (form.controls['material_uom'].controls[i].controls['unit_per_uom'].dirty || form.controls['material_uom'].controls[i].controls['unit_per_uom'].touched),
+                                                        'is-valid': form.controls['material_uom'].controls[i].controls['unit_per_uom'].valid && (form.controls['material_uom'].controls[i].controls['unit_per_uom'].dirty || form.controls['material_uom'].controls[i].controls['unit_per_uom'].touched)
+                                                      }"  [(ngModel)]="material.material_uom[i].unit_per_uom" name="unit_per_uom">
+                                                    <div class="invalid-feedback" *ngIf="form.controls['material_uom'].controls[i].controls['unit_per_uom'].hasError('required')">
+                                                        Please enter unit per UOM
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>UOM</label>
+                                                    <select class="form-control" formControlName="unit_uom" [ngClass]="{
+                                                        'is-invalid': form.controls['material_uom'].controls[i].controls['unit_uom'].invalid && (form.controls['material_uom'].controls[i].controls['unit_uom'].dirty || form.controls['material_uom'].controls[i].controls['unit_uom'].touched),
+                                                        'is-valid': form.controls['material_uom'].controls[i].controls['unit_uom'].valid && (form.controls['material_uom'].controls[i].controls['unit_uom'].dirty || form.controls['material_uom'].controls[i].controls['unit_uom'].touched)
+                                                      }" [(ngModel)]="material.material_uom[i].unit_uom" name="unit_uom">
+                                                        <option value="0">Select UOM</option>
+                                                        <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
+                                                    </select>
+                                                    <div class="invalid-feedback" *ngIf="form.controls['material_uom'].controls[i].controls['unit_uom'].hasError('required')">
+                                                        Please enter select UOM
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" formControlName="is_sales" (click)="showHideMaterialUOM()" [(ngModel)]="material.is_sales" name="is_sales"> For Sale Material
+                                            </label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group col-md-12">
+    
+                                        <label>
+                                            <input type="checkbox" formControlName="is_taxable" (click)="showHideMaterialTax()" [(ngModel)]="material.is_taxable" name="is_taxable"> Is Taxable?
+                                        </label>
+    
+                                    </div>
+                                    <div class="form-group col-md-12" *ngIf="is_taxable_value==true">
+                                        <div class="row">
+                                            <div class="form-group col-md-12" formArrayName="material_tax" *ngFor="let material_taxs of form.controls['material_tax'].controls; let i = index;">
+                                                <div class="row" [formGroupName]="i">
+                                                    <div class="form-group col-md-3">
+                                                        <label>IGST</label>
+                                                        <input class="form-control" type="number" formControlName="igst" placeholder="IGST" [ngClass]="{
+                                                    'is-invalid': form.controls['material_tax'].controls[i].controls['igst'].invalid && (form.controls['material_tax'].controls[i].controls['igst'].dirty || form.controls['material_tax'].controls[i].controls['igst'].touched),
+                                                    'is-valid': form.controls['material_tax'].controls[i].controls['igst'].valid && (form.controls['material_tax'].controls[i].controls['igst'].dirty || form.controls['material_tax'].controls[i].controls['igst'].touched)
+                                                  }" [(ngModel)]="material.material_tax[i].igst" name="igst">
+                                                        <div class="invalid-feedback" *ngIf="form.controls['material_tax'].controls[i].controls['igst'].hasError('required')">
+                                                            Please enter IGST
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>CGST</label>
+                                                        <input class="form-control" type="number" formControlName="cgst" placeholder="CGST" [ngClass]="{
+                                                    'is-invalid': form.controls['material_tax'].controls[i].controls['cgst'].invalid && (form.controls['material_tax'].controls[i].controls['cgst'].dirty || form.controls['material_tax'].controls[i].controls['cgst'].touched),
+                                                    'is-valid': form.controls['material_tax'].controls[i].controls['cgst'].valid && (form.controls['material_tax'].controls[i].controls['cgst'].dirty || form.controls['material_tax'].controls[i].controls['cgst'].touched)
+                                                  }" [(ngModel)]="material.material_tax[i].cgst" name="cgst">
+                                                        <div class="invalid-feedback" *ngIf="form.controls['material_tax'].controls[i].controls['cgst'].hasError('required')">
+                                                            Please enter CGST
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>SGST</label>
+                                                        <input class="form-control" type="number" formControlName="sgst" placeholder="SGST" [ngClass]="{
+                                                    'is-invalid': form.controls['material_tax'].controls[i].controls['sgst'].invalid && (form.controls['material_tax'].controls[i].controls['sgst'].dirty || form.controls['material_tax'].controls[i].controls['sgst'].touched),
+                                                    'is-valid': form.controls['material_tax'].controls[i].controls['sgst'].valid && (form.controls['material_tax'].controls[i].controls['sgst'].dirty || form.controls['material_tax'].controls[i].controls['sgst'].touched)
+                                                  }" [(ngModel)]="material.material_tax[i].sgst" name="sgst">
+                                                        <div class="invalid-feedback" *ngIf="form.controls['material_tax'].controls[i].controls['sgst'].hasError('required')">
+                                                            Please enter SGST
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label>HSN</label>
+                                                        <input class="form-control" type="text" formControlName="hsn" placeholder="HSN" [ngClass]="{
+                                                    'is-invalid': form.controls['material_tax'].controls[i].controls['hsn'].invalid && (form.controls['material_tax'].controls[i].controls['hsn'].dirty || form.controls['material_tax'].controls[i].controls['hsn'].touched),
+                                                    'is-valid': form.controls['material_tax'].controls[i].controls['hsn'].valid && (form.controls['material_tax'].controls[i].controls['hsn'].dirty || form.controls['material_tax'].controls[i].controls['hsn'].touched)
+                                                  }" [(ngModel)]="material.material_tax[i].hsn" name="hsn">
+                                                        <div class="invalid-feedback" *ngIf="form.controls['material_tax'].controls[i].controls['hsn'].hasError('required')">
+                                                            Please enter HSN
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group col-md-6">
+                                        <label>Purchase Org: </label>
+                                        <select multiple="" class="form-control" formControlName="material_purchase_org" [ngClass]="displayFieldCss('material_purchase_org')">
+                                            <option *ngFor="let purchaseOrganization of purchaseOrganizationList" value={{purchaseOrganization.id}}>{{purchaseOrganization.name}} </option>
+                                        </select>
+                                        <div class="invalid-feedback" *ngIf="form.controls['material_purchase_org'].hasError('required')">
+                                            Please select purchase org
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group col-md-6">
+                                        <label>Purchase Group: </label>
+                                        <select multiple="" class="form-control" formControlName="material_purchase_grp" [ngClass]="displayFieldCss('material_purchase_grp')">
+                                            <option *ngFor="let purchaseGroup of purchaseGroupList;" value={{purchaseGroup.id}}>{{purchaseGroup.name}} </option>
+                                        </select>
+                                        <div class="invalid-feedback" *ngIf="form.controls['material_purchase_grp'].hasError('required')">
+                                            Please select purchase group
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group col-md-12">
+                                        <label>Description</label>
+                                        <textarea class="form-control" rows="2" placeholder="Description" formControlName="description" [ngClass]="displayFieldCss('description')" [(ngModel)]="material.description" name="description">{{material.description}}></textarea>
+                                        <div class="invalid-feedback" *ngIf="form.controls['description'].hasError('required')">
+                                            Please enter description
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group col-md-12" style="text-align: right">
+                                        <button type="submit" class="btn btn-success" (click)="addMaterial()">Submit</button>
+                                        <button type="reset" class="btn btn-secondary">Reset</button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="form-group col-md-4">
-                                <label>Unit of Measurement</label>
-                                <select class="form-control"  [(ngModel)]="material.sale_base_uom" name="sale_base_uom">
-                                    <option value="0">Select UOM</option>
-                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label>Unit Per UOM</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.sale_unit_per_uom" name="sale_unit_per_uom" placeholder="Unit per UOM">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label>UOM</label>
-                                <select class="form-control"  [(ngModel)]="material.sale_unit_uom" name="sale_unit_uom">
-                                    <option value="0">Select UOM</option>
-                                    <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <label>Tax:</label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="" checked=true> Taxable
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value=""> Non taxable
-                                </label>
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <label>Purchase IGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.purchase_igst" name="purchase_igst" placeholder="Purchase IGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Purchase CGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.purchase_cgst" name="purchase_cgst" placeholder="Purchase CGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Purchase SGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.purchase_sgst" name="purchase_sgst" placeholder="Purchase SGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Purchase HSN</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.purchase_hsn" name="purchase_hsn" placeholder="Purchase HSN">
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <label>Sale IGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.sale_igst" name="sale_igst" placeholder="Sale IGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Sale CGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.sale_cgst" name="sale_cgst" placeholder="Sale CGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Sale SGST</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.sale_sgst" name="sale_sgst" placeholder="Sale SGST">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Sale HSN</label>
-                                <input class="form-control" type="number" [(ngModel)]="material.sale_hsn" name="sale_hsn" placeholder="Sale HSN">
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <label>Purchase Org: </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> orgname 
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> Testorg
-                                </label>
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <label>Purchase Group: </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> Asset Purchase 
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> Material Purchase
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> Purchase 
-                                </label>
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <label>Description</label>
-                                <textarea class="form-control" rows="2" placeholder="Description" [(ngModel)]="material.description" name="description">{{material.description}}</textarea>
-                            </div>
-                            <div class="form-group col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
-                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-              </form>
-          </div>
+            </div>
         </div>
     </div>
-  </div>

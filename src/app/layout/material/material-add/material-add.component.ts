@@ -19,7 +19,8 @@ export class MaterialAddComponent implements OnInit {
   purchaseGroupList=[];
   purchaseOrganizationList=[];
   form: FormGroup;
-  material_uom_arr;
+  is_taxable_value=false;
+  
 
   constructor(
       private materialService: MaterialService,
@@ -32,49 +33,123 @@ export class MaterialAddComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    
-
    
     this.form = this.formBuilder.group({
       material_type: [null, Validators.required],
-      material_fullname: [null, Validators.required]
+      material_code:  [null, Validators.required],
+      material_fullname: [null, Validators.required],
+      material_purchase_org:[null, Validators.required],
+      material_purchase_grp:[null, Validators.required],
+      description:[null, Validators.required],
+      material_uom:this.formBuilder.array([ this.createmMaterialUom(1) ]),
+      is_sales: [false],
+      is_taxable: [false],
+      material_tax:this.formBuilder.array([ this.createmMaterialTax(1) ])
     });
-  
-    this.material = {
-      material_type: 0,               
-      material_name: '',
-      base_uom:0,
-      unit_per_uom:'',
-      unit_uom:0,
-      sale_base_uom:0,
-      sale_unit_per_uom:'',
-      sale_unit_uom:0,
-      is_sale: false,
-      is_taxable: false,
-      purchase_igst:'',
-      purchase_cgst:'',
-      purchase_sgst:'',
-      purchase_hsn:'',
-      sale_igst:'',
-      sale_cgst:'',
-      sale_sgst:'',
-      sale_hsn:'',
-      purchase_organization:[],
-      purchase_group:[],
-    };
+    
     this.getUOMList();
     this.getMaterialTypeList();
     this.getPurchaseGroupActiveList();
     this.getPurchaseOrganizationActiveList();                                                      
   }
 
-  // createItem(): FormGroup {
-  //   return this.material_uom_arr({
-  //     base_uom:new FormControl('', Validators.required),
-  //     unit_per_uom:new FormControl('', Validators.required),
-  //     unit_uom:new FormControl('', Validators.required)
-  //   });
-  // }
+  
+
+  createmMaterialUom(for_id) {
+    return this.formBuilder.group({
+      material_for: for_id,
+      base_uom: ['', Validators.required],
+      unit_per_uom: ['', Validators.required],
+      unit_uom: ['', Validators.required]
+    });
+  }
+
+  addMaterialUom(){
+
+    const control = <FormArray>this.form.controls['material_uom'];
+    control.push(this.createmMaterialUom(2));
+
+    // this.material_uom_arr = this.form.get('material_uom') as FormArray;
+    // this.material_uom_arr.push(this.createmMaterialUom(2));
+  }
+
+  deleteMaterialUom(index:number)
+  {
+    const control = <FormArray>this.form.controls['material_uom'];
+    control.removeAt(index);
+
+    // this.material_uom_arr.controls.splice(index);
+    // this.form.value.material_uom.splice(index);
+  }
+
+  showHideMaterialUOM()
+  {
+    if(this.form.value.is_sales!=true)
+    {
+      this.addMaterialUom();
+      if(this.form.value.is_taxable==true)
+      {
+        this.addMateriaTax();
+      }
+    }
+    else{
+      this.deleteMaterialUom(1);
+      if(this.form.value.is_taxable==true)
+      {
+        this.deleteMaterialTax(1);
+      }
+    }
+  }
+
+  createmMaterialTax(for_id) {
+    return this.formBuilder.group({
+      tax_for: for_id,
+      igst: [''],
+      cgst: [''],
+      sgst: [''],
+      hsn: ['']
+    });
+  }
+
+  addMateriaTax(){
+
+    const control = <FormArray>this.form.controls['material_tax'];
+    control.push(this.createmMaterialTax(2));
+
+    // this.material_tax_arr = this.form.get('material_tax') as FormArray;
+    // this.material_tax_arr.push(this.createmMaterialTax(2));
+  }
+
+  deleteMaterialTax(index:number)
+  {
+    const control = <FormArray>this.form.controls['material_tax'];
+    control.removeAt(index);
+
+    // this.material_tax_arr.controls.splice(index);
+    // this.form.value.material_tax.splice(index);
+  }
+
+  showHideMaterialTax()
+  {
+    
+    if(this.form.value.is_taxable!=true)
+    {
+      this.is_taxable_value = true;
+      if(this.form.value.is_sales==true)
+      {
+        this.addMateriaTax();
+      }
+     
+    }
+    else{
+      this.is_taxable_value = false;
+      if(this.form.value.is_sales==true)
+      {
+        this.deleteMaterialTax(1);
+      }
+      
+    }
+  }
 
   getMaterialTypeList()
   {
@@ -116,25 +191,68 @@ export class MaterialAddComponent implements OnInit {
      );
   }
 
-  addMaterial(){
+  
+
+  addMaterial = function () {
 
     if (this.form.valid) {
 
-    }
-    else{
+      let material_purchase_org_arr = [];
+      for (let i=0; i<this.form.value.material_purchase_org.length; i++)
+      {
+        material_purchase_org_arr.push({pur_org:this.form.value.material_purchase_org[i]});
+      }
+
+      let material_purchase_grp_arr = [];
+      for (let i=0; i<this.form.value.material_purchase_grp.length; i++)
+      {
+        material_purchase_grp_arr.push({pur_group:this.form.value.material_purchase_grp[i]});
+      }
+
+      this.form.value.material_purchase_org = material_purchase_org_arr;
+      this.form.value.material_purchase_grp = material_purchase_grp_arr;
+
+      if(this.is_taxable_value==false)
+      {
+        this.form.value.material_tax = [];
+      }
+
+      
+      this.materialService.addNewMaterial(this.form.value).subscribe(
+        response => {
+          this.toastr.success('Material added successfully', '', {
+            timeOut: 3000,
+          });
+          this.goToList('material');          
+        },
+        error => {
+          console.log('error', error)
+          // this.toastr.error('everything is broken', '', {
+          //   timeOut: 3000,
+          // });
+        }
+      );
+    } else {
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
-   
   }
 
+  goToList(toNav) {
+    this.router.navigateByUrl('/' + toNav);
+  };
+  
   displayFieldCss(field: string) {
     return {
       'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
       'is-valid': this.form.controls[field].valid && (this.form.controls[field].dirty || this.form.controls[field].touched)
     };
   }
+
+ 
+
+ 
 
 }

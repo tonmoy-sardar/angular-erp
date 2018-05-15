@@ -46,6 +46,28 @@ export class MaterialComponent implements OnInit {
     );
   };
 
+  deleteMaterial = function (id) {
+    let material;
+
+    material = {
+      id: id
+    };
+
+    this.materialService.deleteMaterial(material).subscribe(
+      response => {
+        this.toastr.success('Material deleted successfully', '', {
+          timeOut: 3000,
+        });
+        this.getMaterialList();
+      },
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
+    );
+  };
  
   btnClickNav(toNav) {
     this.router.navigateByUrl('/' + toNav);
