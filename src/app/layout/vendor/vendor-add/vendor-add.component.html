@@ -1,0 +1,176 @@
+<div>
+  <!-- <app-page-header [heading]="'Vendor Add'" [icon]="'fa fa-university'"></app-page-header> -->
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="page-header">Vendor Add</h4>
+    </div>
+    <div class="col-md-6 pull-right" style="text-align: right">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-question" aria-hidden="true"></i> Help</button>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-refresh"></i> Reload</button>
+      <button type="button" class="btn btn-success" (click)="btnClickNav('vendor')">
+        <i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <hr/>
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <form role="form" [formGroup]="form">
+          <div class="card bg-light mb-3">
+            <div class="card-header" style="background-color:#868e96; color: #fff;">Vendor Add</div>
+            <div class="card-body">
+              <div class="card bg-light mb-3">
+                <div class="card-header">General Information</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="form-group col-md-3">
+                      <label>Vendor Name</label>
+                      <input type="number" class="form-control" name="vendor_name" placeholder="Vendor Name" formControlName="vendor_name" [ngClass]="displayFieldCss('vendor_name')">
+                      <div class="invalid-feedback" *ngIf="form.controls['vendor_name'].hasError('required')">
+                        Please enter vendor name
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>PAN</label>
+                      <input type="number" class="form-control" name="pan" placeholder="Pan" formControlName="pan" [ngClass]="displayFieldCss('pan')">
+                      <div class="invalid-feedback" *ngIf="form.controls['pan'].hasError('required')">
+                        Please enter PAN
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>CIN</label>
+                      <input type="number" class="form-control" name="cin" placeholder="CIN" formControlName="cin" [ngClass]="displayFieldCss('cin')">
+                      <div class="invalid-feedback" *ngIf="form.controls['cin'].hasError('required')">
+                        Please enter CIN
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>GSTIN</label>
+                      <input type="number" class="form-control" name="gstin" placeholder="GSTIN" formControlName="gstin" [ngClass]="displayFieldCss('gstin')">
+                      <div class="invalid-feedback" *ngIf="form.controls['gstin'].hasError('required')">
+                        Please enter GSTIN
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card bg-light mb-3">
+                <div class="card-header">Contact Information</div>
+                <div class="card-body">
+                  <div class="row" formArrayName="contact_info" *ngFor="let contact of form.get('contact_info').controls; let i = index;">
+                    <div [formGroupName]="i" class="col-md-12">
+                      <div class="row">
+                        <div class="form-group col-md-3">
+                          <label>Email</label>
+                          <input class="form-control" placeholder="Email" name="email" formControlName="email">
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>Contact No.</label>
+                          <input class="form-control" placeholder="Contact No." name="phone" formControlName="phone">
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>Contact Person</label>
+                          <input class="form-control" placeholder="Contact Person" name="contact_person" formControlName="contact_person">
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>Designation</label>
+                          <input class="form-control" placeholder="Designation" name="designation" formControlName="designation">
+                        </div>
+                        <div class="form-group col-md-5">
+                          <label>Address</label>
+                          <textarea class="form-control" rows="3" placeholder="Address" name="address" formControlName="address"></textarea>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>State</label>
+                          <select class="form-control" name="state" formControlName="state">
+                            <option value="">Select State</option>
+                            <option value="{{state.id}}" *ngFor="let state of stateList">{{state.state_name}}</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label>City</label>
+                          <input class="form-control" placeholder="City" name="city" formControlName="city">
+                        </div>
+                        <div class="form-group col-md-1">
+                          <label>Pin</label>
+                          <input class="form-control" placeholder="Pin" name="pin" formControlName="pin">
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:30px;">
+                          <a routerLink="." (click)="addContact()" title="Add More" name="Add More" *ngIf="i == 0">
+                            <i class="fa fa-plus"></i> Add More</a>
+                          <a href="javascript:void(0);" title="Delete" name="Delete" *ngIf="i > 0">
+                            <i class="fa fa-times-circle fa-2"></i> Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card bg-light mb-3">
+                <div class="card-header">Banking Information</div>
+                <div class="card-body">
+                  <div class="row" formArrayName="bank_info" *ngFor="let bank of form.get('bank_info').controls; let i = index;">
+                    <div [formGroupName]="i" class="col-md-12">
+                      <div class="row">
+                        <div class="form-group col-md-3">
+                          <label>Bank Name</label>
+                          <input class="form-control" placeholder="Bank Name" name="bank_name" formControlName="bank_name">
+                          <div class="invalid-feedback" *ngIf="bank.get('bank_name').touched && bank.get('bank_name').hasError('required')">
+                            Please enter Bank Name
+                          </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>Branch</label>
+                          <input class="form-control" placeholder="Branch" name="branch" formControlName="branch">
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label>A/c No</label>
+                          <input class="form-control" placeholder="A/c No" name="account_no" formControlName="account_no">
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label>IFSC</label>
+                          <input class="form-control" placeholder="IFSC" name="ifsc" formControlName="ifsc">
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:30px;">
+                          <a routerLink="." (click)="addBank()" title="Add More" name="Add More" *ngIf="i == 0">
+                            <i class="fa fa-plus"></i> Add More</a>
+                          <a href="javascript:void(0);" title="Delete" name="Delete" *ngIf="i > 0">
+                            <i class="fa fa-times-circle fa-2"></i> Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label>Amount Credit</label>
+                  <input class="form-control" placeholder="Amount Credit" name="amount_credit" formControlName="amount_credit" [ngClass]="displayFieldCss('amount_credit')">
+                  <div class="invalid-feedback" *ngIf="isFieldValid('amount_credit')">
+                    Please enter Amount Credit
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Amount Debit</label>
+                  <input class="form-control" placeholder="Amount Debit" name="amount_debit" formControlName="amount_debit" [ngClass]="displayFieldCss('amount_debit')">
+                  <div class="invalid-feedback" *ngIf="isFieldValid('amount_debit')">
+                    Please enter Amount Debit
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12" style="text-align: right">
+                  <button type="submit" class="btn btn-success" (click)="addVendor()">Submit</button>
+                  <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
