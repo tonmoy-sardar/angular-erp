@@ -84,7 +84,7 @@ export class CompanyService {
   // Branch Services End
 
   // Storage Services Start
-  getStorageList(id): Observable<any>{
+  getStorageList(): Observable<any>{
     return this.http.get(environment.apiEndpoint+'all_storage/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })

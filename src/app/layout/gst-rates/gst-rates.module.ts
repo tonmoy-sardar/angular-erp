@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsComponentModule } from '../bs-component/bs-component.module';
 import { GstRatesRoutingModule } from './gst-rates-routing.module';
 import { GstRatesComponent } from './gst-rates.component';
 import { GstRatesAddComponent } from './gst-rates-add/gst-rates-add.component';
@@ -14,9 +15,12 @@ import { GstRatesService } from './gst-rates.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     GstRatesRoutingModule,
-    PageHeaderModule
+    PageHeaderModule,
+    BsComponentModule,
+    NgbModule.forRoot()
   ],
   declarations: [GstRatesComponent, GstRatesAddComponent, GstRatesEditComponent],
   providers: [GstRatesService]
