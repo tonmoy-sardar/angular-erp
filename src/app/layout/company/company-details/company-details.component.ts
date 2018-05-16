@@ -41,7 +41,7 @@ export class CompanyDetailsComponent implements OnInit {
 
   }
 
-  getCompanyDetails = function(id) {
+  getCompanyDetails(id) {
 
     this.companyService.getCompanyDetails(id).subscribe(
       (data: any[]) =>{
@@ -55,7 +55,7 @@ export class CompanyDetailsComponent implements OnInit {
      );
   }
 
-  getStateDetails = function(id) {
+  getStateDetails(id) {
     this.statesService.getStateDetails(id).subscribe(
       (data: any[]) =>{  
         this.states = data;
@@ -63,7 +63,7 @@ export class CompanyDetailsComponent implements OnInit {
      );
   }
 
-  btnClickNav= function (toNav) {
+  btnClickNav(toNav) {
     this.router.navigateByUrl('/'+toNav);
   };
 

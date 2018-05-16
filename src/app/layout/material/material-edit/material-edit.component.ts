@@ -44,6 +44,37 @@ export class MaterialEditComponent implements OnInit {
       description:'',
       is_sales:false,
       is_taxable:false,
+      material_uom: [
+          {   
+            "material_for": '',
+            "base_uom": '',
+            "unit_per_uom":'',
+            "unit_uom":''
+          },
+          {   
+            "material_for": '',
+            "base_uom": '',
+            "unit_per_uom":'',
+            "unit_uom":''
+          }
+        ],
+     material_tax: [
+            {
+              "tax_for":'',
+              "igst":'',
+              "cgst":'',
+              "sgst":'',
+              "hsn":''
+            },
+            {
+              "tax_for":'',
+              "igst":'',
+              "cgst":'',
+              "sgst":'',
+              "hsn":''
+            }
+        ],
+      
     };
 
     this.form = this.formBuilder.group({
@@ -83,8 +114,21 @@ export class MaterialEditComponent implements OnInit {
           this.addMateriaTax();
         }
 
+        let material_purchase_org_arr = [];
+        for (let i=0; i<this.material.material_purchase_org.length; i++)
+        {
+          material_purchase_org_arr.push(this.material.material_purchase_org[i].id);
+        }
+        this.material.material_purchase_org = material_purchase_org_arr;
 
+        let material_purchase_grp_arr = [];
+        for (let i=0; i<this.material.material_purchase_grp.length; i++)
+        {
+          material_purchase_grp_arr.push(this.material.material_purchase_grp[i].id);
+        }
+        this.material.material_purchase_grp = material_purchase_grp_arr;
 
+        console.log(this.material);
       }
     );
   }
@@ -227,7 +271,7 @@ export class MaterialEditComponent implements OnInit {
 
   
 
-  addMaterial = function () {
+  updateMaterial = function () {
 
     if (this.form.valid) {
 
@@ -252,9 +296,9 @@ export class MaterialEditComponent implements OnInit {
       }
 
       
-      this.materialService.addNewMaterial(this.form.value).subscribe(
+      this.materialService.updateMaterial(this.form.value,this.material).subscribe(
         response => {
-          this.toastr.success('Material added successfully', '', {
+          this.toastr.success('Material updated successfully', '', {
             timeOut: 3000,
           });
           this.goToList('material');          

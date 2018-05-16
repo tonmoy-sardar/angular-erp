@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PurchaseRequisitionComponent } from './purchase-requisition.component';
 import { PurchaseRequisitionAddComponent } from './purchase-requisition-add/purchase-requisition-add.component';
+import { PurchaseRequisitionDeatilsComponent } from './purchase-requisition-deatils/purchase-requisition-deatils.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,11 @@ const routes: Routes = [
   {
     path: 'add',
     component: PurchaseRequisitionAddComponent
+  }
+  ,
+  {
+    path: 'details/:id',
+    component: PurchaseRequisitionDeatilsComponent
   }
 ];
 

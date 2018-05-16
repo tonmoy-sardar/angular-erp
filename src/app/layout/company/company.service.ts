@@ -158,4 +158,23 @@ export class CompanyService {
   }
   // UOM Services End
 
+  getCompanyBranchDropdownList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_branch_dropdown/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getCompanyStorageDropdownList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_storage_dropdown/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getCompanyStoragebinDropdownList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_storagebin_dropdown/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+
 }

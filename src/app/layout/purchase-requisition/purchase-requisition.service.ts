@@ -8,10 +8,40 @@ export class PurchaseRequisitionService {
 
   constructor(private http: HttpClient) { }
 
-  // getPurchaseRequisitionList(params): Observable<any>{
-  //   return this.http.get(environment.apiEndpoint+'states/?'+params, {
-  //     headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
-  //   })
-  // }
+  addNewPurchaseRequisition(data): Observable<any>{
+    return this.http.post(environment.apiEndpoint+'purchase_requistion/', data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getPurchaseRequisitionList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_purchase_requistion/?'+params, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getPurchaseRequisitionDetails(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_purchase_requistion/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  updatePurchaseRequisition(data): Observable<any>{
+    return this.http.put(environment.apiEndpoint+'purchase_requistion/'+data.id+'/',data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  changeStatusPurchaseRequisition(data): Observable<any>{
+    return this.http.patch(environment.apiEndpoint+'purchase_requistion/'+data.id+'/',data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  changeApproveStatusPurchaseRequisition(data): Observable<any>{
+    return this.http.patch(environment.apiEndpoint+'purchase_requistion/'+data.id+'/',data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
 
 }

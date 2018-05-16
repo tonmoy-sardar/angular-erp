@@ -11,6 +11,13 @@ import { PurchaseRequisitionAddComponent } from './purchase-requisition-add/purc
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { PurchaseRequisitionService } from './purchase-requisition.service';
+import { PurchaseRequisitionDeatilsComponent } from './purchase-requisition-deatils/purchase-requisition-deatils.component';
+
+import { MaterialService } from '../material/material.service';
+import { CompanyService} from '../company/company.service';
+import { PurchaseOrganizationService} from '../purchase-organization/purchase-organization.service';
+import { PurchaseGroupService} from '../purchase-group/purchase-group.service';
+
 
 @NgModule({
   imports: [
@@ -23,7 +30,7 @@ import { PurchaseRequisitionService } from './purchase-requisition.service';
     HttpClientModule,
     BsComponentModule
   ],
-  declarations: [PurchaseRequisitionComponent, PurchaseRequisitionAddComponent],
-  providers: [PurchaseRequisitionService]
+  declarations: [PurchaseRequisitionComponent, PurchaseRequisitionAddComponent, PurchaseRequisitionDeatilsComponent],
+  providers: [PurchaseRequisitionService,MaterialService,CompanyService,PurchaseOrganizationService,PurchaseGroupService]
 })
 export class PurchaseRequisitionModule { }

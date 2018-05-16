@@ -27,8 +27,8 @@ export class MaterialService {
     })
   }
 
-  updateMaterial(data): Observable<any>{
-    return this.http.put(environment.apiEndpoint+'material_master/'+data.id+'/',data, {
+  updateMaterial(data,material): Observable<any>{
+    return this.http.put(environment.apiEndpoint+'material_master/'+material.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

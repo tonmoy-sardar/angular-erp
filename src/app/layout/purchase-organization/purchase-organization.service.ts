@@ -63,4 +63,16 @@ export class PurchaseOrganizationService {
     })
   }
 
+  getPurchaseOrganizationCompanyList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'specific_organisation_company/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getPurchaseOrganizationMaterialList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'specific_organisation_material/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
 }
