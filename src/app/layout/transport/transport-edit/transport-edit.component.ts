@@ -17,13 +17,13 @@ export class TransportEditComponent implements OnInit {
   storageList = [];
   stateList = [];
   constructor(
-     private router: Router,
-      private route: ActivatedRoute,
-      private toastr: ToastrService,
-      private transportService: TransportService,
-      private companyService: CompanyService,
-      private statesService: StatesService
-    ) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private transportService: TransportService,
+    private companyService: CompanyService,
+    private statesService: StatesService
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -54,15 +54,15 @@ export class TransportEditComponent implements OnInit {
     this.transport = {
       transporter_name: '',
       email: '',
-      phone:'',
+      phone: '',
       company: '',
       storage: '',
-      city:'',
-      pan:'',
-      pin:'',
-      gstin:'',
-      amount_credit:'',
-      amount_debit:''
+      city: '',
+      pan: '',
+      pin: '',
+      gstin: '',
+      amount_credit: '',
+      amount_debit: ''
     };
   }
   goToList(toNav) {
@@ -70,13 +70,13 @@ export class TransportEditComponent implements OnInit {
   };
   getStateList() {
     this.statesService.getStateActiveList().subscribe(res => {
-        this.stateList = res;
-        // console.log(this.stateList);
-      }
+      this.stateList = res;
+      // console.log(this.stateList);
+    }
     );
   };
-  getStorageList(){
-    this.companyService.getStorageList().subscribe(res =>{
+  getStorageList() {
+    this.companyService.getStorageList().subscribe(res => {
       this.storageList = res.results;
       // console.log(this.storageList)
     })
@@ -94,8 +94,8 @@ export class TransportEditComponent implements OnInit {
       this.transport = res
     })
   }
-  btnClickNav= function (toNav) {
-    this.router.navigateByUrl('/'+toNav);
+  btnClickNav = function (toNav) {
+    this.router.navigateByUrl('/' + toNav);
   };
   updateTransport() {
     if (this.form.valid) {
