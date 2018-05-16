@@ -46,8 +46,6 @@
               <th>Company</th>
               <th>P. Org.</th>
               <th>P. Group</th>
-              <th>Vendor</th>
-              <th>Vendor Address</th>
               <th>PR Raised Date</th>
               <th>PR Raised By</th>
               <th>Status</th>
@@ -56,75 +54,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>17-18/02/I-0001</td>
-              <td>Shyam Futuretech</td>
-              <td>Testorg</td>
-              <td>Material Purchase</td>
-              <td>Shyam FT</td>
-              <td>kolkata, kolkata, WEST BENGAL, 700012</td>
-              <td>14-02-2018</td>
-              <td>admin</td>
-              <td>Finalised</td>
-              <td>Finalised</td>
+            <tr *ngFor="let purchaseRequisition of purchaseRequisitionList ; let i = index">
+              <th scope="row">{{i +1}}</th>
+              <td>{{purchaseRequisition.requisition_map[0].requisition_no}}</td>
+              <td>{{purchaseRequisition.company.company_name}}</td>
+              <td>{{purchaseRequisition.purchase_org.name}}</td>
+              <td>{{purchaseRequisition.purchase_grp.name}}</td>
+              <td>{{purchaseRequisition.created_at | date: 'dd-MM-yyyy'}}</td>
+              <td>{{purchaseRequisition.created_by.first_name}}</td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit">
-                  <i class="fa fa-eye"></i>
-                </a>
-              </td>
-
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>17-18/02/I-0001</td>
-              <td>Shyam Futuretech</td>
-              <td>Testorg</td>
-              <td>Material Purchase</td>
-              <td>Shyam FT</td>
-              <td>kolkata, kolkata, WEST BENGAL, 700012</td>
-              <td>14-02-2018</td>
-              <td>admin</td>
-              <td>Finalised</td>
-              <td>Finalised</td>
-              <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit">
-                  <i class="fa fa-eye"></i>
-                </a>
-              </td>
-
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>17-18/02/I-0001</td>
-              <td>Shyam Futuretech</td>
-              <td>Testorg</td>
-              <td>Material Purchase</td>
-              <td>Shyam FT</td>
-              <td>kolkata, kolkata, WEST BENGAL, 700012</td>
-              <td>14-02-2018</td>
-              <td>admin</td>
-              <td>
-                <select class="form-control">
-                  <option>Change Status</option>
-                  <option>Cancel</option>
-                  <option>Active</option>
+                <select class="form-control" [(ngModel)]="purchaseRequisition.is_finalised" name="is_finalised"  (ngModelChange)="changeStatus(purchaseRequisition.is_finalised,purchaseRequisition.id)">
+                  <option value='0'>Change Status</option>
+                  <option value='2'>Cancel</option>
+                  <option value='1'>Active</option>
                 </select>
               </td>
               <td>
-                <select class="form-control">
-                  <option>Change Approve</option>
-                  <option>Approve</option>
-                  <option>Dis-Approve</option>
+                <select class="form-control" [(ngModel)]="purchaseRequisition.is_approve" name="is_approve"  (ngModelChange)="changeApproveStatus(purchaseRequisition.is_approve,purchaseRequisition.id)">
+                  <option value='0'>Change Approve</option>
+                  <option value='1'>Approve</option>
+                  <option value='2'>Dis-Approve</option>
                 </select>
               </td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit">
+                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/purchase-requisition/details', purchaseRequisition.id]">
                   <i class="fa fa-eye"></i>
                 </a>
               </td>
 
             </tr>
+            
             <!-- <tr *ngIf="purchaseRequisitionList.length == 0">
               <td colspan="12" class="text-center">No record found</td>
             </tr> -->
@@ -133,10 +92,10 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="totalpurchaseRequisitionList > 10">
+  <div class="row" *ngIf="totalPurchaseRequisitionList > 10">
     <div class="col-md-12">
       <div class="card-body pull-right">
-        <ngb-pagination [collectionSize]="totalpurchaseRequisitionList" [(page)]="defaultPagination" (pageChange)="pagination()"
+        <ngb-pagination [collectionSize]="totalPurchaseRequisitionList" [(page)]="defaultPagination" (pageChange)="pagination()"
           size="sm"></ngb-pagination>
       </div>
     </div>
