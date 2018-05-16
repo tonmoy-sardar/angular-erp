@@ -66,7 +66,7 @@
                   <i class="fa fa-thumbs-down"></i> Inactive</a>
               </td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/vendor/edit', 1]">
+                <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/vendor/edit', vendor.id]">
                   <i class="fa fa-edit"></i>
                 </a>&nbsp;&nbsp;&nbsp;
                 <a href="javascript:void(0);" title="Map" name="Map" (click)="deleteVendor(vendor.id)">

@@ -35,8 +35,8 @@ export class VendorEditComponent implements OnInit {
       gst_no: ['', Validators.required],
       amount_credit: ['', Validators.required],
       amount_debit: ['', Validators.required],
-      vendor_address: this.formBuilder.array([this.createContactInfo()]),
-      vendor_account: this.formBuilder.array([this.createBankInfo()])
+      vendor_address: this.formBuilder.array([]),
+      vendor_account: this.formBuilder.array([])
     });
     this.vendor_details = {
       id: '',
@@ -71,6 +71,7 @@ export class VendorEditComponent implements OnInit {
     this.getStateList()
     this.getVendorDetails(this.route.snapshot.params['id']);
   }
+  
   getVendorTypeList() {
     this.vendorService.getVendorTypeList().subscribe(res => {
       this.vendorTypeList = res.results;
@@ -85,7 +86,15 @@ export class VendorEditComponent implements OnInit {
   };
   getVendorDetails(id) {
     this.vendorService.getVendorDetails(id).subscribe(res => {
-      this.vendor_details = res
+      this.vendor_details = res;
+      const address_control = <FormArray>this.form.controls['vendor_address'];
+      const account_control = <FormArray>this.form.controls['vendor_account'];
+      this.vendor_details.vendor_address.forEach( x => {
+        address_control.push(this.createContactInfo());
+      })
+      this.vendor_details.vendor_account.forEach( x => {
+        account_control.push(this.createBankInfo());
+      })
     })
   }
   createContactInfo() {
@@ -111,50 +120,46 @@ export class VendorEditComponent implements OnInit {
   }
 
   addContact() {
-    
+    var vndr_addrs = {
+      email: '',
+      mobile: '',
+      contact_person: '',
+      designation: '',
+      address: '',
+      state: '',
+      city: '',
+      pincode: ''
+    }
+    this.vendor_details.vendor_address.push(vndr_addrs)
     const control = <FormArray>this.form.controls['vendor_address'];
     control.push(this.createContactInfo());
-    // var vndr_addrs = {
-    //   email: '',
-    //   mobile: '',
-    //   contact_person: '',
-    //   designation: '',
-    //   address: '',
-    //   state: '',
-    //   city: '',
-    //   pincode: ''
-    // }
-    // this.vendor_details.vendor_address.push(vndr_addrs)
   }
 
   deleteContact(index: number) {
+    if (index > -1) {
+      this.vendor_details.vendor_address.splice(index, 1)
+    }
     const control = <FormArray>this.form.controls['vendor_address'];
     control.removeAt(index);
-    // var arrIndx = this.vendor_details.vendor_address.indexOf(index);
-    // if (arrIndx > -1) {
-    //   this.vendor_details.vendor_address.splice(arrIndx, 1)
-    // }
 
   }
   addBank() {
-    
+    var vndr_accnt = {
+      bank_name: '',
+      branch_name: '',
+      account_no: '',
+      ifsc_code: ''
+    }
+    this.vendor_details.vendor_account.push(vndr_accnt)
     const control = <FormArray>this.form.controls['vendor_account'];
     control.push(this.createBankInfo());
-    // var vndr_accnt = {
-    //   bank_name: '',
-    //   branch_name: '',
-    //   account_no: '',
-    //   ifsc_code: ''
-    // }
-    // this.vendor_details.vendor_account.push(vndr_accnt)
   }
   deleteBank(index: number) {
+    if (index > -1) {
+      this.vendor_details.vendor_account.splice(index, 1)
+    }
     const control = <FormArray>this.form.controls['vendor_account'];
     control.removeAt(index);
-    // var arrIndx = this.vendor_details.vendor_account.indexOf(index);
-    // if (arrIndx > -1) {
-    //   this.vendor_details.vendor_account.splice(arrIndx, 1)
-    // }
   }
   btnClickNav(toNav) {
     this.router.navigateByUrl('/' + toNav);
@@ -164,7 +169,6 @@ export class VendorEditComponent implements OnInit {
   };
   updateVendor() {
     if (this.form.valid) {
-      console.log(this.vendor_details)
       this.vendorService.updateVendor(this.vendor_details).subscribe(
         response => {
           // console.log(response)
@@ -196,9 +200,7 @@ export class VendorEditComponent implements OnInit {
   reSet() {
     this.form.reset();
   }
-  isFieldValid(field: string) {
-    return !this.form.get(field).valid && this.form.get(field).touched;
-  }
+
   displayFieldCss(field: string) {
     return {
       'is-invalid': this.form.get(field).invalid && (this.form.get(field).dirty || this.form.get(field).touched),
