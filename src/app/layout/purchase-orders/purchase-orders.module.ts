@@ -11,8 +11,9 @@ import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { PurchaseOrdersService } from './purchase-orders.service';
-
-
+import { CompanyService } from '../company/company.service';
+import { MaterialService } from '../material/material.service';
+import { PurchaseRequisitionService } from '../purchase-requisition/purchase-requisition.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +26,6 @@ import { PurchaseOrdersService } from './purchase-orders.service';
     BsComponentModule
   ],
   declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent],
-  providers: [PurchaseOrdersService]
+  providers: [PurchaseOrdersService,CompanyService,MaterialService,PurchaseRequisitionService]
 })
 export class PurchaseOrdersModule { }
