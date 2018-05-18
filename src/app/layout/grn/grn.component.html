@@ -1,5 +1,5 @@
 <div>
- 
+  <!-- <app-page-header [heading]="'GRN List'" [icon]="'fa fa-university'"></app-page-header> -->
   <div class="row">
     <div class="col-md-6">
       <h4 class="page-header">GRN List</h4>
@@ -10,16 +10,16 @@
       <button type="button" class="btn btn-secondary">
         <i class="fa fa-refresh"></i> Reload</button>
       <button type="button" class="btn btn-success" (click)="btnClickNav('grn/add')">
-        <i class="fa fa-plus"></i> New Purchase Organization</button>
+        <i class="fa fa-plus"></i> New GRN</button>
     </div>
     <div class="clearfix"></div>
   </div>
-    
+
   <hr/>
   <div class="row">
     <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
+      <div class="card">
+        <div class="card-header">
           <div class="row">
             <div class="col-md-9">
               <h5>GRN</h5>
@@ -37,10 +37,10 @@
               </form>
             </div>
           </div>
-      </div>
-      <table class="card-body table table-hover table-sm table-bordered">
+        </div>
+        <table class="card-body table table-hover table-sm table-bordered">
           <thead>
-          <tr>
+            <tr>
               <th>Sl.No.</th>
               <th>Grn No</th>
               <th>Po No</th>
@@ -52,45 +52,55 @@
               <th>GRN Raised Date</th>
               <th>Status</th>
               <th>Action</th>
-          </tr>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let grn of grnList ; let i = index">
+            <tr *ngFor="let grn of grnList ; let i = index">
               <th scope="row">{{i +1}}</th>
               <td>{{grn.grn_map[0].grn_no}}</td>
-              <td>17-18/02/PO-0003</td>
+              <td>{{grn.purchase_order_no[0].purchase_order_no}}</td>
               <td>{{grn.company}}</td>
               <td>{{grn.pur_org}}</td>
               <td>{{grn.pur_grp}}</td>
               <td>{{grn.vendor}}</td>
               <td>{{grn.vendor_address.address}}</td>
-              <td>{{grn.created_at | date : 'dd-MM-yyyy'}}</td>
+              <td>{{grn.created_at | date:'dd-MM-yyyy'}}</td>
               <td>
-                <select class="form-control" [(ngModel)]="grn.is_finalised" name="is_finalised"  (ngModelChange)="changeStatus(grn.is_finalised,grn.id)">
-                    <option value='0'>Change Status</option>
-                    <option value='2'>Cancel</option>
-                    <option value='1'>Active</option>
-                </select>
+                <!-- <select class="form-control">
+                  <option>Change Status</option>
+                  <option>Cancel</option>
+                  <option>Active</option>
+                </select> -->
+                <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveState(grn.id)" *ngIf="grn.status==true">
+                  <i class="fa fa-thumbs-up"></i> Active</a>
+                <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activeState(grn.id)" *ngIf="grn.status==false">
+                  <i class="fa fa-thumbs-down"></i> Inactive</a>
               </td>
               <td>
-                <select class="form-control" [(ngModel)]="grn.is_approve" name="is_approve"  (ngModelChange)="changeApproveStatus(grn.is_approve,grn.id)">
-                    <option value='0'>Change Approve</option>
-                    <option value='1'>Approve</option>
-                    <option value='2'>Dis-Approve</option>
-                </select>
+                <!-- <select class="form-control">
+                  <option>Change Approve</option>
+                  <option>Approve</option>
+                  <option>Dis-Approve</option>
+                </select> -->
+                <a href="javascript:void(0);" title="Active" name="Active" (click)="disApproveGrn(grn.id)" *ngIf="grn.is_approve==1">
+                  <i class="fa fa-thumbs-up"></i> Approve</a>
+                <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="approveGrn(grn.id)" *ngIf="grn.is_approve==0">
+                  <i class="fa fa-thumbs-down"></i> Dis-approve</a>
               </td>
-          </tr>
+            </tr>
+            <tr *ngIf="grnList.length == 0">
+              <td colspan="12" class="text-center">No record found</td>
+            </tr>
           </tbody>
-      </table>
-    </div>
-  </div>
-  </div>
-  <div class="row" *ngIf="totalGrnList > 10">
-      <div class="col-md-12">
-        <div class="card-body pull-right">
-          <ngb-pagination [collectionSize]="totalGrnList" [(page)]="defaultPagination" (pageChange)="pagination()"
-            size="sm"></ngb-pagination>
-        </div>
+        </table>
       </div>
     </div>
+  </div>
+  <div class="row" *ngIf="totalgrnList > 10">
+    <div class="col-md-12">
+      <div class="card-body pull-right">
+        <ngb-pagination [collectionSize]="totalgrnList" [(page)]="defaultPagination" (pageChange)="pagination()" size="sm"></ngb-pagination>
+      </div>
+    </div>
+  </div>
 </div>

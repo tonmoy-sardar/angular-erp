@@ -1,4 +1,5 @@
 <div>
+    <!-- <app-page-header [heading]="'GRN Add'" [icon]="'fa fa-university'"></app-page-header> -->
     <div class="row">
         <div class="col-md-6">
             <h4 class="page-header">GRN Add</h4>
@@ -9,7 +10,7 @@
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
             <button type="button" class="btn btn-success" (click)="btnClickNav('grn')">
-                <i class="fa fa-plus"></i> Back</button>
+                <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -26,22 +27,20 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label>Po No.</label>
-                                            <select class="form-control">
-                                                <option>Select Po</option>
-                                                <option>17-18/02/PO-0002</option>
-                                                <option>17-18/02/PO-0008</option>
+                                            <select class="form-control" (change)="purchaseOrderChange($event.target.value)" name="po_order">
+                                                <option value="">Select Po</option>
+                                                <option value="{{po.id}}" *ngFor="let po of purchaseOrderList">{{po.purchase_order_map[0].purchase_order_no}}</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <!-- <div class="form-group col-md-3">
                                             <label>GRN Date</label>
                                             <div class="input-group datepicker-input">
-                                                <input class="form-control" placeholder="yyyy-mm-dd" name="quotation_date" [(ngModel)]="model" ngbDatepicker #quotation_date="ngbDatepicker">
-                                                <button class="input-group-addon" (click)="quotation_date.toggle()" type="button">
-                                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="grn_date" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                                <button class="input-group-addon" (click)="d.toggle()" type="button">
                                                     <span class="fa fa-calendar"></span>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card bg-light mb-3">
+                            <div class="card bg-light mb-3" *ngIf="visible_key">
                                 <div class="card-header">Material Line</div>
                                 <div class="card-body">
                                     <div class="row">
@@ -92,35 +91,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr *ngFor="let mat of purchase_order_details.purchase_order_detail; let k = index">
                                                     <td>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" value="">
+                                                                <input type="checkbox" (change)="matCheck($event, mat)">
                                                             </label>
                                                         </div>
                                                     </td>
                                                     <td>RM002</td>
                                                     <td>100.00</td>
                                                     <td>CFT</td>
-                                                    <td>MATLA BDS BRIDGE</td>
-                                                    <td>Kolkata, WEST BENGAL, 741258</td>
-                                                    <td></td>
-                                                    <td>
-                                                        <input class="form-control" placeholder="GRN Quantity">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" value="">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>RM004</td>
-                                                    <td>10.00</td>
-                                                    <td>KG</td>
                                                     <td>MATLA BDS BRIDGE</td>
                                                     <td>Kolkata, WEST BENGAL, 741258</td>
                                                     <td></td>

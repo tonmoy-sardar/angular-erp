@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
 import { environment } from '../../../environments/environment';
 
 
@@ -20,10 +19,11 @@ export class GrnService {
     return this.http.get(environment.apiEndpoint+'all_grn/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
-  }
+  }  
+  
 
   getGrnDetails(id): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'grn/'+id+'/', {
+    return this.http.get(environment.apiEndpoint+'all_grn/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
@@ -34,13 +34,13 @@ export class GrnService {
     })
   }
 
-  changeStatusGrn(data): Observable<any>{
+  activeInactiveGrn(data): Observable<any>{
     return this.http.patch(environment.apiEndpoint+'grn/'+data.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
 
-  changeApproveStatusGrn(data): Observable<any>{
+  approveDisapproveGrn(data): Observable<any>{
     return this.http.patch(environment.apiEndpoint+'grn/'+data.id+'/',data, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })

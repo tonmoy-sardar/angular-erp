@@ -11,13 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 export class GrnComponent implements OnInit {
   grnList = []
   defaultPagination: number;
-  totalGrnList: number;
+  totalgrnList: number;
   search_key = '';
-
   constructor(
     private router: Router,
-    private grnService: GrnService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private grnService: GrnService
   ) { }
 
   ngOnInit() {
@@ -29,31 +28,34 @@ export class GrnComponent implements OnInit {
     this.router.navigateByUrl('/'+toNav);
   };
 
+  dataSearch() {
+    this.defaultPagination = 1;
+    this.getGrnList();
+  }
+
   getGrnList(){
     let params: URLSearchParams = new URLSearchParams();
     params.set('page', this.defaultPagination.toString());
     params.set('search', this.search_key.toString());
     this.grnService.getGrnList(params).subscribe(
       (data: any[]) => {
-        this.totalGrnList = data['count'];
+        this.totalgrnList = data['count'];
         this.grnList = data['results'];
-        console.log(this.grnList);
+        console.log(this.grnList)
       }
     );
   }
 
-  changeStatus(value,id)
-  {
+  activeState(id) {
     let grn;
 
     grn = {
       id: id,
-      is_finalised: value
+      status: true
     };
-
-    this.grnService.changeStatusGrn(grn).subscribe(
+    this.grnService.activeInactiveGrn(grn).subscribe(
       response => {
-        this.toastr.success('GRN status changed successfully', '', {
+        this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
         });
         this.getGrnList();
@@ -65,20 +67,19 @@ export class GrnComponent implements OnInit {
         // });
       }
     );
-  }
+  };
 
-  changeApproveStatus(value,id)
-  {
+  inactiveState(id) {
     let grn;
 
     grn = {
       id: id,
-      is_approve: value
+      status: false
     };
 
-    this.grnService.changeApproveStatusGrn(grn).subscribe(
+    this.grnService.activeInactiveGrn(grn).subscribe(
       response => {
-        this.toastr.success('GRN approve status changed successfully', '', {
+        this.toastr.success('Status changed successfully', '', {
           timeOut: 3000,
         });
         this.getGrnList();
@@ -90,12 +91,55 @@ export class GrnComponent implements OnInit {
         // });
       }
     );
-  }
+  };
 
-  dataSearch() {
-    this.defaultPagination = 1;
-    this.getGrnList();
-  }
+  approveGrn(id) {
+    let grn;
+
+    grn = {
+      id: id,
+      is_approve: 1
+    };
+    this.grnService.approveDisapproveGrn(grn).subscribe(
+      response => {
+        this.toastr.success('GRN approved successfully', '', {
+          timeOut: 3000,
+        });
+        this.getGrnList();
+      },
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
+    );
+  };
+
+  disApproveGrn(id) {
+    let grn;
+
+    grn = {
+      id: id,
+      is_approve: 0
+    };
+
+    this.grnService.approveDisapproveGrn(grn).subscribe(
+      response => {
+        this.toastr.success('GRN disapproved successfully', '', {
+          timeOut: 3000,
+        });
+        this.getGrnList();
+      },
+      error => {
+        console.log('error', error)
+        // this.toastr.error('everything is broken', '', {
+        //   timeOut: 3000,
+        // });
+      }
+    );
+  };
+
   pagination() {
     this.getGrnList();
   };
