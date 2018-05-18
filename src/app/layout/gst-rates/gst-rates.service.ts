@@ -19,6 +19,11 @@ export class GstRatesService {
     })
   }
   
+  getGSTListWithoutPagination(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'gst_rates_dropdown/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
 
   getGSTDetails(id): Observable<any>{
     return this.http.get(environment.apiEndpoint+'gst_rates/'+id+'/', {

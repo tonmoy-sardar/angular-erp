@@ -18,7 +18,11 @@ export class TermsConditionService {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
-  
+  getTermsListWithoutPagination(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'terms_conditions_dropdown/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
 
   getTermsDetails(id): Observable<any>{
     return this.http.get(environment.apiEndpoint+'terms_conditions/'+id+'/', {

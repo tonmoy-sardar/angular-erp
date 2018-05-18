@@ -11,8 +11,13 @@ import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { PurchaseOrdersService } from './purchase-orders.service';
-
-
+import { CompanyService } from '../company/company.service';
+import { MaterialService } from '../material/material.service';
+import { PurchaseRequisitionService } from '../purchase-requisition/purchase-requisition.service';
+import { VendorService } from '../vendor/vendor.service';
+import { TermsConditionService } from '../terms-condition/terms-condition.service';
+import { GstRatesService } from '../gst-rates/gst-rates.service';
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +29,7 @@ import { PurchaseOrdersService } from './purchase-orders.service';
     HttpClientModule,
     BsComponentModule
   ],
-  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent],
-  providers: [PurchaseOrdersService]
+  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent, PurchaseDetailsComponent],
+  providers: [PurchaseOrdersService,CompanyService,MaterialService,PurchaseRequisitionService,VendorService,TermsConditionService,GstRatesService]
 })
 export class PurchaseOrdersModule { }
