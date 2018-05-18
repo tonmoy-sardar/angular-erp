@@ -25,7 +25,7 @@ export class PurchaseRequisitionDeatilsComponent implements OnInit {
       created_at:'',
       status:'',
       created_by:{first_name:'',id:''},
-      requisition_detail:[{material:{},quantity:''}]
+      requisition_detail:[{material:{material_code:'',material_fullname:'',id:''},quantity:'',uom:{id:'',name:''}}]
     };
     this.getPurchaseRequisitionDetails(this.route.snapshot.params['id']);
   }

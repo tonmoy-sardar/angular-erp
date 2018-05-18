@@ -105,10 +105,10 @@
                               <tbody>
                                   <tr *ngFor="let requisition_detail of purchaseRequisition.requisition_detail ; let i = index">
                                       <td>
-                                          <label></label>
+                                          <label>{{requisition_detail.material.material_code}} - {{requisition_detail.material.material_fullname}}</label>
                                       </td>
                                       <td>
-                                          <label></label>
+                                          <label>{{requisition_detail.uom.name}}</label>
                                       </td>
                                       <td>
                                           <label>{{requisition_detail.quantity}}</label>
