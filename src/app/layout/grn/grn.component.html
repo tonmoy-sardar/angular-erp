@@ -1,10 +1,16 @@
 <div>
-  <app-page-header [heading]="'GRN List'" [icon]="'fa fa-university'"></app-page-header>
-  <div>
-    <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
-        <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
-        <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-        <button type="button" class="btn btn-success" (click)="btnClickNav('grn/add')"><i class="fa fa-plus"></i> New GRN</button>
+ 
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="page-header">GRN List</h4>
+    </div>
+    <div class="col-md-6 pull-right" style="text-align: right">
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-question" aria-hidden="true"></i> Help</button>
+      <button type="button" class="btn btn-secondary">
+        <i class="fa fa-refresh"></i> Reload</button>
+      <button type="button" class="btn btn-success" (click)="btnClickNav('grn/add')">
+        <i class="fa fa-plus"></i> New Purchase Organization</button>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -13,7 +19,25 @@
   <div class="row">
     <div class="col-md-12">
     <div class="card">
-      <div class="card-header">GRN</div>
+      <div class="card-header">
+          <div class="row">
+            <div class="col-md-9">
+              <h5>GRN</h5>
+            </div>
+            <div class="col-md-3">
+              <form role="form" (ngSubmit)="dataSearch()">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search_key">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
       <table class="card-body table table-hover table-sm table-bordered">
           <thead>
           <tr>
@@ -31,28 +55,28 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-              <th scope="row">1</th>
-              <td>17-18/02/GRN-0002</td>
+          <tr *ngFor="let grn of grnList ; let i = index">
+              <th scope="row">{{i +1}}</th>
+              <td>{{grn.grn_map[0].grn_no}}</td>
               <td>17-18/02/PO-0003</td>
-              <td>Shyam Futuretech</td>
-              <td>Testorg</td>
-              <td>Material Purchase</td>
-              <td>Shyam FT</td>
-              <td>kolkata, WEST BENGAL, 700012</td>
-              <td>14-02-2018</td>
+              <td>{{grn.company}}</td>
+              <td>{{grn.pur_org}}</td>
+              <td>{{grn.pur_grp}}</td>
+              <td>{{grn.vendor}}</td>
+              <td>{{grn.vendor_address.address}}</td>
+              <td>{{grn.created_at | date : 'dd-MM-yyyy'}}</td>
               <td>
-                <select class="form-control">
-                  <option>Change Status</option>
-                  <option>Cancel</option>
-                  <option>Active</option>
+                <select class="form-control" [(ngModel)]="grn.is_finalised" name="is_finalised"  (ngModelChange)="changeStatus(grn.is_finalised,grn.id)">
+                    <option value='0'>Change Status</option>
+                    <option value='2'>Cancel</option>
+                    <option value='1'>Active</option>
                 </select>
               </td>
               <td>
-                <select class="form-control">
-                  <option>Change Approve</option>
-                  <option>Approve</option>
-                  <option>Dis-Approve</option>
+                <select class="form-control" [(ngModel)]="grn.is_approve" name="is_approve"  (ngModelChange)="changeApproveStatus(grn.is_approve,grn.id)">
+                    <option value='0'>Change Approve</option>
+                    <option value='1'>Approve</option>
+                    <option value='2'>Dis-Approve</option>
                 </select>
               </td>
           </tr>
@@ -61,4 +85,12 @@
     </div>
   </div>
   </div>
+  <div class="row" *ngIf="totalGrnList > 10">
+      <div class="col-md-12">
+        <div class="card-body pull-right">
+          <ngb-pagination [collectionSize]="totalGrnList" [(page)]="defaultPagination" (pageChange)="pagination()"
+            size="sm"></ngb-pagination>
+        </div>
+      </div>
+    </div>
 </div>

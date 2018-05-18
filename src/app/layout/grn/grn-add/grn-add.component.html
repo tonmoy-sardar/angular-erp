@@ -1,174 +1,181 @@
 <div>
-    <app-page-header [heading]="'GRN Add'" [icon]="'fa fa-university'"></app-page-header>
-    <div>
-      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
-          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
-          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-          <button type="button" class="btn btn-success" (click)="btnClickNav('grn')"><i class="fa fa-arrow-left"></i> Back</button>
-      </div>
-      <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="page-header">GRN Add</h4>
+        </div>
+        <div class="col-md-6 pull-right" style="text-align: right">
+            <button type="button" class="btn btn-secondary">
+                <i class="fa fa-question" aria-hidden="true"></i> Help</button>
+            <button type="button" class="btn btn-secondary">
+                <i class="fa fa-refresh"></i> Reload</button>
+            <button type="button" class="btn btn-success" (click)="btnClickNav('grn')">
+                <i class="fa fa-plus"></i> Back</button>
+        </div>
+        <div class="clearfix"></div>
     </div>
     <hr/>
     <div>
-        <div class="row">                      
+        <div class="row">
             <div class="col-md-12">
                 <form role="form">
-                  <div class="card bg-light mb-3">
-                      <div class="card-header" style="background-color:#868e96; color: #fff;">GRN Add</div>
-                      <div class="card-body">
-                          <div class="card bg-light mb-3">
-                              <div class="card-body">
-                                  <div class="row">
-                                      <div class="form-group col-md-3">
-                                          <label>Po No.</label>
-                                          <select class="form-control">
-                                              <option>Select Po</option>
-                                              <option>17-18/02/PO-0002</option>
-                                              <option>17-18/02/PO-0008</option>
-                                          </select>
-                                      </div>
-                                      <div class="form-group col-md-3">
-                                          <label>GRN Date</label>
-                                          <div class="input-group datepicker-input">
-                                              <input class="form-control" placeholder="yyyy-mm-dd"
-                                                  name="quotation_date" [(ngModel)]="model" ngbDatepicker #quotation_date="ngbDatepicker">
-                                              <button class="input-group-addon" (click)="quotation_date.toggle()" type="button">
-                                                  <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
-                                                  <span class="fa fa-calendar"></span>
-                                              </button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="card bg-light mb-3">
-                              <div class="card-header">Header Line</div>
-                              <div class="card-body">
-                                  <div class="row">
-                                      <table class="card-body table table-sm ">
-                                          <thead>
-                                            <tr>
-                                                <th>Purchase Organization</th>
-                                                <th>Purchase Group</th>
-                                                <th>PurchaseCompany</th>
-                                                <th>PO Date</th>
-                                                <th>Vendor</th>
-                                                <th>Vendor Address</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>Testorg</td>
-                                                <td>Material Purchase</td>
-                                                <td>Shyam Futuretech</td>
-                                                <td>14-02-2018</td>
-                                                <td>Demo Name</td>
-                                                <td>Kolkata, UTTAR PRADESH, 700012, India</td>
-                                            </tr>
-                                            </tbody>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="card bg-light mb-3">
-                              <div class="card-header">Material Line</div>
-                              <div class="card-body">
-                                  <div class="row">
-                                      <table class="card-body table  table-hover table-sm table-bordered ">
-                                          <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Material</th>
-                                                <th>Po. Quantity</th>
-                                                <th>UOM</th>
-                                                <th>Plant</th>
-                                                <th>Storage</th>
-                                                <th>Bin</th>
-                                                <th>GRN Quantity</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>RM002</td>
-                                                <td>100.00</td>
-                                                <td>CFT</td>
-                                                <td>MATLA BDS BRIDGE</td>
-                                                <td>Kolkata, WEST BENGAL, 741258</td>
-                                                <td></td>
-                                                <td><input class="form-control" placeholder="GRN Quantity"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>RM004</td>
-                                                <td>10.00</td>
-                                                <td>KG</td>
-                                                <td>MATLA BDS BRIDGE</td>
-                                                <td>Kolkata, WEST BENGAL, 741258</td>
-                                                <td></td>
-                                                <td><input class="form-control" placeholder="GRN Quantity"></td>
-                                            </tr>
-                                            </tbody>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="card bg-light mb-3">
-                              <div class="card-header">Transport</div>
-                              <div class="card-body">
-                                  <div class="row">
-                                      <div class="form-group col-md-2">
-                                          <label>Way Bill No.</label>
-                                          <input class="form-control" placeholder="Way Bill No.">
-                                      </div>
-                                      <div class="form-group col-md-2">
-                                          <label>Vehicle No.</label>
-                                          <input class="form-control" placeholder="Vehicle No.">
-                                      </div>
-                                      <div class="form-group col-md-2">
-                                          <label>Check Post</label>
-                                          <input class="form-control" placeholder="Check Post">
-                                      </div>
-                                      <div class="form-group col-md-2">
-                                          <label>Challan No.</label>
-                                          <input class="form-control" placeholder="Challan No.">
-                                      </div>
-                                      <div class="form-group col-md-2">
-                                          <label>Challan Date</label>
-                                          <div class="input-group datepicker-input">
-                                              <input class="form-control" placeholder="yyyy-mm-dd"
-                                                  name="quotation_date" [(ngModel)]="model" ngbDatepicker #challan_date="ngbDatepicker">
-                                              <button class="input-group-addon" (click)="challan_date.toggle()" type="button">
-                                                  <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
-                                                  <span class="fa fa-calendar"></span>
-                                              </button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>                 
-                          <div class="row">
-                            <div class="form-group col-md-12" style="text-align: right">
-                              <button type="submit" class="btn btn-success">Submit</button>
-                              <button type="reset" class="btn btn-secondary">Reset</button>
+                    <div class="card bg-light mb-3">
+                        <div class="card-header" style="background-color:#868e96; color: #fff;">GRN Add</div>
+                        <div class="card-body">
+                            <div class="card bg-light mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>Po No.</label>
+                                            <select class="form-control">
+                                                <option>Select Po</option>
+                                                <option>17-18/02/PO-0002</option>
+                                                <option>17-18/02/PO-0008</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>GRN Date</label>
+                                            <div class="input-group datepicker-input">
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="quotation_date" [(ngModel)]="model" ngbDatepicker #quotation_date="ngbDatepicker">
+                                                <button class="input-group-addon" (click)="quotation_date.toggle()" type="button">
+                                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                                    <span class="fa fa-calendar"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </form>
+                            <div class="card bg-light mb-3">
+                                <div class="card-header">Header Line</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <table class="card-body table table-sm ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Purchase Organization</th>
+                                                    <th>Purchase Group</th>
+                                                    <th>PurchaseCompany</th>
+                                                    <th>PO Date</th>
+                                                    <th>Vendor</th>
+                                                    <th>Vendor Address</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Testorg</td>
+                                                    <td>Material Purchase</td>
+                                                    <td>Shyam Futuretech</td>
+                                                    <td>14-02-2018</td>
+                                                    <td>Demo Name</td>
+                                                    <td>Kolkata, UTTAR PRADESH, 700012, India</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-light mb-3">
+                                <div class="card-header">Material Line</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <table class="card-body table  table-hover table-sm table-bordered ">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Material</th>
+                                                    <th>Po. Quantity</th>
+                                                    <th>UOM</th>
+                                                    <th>Plant</th>
+                                                    <th>Storage</th>
+                                                    <th>Bin</th>
+                                                    <th>GRN Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" value="">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td>RM002</td>
+                                                    <td>100.00</td>
+                                                    <td>CFT</td>
+                                                    <td>MATLA BDS BRIDGE</td>
+                                                    <td>Kolkata, WEST BENGAL, 741258</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <input class="form-control" placeholder="GRN Quantity">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" value="">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td>RM004</td>
+                                                    <td>10.00</td>
+                                                    <td>KG</td>
+                                                    <td>MATLA BDS BRIDGE</td>
+                                                    <td>Kolkata, WEST BENGAL, 741258</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <input class="form-control" placeholder="GRN Quantity">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-light mb-3">
+                                <div class="card-header">Transport</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-2">
+                                            <label>Way Bill No.</label>
+                                            <input class="form-control" placeholder="Way Bill No.">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Vehicle No.</label>
+                                            <input class="form-control" placeholder="Vehicle No.">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Check Post</label>
+                                            <input class="form-control" placeholder="Check Post">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Challan No.</label>
+                                            <input class="form-control" placeholder="Challan No.">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Challan Date</label>
+                                            <div class="input-group datepicker-input">
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="quotation_date" [(ngModel)]="model" ngbDatepicker #challan_date="ngbDatepicker">
+                                                <button class="input-group-addon" (click)="challan_date.toggle()" type="button">
+                                                    <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                                                    <span class="fa fa-calendar"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12" style="text-align: right">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
