@@ -11,7 +11,7 @@ import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { GrnService } from './grn.service';
-
+import { PurchaseOrdersService } from '../purchase-orders/purchase-orders.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +24,6 @@ import { GrnService } from './grn.service';
     BsComponentModule
   ],
   declarations: [GrnComponent, GrnAddComponent],
-  providers: [GrnService]
+  providers: [GrnService,PurchaseOrdersService]
 })
 export class GrnModule { }

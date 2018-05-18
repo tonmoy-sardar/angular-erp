@@ -18,7 +18,13 @@ export class PurchaseOrdersService {
     return this.http.get(environment.apiEndpoint+'all_purchase_order/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
-  }  
+  }
+  
+  getPurchaseOrderListWithoutPagination(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'purchase_order_dropdown/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
   
 
   getPurchaseOrderDetails(id): Observable<any>{

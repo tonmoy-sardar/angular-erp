@@ -117,7 +117,7 @@ export class PurchaseOrdersComponent implements OnInit {
       id: id,
       is_approve: 1
     };
-    this.purchaseOrdersService.activeInactivePurchaseOrder(PurchaseOrder).subscribe(
+    this.purchaseOrdersService.approveDisapprovePurchaseOrder(PurchaseOrder).subscribe(
       response => {
         this.toastr.success('Purchase order approved successfully', '', {
           timeOut: 3000,
@@ -141,7 +141,7 @@ export class PurchaseOrdersComponent implements OnInit {
       is_approve: 0
     };
 
-    this.purchaseOrdersService.activeInactivePurchaseOrder(PurchaseOrder).subscribe(
+    this.purchaseOrdersService.approveDisapprovePurchaseOrder(PurchaseOrder).subscribe(
       response => {
         this.toastr.success('Purchase order disapproved successfully', '', {
           timeOut: 3000,

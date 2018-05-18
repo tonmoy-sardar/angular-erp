@@ -61,7 +61,7 @@
                         <label>Vendor Name : </label>
                       </td>
                       <td>
-                        <label>{{purchaseOrder.vendor}}</label>
+                        <label>{{purchaseOrder.vendor.vendor_fullname}}</label>
                       </td>
                       <td>
                         <label>Vendor Address : </label>
@@ -143,7 +143,7 @@
                   <tbody>
                     <tr *ngFor="let item of purchaseOrder.purchase_order_detail">
                       <td>
-                        <label>{{item.material}}</label>
+                        <label>{{item.material.material_fullname}}</label>
                       </td>
                       <td>
                         <label>{{item.order_quantity}}</label>
