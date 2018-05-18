@@ -17,6 +17,7 @@ import { PurchaseRequisitionService } from '../purchase-requisition/purchase-req
 import { VendorService } from '../vendor/vendor.service';
 import { TermsConditionService } from '../terms-condition/terms-condition.service';
 import { GstRatesService } from '../gst-rates/gst-rates.service';
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +29,7 @@ import { GstRatesService } from '../gst-rates/gst-rates.service';
     HttpClientModule,
     BsComponentModule
   ],
-  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent],
+  declarations: [PurchaseOrdersComponent, PurchaseOrdersAddComponent, PurchaseDetailsComponent],
   providers: [PurchaseOrdersService,CompanyService,MaterialService,PurchaseRequisitionService,VendorService,TermsConditionService,GstRatesService]
 })
 export class PurchaseOrdersModule { }

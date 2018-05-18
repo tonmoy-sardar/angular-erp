@@ -58,14 +58,14 @@
           <tbody>
             <tr *ngFor="let purchaseOrder of purchaseOrderList ; let i = index">
               <th scope="row">{{i +1}}</th>
-              <td>17-18/02/PO-0008</td>
-              <td>17-18/02/I-0003</td>
-              <td>558.00</td>
-              <td>{{getCompanyName(purchaseOrder.company)}}</td>
-              <td>MATLA BDS BRIDGE</td>
-              <td>kolkata, kolkata, WEST BENGAL, 700012</td>
-              <td>N/A</td>
-              <td>15-02-2018</td>
+              <td>{{purchaseOrder.purchase_order_map[0].purchase_order_no}}</td>
+              <td>{{purchaseOrder.requisition_no[0].requisition_no}}</td>
+              <td>{{purchaseOrder.grand_total}}</td>
+              <td>{{purchaseOrder.company.company_name}}</td>
+              <td>{{purchaseOrder.purchase_order_detail[0].company_branch.branch_address}}</td>
+              <td>{{purchaseOrder.purchase_order_detail[0].storage_location.storage_address}}</td>
+              <td>{{purchaseOrder.purchase_order_detail[0].storage_bin.bin_no}}</td>
+              <td>{{purchaseOrder.quotation_date | date:'dd-MM-yyyy'}}</td>
               <td>
                 <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveState(purchaseOrder.id)" *ngIf="purchaseOrder.status==true">
                     <i class="fa fa-thumbs-up"></i> Active</a>
@@ -79,7 +79,7 @@
                     <i class="fa fa-thumbs-down"></i> Dis-approve</a>
               </td>
               <td>
-                <a href="javascript:void(0);" title="Edit" name="Edit">
+                <a href="javascript:void(0);" title="Details" name="Details" [routerLink]="['/purchase-orders/details', purchaseOrder.id]">
                   <i class="fa fa-eye"></i>
                 </a>
               </td>

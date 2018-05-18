@@ -9,6 +9,7 @@ import { PurchaseOrdersService } from '../purchase-orders.service';
 import { VendorService } from '../../vendor/vendor.service';
 import { TermsConditionService } from '../../terms-condition/terms-condition.service';
 import { GstRatesService } from '../../gst-rates/gst-rates.service';
+declare var require: any;
 var converter = require('number-to-words');
 @Component({
   selector: 'app-purchase-orders-add',
@@ -122,7 +123,6 @@ export class PurchaseOrdersAddComponent implements OnInit {
           }
           this.material_details_list.push(Mdtl)
         })
-        console.log(this.material_details_list)
         this.form.patchValue({
           company: this.requisition_details.company.id,
           pur_org: this.requisition_details.purchase_grp.id,
@@ -295,7 +295,7 @@ export class PurchaseOrdersAddComponent implements OnInit {
     }
     const order_detail_control = <FormArray>this.form.controls['purchase_order_detail'];
     this.material_details_list.forEach(x => {
-      if(x.gst_amount == "" && x.rate == "" && x.discount_percent == "" && x.delivery_date != ""){
+      if(x.gst_amount == "" || x.rate == "" || x.discount_percent == "" || x.delivery_date == ""){
         this.toastr.error('All fields are required in every row ', '', {
           timeOut: 3000,
         });
@@ -316,16 +316,18 @@ export class PurchaseOrdersAddComponent implements OnInit {
         });
       }
     })
-    console.log(this.form.value)
     if (this.form.valid) {
-      console.log("vvv")
+      var QtnDate = new Date(this.form.value.quotation_date.year,this.form.value.quotation_date.month-1,this.form.value.quotation_date.day)
+      this.form.patchValue({
+        quotation_date: QtnDate.toISOString()
+      })
       this.purchaseOrdersService.addNewPurchaseOrder(this.form.value).subscribe(
         response => {
           // console.log(response)
           this.toastr.success('Purchase order added successfully', '', {
             timeOut: 3000,
           });
-          this.goToList('vendor');
+          this.goToList('purchase-orders');
         },
         error => {
           console.log('error', error)

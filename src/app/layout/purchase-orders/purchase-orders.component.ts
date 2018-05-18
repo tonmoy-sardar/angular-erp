@@ -43,13 +43,13 @@ export class PurchaseOrdersComponent implements OnInit {
       }
     );
   };
-  getCompanyName(id) {
-    var data = { id: 0, company_name: '' }
-    data = this.companyList.filter(x => x.id === id)[0];
-    if (data != undefined) {
-      return data.company_name
-    }
-  }
+  // getCompanyName(id) {
+  //   var data = { id: 0, company_name: '' }
+  //   data = this.companyList.filter(x => x.id === id)[0];
+  //   if (data != undefined) {
+  //     return data.company_name
+  //   }
+  // }
   getPurchaseOrderList(){
     let params: URLSearchParams = new URLSearchParams();
     params.set('page', this.defaultPagination.toString());
@@ -58,7 +58,7 @@ export class PurchaseOrdersComponent implements OnInit {
       (data: any[]) => {
         this.totalpurchaseOrderList = data['count'];
         this.purchaseOrderList = data['results'];
-        console.log(this.purchaseOrderList)
+        // console.log(this.purchaseOrderList)
       }
     );
   }
