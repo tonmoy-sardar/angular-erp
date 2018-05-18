@@ -33,21 +33,21 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>IGST(%)</label>
-                                    <input class="form-control" [(ngModel)]="gstRates.igst" name="igst" placeholder="IGST" formControlName="igst" [ngClass]="displayFieldCss('igst')">
+                                    <input type="number" class="form-control" [(ngModel)]="gstRates.igst" name="igst" placeholder="IGST" formControlName="igst" [ngClass]="displayFieldCss('igst')" readonly>
                                     <div class="invalid-feedback" *ngIf="form.controls['igst'].hasError('required')">
                                         Please enter IGST
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>CGST(%)</label>
-                                    <input class="form-control" [(ngModel)]="gstRates.cgst" name="cgst" placeholder="CGST" formControlName="cgst" [ngClass]="displayFieldCss('cgst')">
+                                    <input type="number" class="form-control" [(ngModel)]="gstRates.cgst" name="cgst" placeholder="CGST" formControlName="cgst" [ngClass]="displayFieldCss('cgst')" (keyup)="GetIgst(form.value.cgst,form.value.sgst)">
                                     <div class="invalid-feedback" *ngIf="form.controls['cgst'].hasError('required')">
                                         Please enter CGST
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>SGST(%)</label>
-                                    <input class="form-control" [(ngModel)]="gstRates.sgst" name="sgst" placeholder="SGST" formControlName="sgst" [ngClass]="displayFieldCss('sgst')">
+                                    <input type="number" class="form-control" [(ngModel)]="gstRates.sgst" name="sgst" placeholder="SGST" formControlName="sgst" [ngClass]="displayFieldCss('sgst')" (keyup)="GetIgst(form.value.cgst,form.value.sgst)">
                                     <div class="invalid-feedback" *ngIf="form.controls['sgst'].hasError('required')">
                                         Please enter SGST
                                     </div>

@@ -50,7 +50,14 @@ export class GstRatesEditComponent implements OnInit {
   goToList(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
-
+  
+  GetIgst(cgst, sgst){
+    if(cgst != "" && sgst != ""){
+      this.form.patchValue({
+        igst: Math.round(Math.round(cgst) + Math.round(sgst))
+      })
+    }
+  }
 
   updateGstRate() {
     if (this.form.valid) {

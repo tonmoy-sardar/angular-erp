@@ -34,7 +34,7 @@
                                 <div class="form-group col-md-3">
                                     <label>IGST(%)</label>
                                     <input type="number" class="form-control"  name="igst" placeholder="IGST" formControlName="igst"
-                                        [ngClass]="displayFieldCss('igst')">
+                                        [ngClass]="displayFieldCss('igst')" readonly>
                                     <div class="invalid-feedback" *ngIf="form.controls['igst'].hasError('required')">
                                         Please enter IGST
                                     </div>
@@ -42,7 +42,7 @@
                                 <div class="form-group col-md-3">
                                     <label>CGST(%)</label>
                                     <input type="number" class="form-control" name="cgst" placeholder="CGST" formControlName="cgst"
-                                        [ngClass]="displayFieldCss('cgst')">
+                                        [ngClass]="displayFieldCss('cgst')" (keyup)="GetIgst(form.value.cgst,form.value.sgst)">
                                     <div class="invalid-feedback" *ngIf="form.controls['cgst'].hasError('required')">
                                         Please enter CGST
                                     </div>
@@ -50,7 +50,7 @@
                                 <div class="form-group col-md-3">
                                     <label>SGST(%)</label>
                                     <input type="number" class="form-control"  name="sgst" placeholder="SGST" formControlName="sgst"
-                                        [ngClass]="displayFieldCss('sgst')">
+                                        [ngClass]="displayFieldCss('sgst')" (keyup)="GetIgst(form.value.cgst,form.value.sgst)">
                                     <div class="invalid-feedback" *ngIf="form.controls['sgst'].hasError('required')">
                                         Please enter SGST
                                     </div>

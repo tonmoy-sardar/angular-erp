@@ -19,7 +19,7 @@ export class GstRatesAddComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       gst_pattern: new FormControl('', Validators.required),
-      igst: new FormControl('', Validators.required),
+      igst: new FormControl(0, Validators.required),
       cgst: new FormControl('', Validators.required),
       sgst: new FormControl('', Validators.required)
     });
@@ -33,7 +33,13 @@ export class GstRatesAddComponent implements OnInit {
   goToList(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
-
+  GetIgst(cgst, sgst){    
+    if(cgst != "" && sgst != ""){
+      this.form.patchValue({
+        igst: Math.round(cgst + sgst)
+      })
+    }
+  }
   addNewGstRate() {
     if (this.form.valid) {
       this.gstRatesService.addNewGST(this.form.value).subscribe(

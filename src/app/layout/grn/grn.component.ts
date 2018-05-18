@@ -41,7 +41,7 @@ export class GrnComponent implements OnInit {
       (data: any[]) => {
         this.totalgrnList = data['count'];
         this.grnList = data['results'];
-        console.log(this.grnList)
+        // console.log(this.grnList)
       }
     );
   }
