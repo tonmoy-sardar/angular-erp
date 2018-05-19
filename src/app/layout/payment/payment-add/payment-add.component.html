@@ -1,77 +1,115 @@
 <div>
-    <app-page-header [heading]="'Payment Add'" [icon]="'fa fa-university'"></app-page-header>
-    <div>
-      <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
-          <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
-          <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-          <button type="button" class="btn btn-success" (click)="btnClickNav('payment')"><i class="fa fa-arrow-left"></i> Back</button>
-      </div>
-      <div class="clearfix"></div>
+    <div class="row">
+    <div class="col-md-6">
+        <h4 class="page-header">Payment Add</h4>
+    </div>
+    <div class="col-md-6 pull-right" style="text-align: right">
+        <button type="button" class="btn btn-secondary">
+            <i class="fa fa-question" aria-hidden="true"></i> Help</button>
+        <button type="button" class="btn btn-secondary">
+            <i class="fa fa-refresh"></i> Reload</button>
+        <button type="button" class="btn btn-success" (click)="btnClickNav('payment')">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="clearfix"></div>
     </div>
     <hr/>
     <div>
         <div class="row">
           <div class="col-md-12">
-              <form role="form">
+              <form role="form" [formGroup]="form">
                 <div class="card bg-light mb-3">
                     <div class="card-header" style="background-color:#868e96; color: #fff;">Payment Add</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3" >
                                 <label>Company</label>
-                                <select class="form-control">
+                                <select class="form-control" [(ngModel)]="payment.company" name="company" 
+                                formControlName="company" [ngClass]="displayFieldCss('company')">
                                     <option>Select Company</option>
                                     <option>Shyam Futuretech</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="form.controls['company'].hasError('required')">
+                                    Please select company 
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Select PO INV</label>
-                                <select class="form-control">
+                                <select class="form-control" [(ngModel)]="payment.po_inv" name="po_inv" 
+                                formControlName="po_inv" [ngClass]="displayFieldCss('po_inv')">
                                     <option>Select PO INV</option>
                                     <option>Shyam Futuretech</option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="form.controls['po_inv'].hasError('required')">
+                                    Please select PO INV 
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
                               <label>Total Amount</label>
-                              <input class="form-control"  name="total_amount" placeholder="Total Amount">
+                              <input class="form-control"  [(ngModel)]="payment.total_amount" name="total_amount" 
+                              formControlName="total_amount" [ngClass]="displayFieldCss('total_amount')" placeholder="Total Amount">
+
+                              <div class="invalid-feedback" *ngIf="form.controls['total_amount'].hasError('required')">
+                                Please enter total_amount
+                            </div>
                             </div>
                             <div class="form-group col-md-3">
                               <label>Select Bank</label>
-                              <select class="form-control">
+                              <select class="form-control" [(ngModel)]="payment.bank" name="bank" 
+                              formControlName="bank" [ngClass]="displayFieldCss('bank')">
                                   <option>Select Bank</option>
                               </select>
+                              <div class="invalid-feedback" *ngIf="form.controls['total_amount'].hasError('required')">
+                                    Please select bank
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
-                                <label>Party inovice Date</label>
+                                <label>Party Payment Date</label>
                                 <div class="input-group datepicker-input">
                                     <input class="form-control" placeholder="yyyy-mm-dd"
-                                        name="quotation_date" [(ngModel)]="model" ngbDatepicker #inovice_date="ngbDatepicker">
-                                    <button class="input-group-addon" (click)="inovice_date.toggle()" type="button">
+                                        name="quotation_date"  name="payment_date" ngbDatepicker #d="ngbDatepicker" name="payment_date"
+                                        formControlName="payment_date" [ngClass]="displayFieldCss('payment_date')">
+                                    <button class="input-group-addon" (click)="d.toggle()" type="button">
                                         <!-- <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
                                         <span class="fa fa-calendar"></span>
                                     </button>
+                                    <div class="invalid-feedback" *ngIf="form.controls['payment_date'].hasError('required')">
+                                        Please enter payment date
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                               <label>Mode of Payment</label>
-                              <select class="form-control">
+                              <select class="form-control" [(ngModel)]="payment.payment_mode" name="payment_mode" 
+                              formControlName="payment_mode" [ngClass]="displayFieldCss('payment_mode')">
                                   <option>Select Mode of Payment</option>
                                   <option>Cheque</option>
                                   <option>Cash</option>
                                   <option>Online</option>
                               </select>
+                              <div class="invalid-feedback" *ngIf="form.controls['payment_mode'].hasError('required')">
+                                    Please select mode of payment
+                            </div>
                             </div>
                             <div class="form-group col-md-3">
                               <label>Payment Refrence</label>
-                              <input class="form-control"  name="payment_refrence" placeholder="Payment Refrence">
+                              <input class="form-control" [(ngModel)]="payment.payment_refrence" name="payment_refrence" 
+                              formControlName="payment_refrence" [ngClass]="displayFieldCss('payment_refrence')" placeholder="Payment Refrence">
+                              <div class="invalid-feedback" *ngIf="form.controls['payment_refrence'].hasError('required')">
+                                    Please enter Payment Refrence
+                                </div>
                             </div>
                             <div class="form-group col-md-12">
                                 <label>Special Note</label>
-                                <textarea class="form-control" rows="4" placeholder="Special Note"></textarea>
+                                <textarea class="form-control" rows="4" placeholder="Special Note"  [(ngModel)]="payment.special_note" name="special_note" 
+                                formControlName="special_note" [ngClass]="displayFieldCss('special_note')"></textarea>
+                                <div class="invalid-feedback" *ngIf="form.controls['special_note'].hasError('required')">
+                                        Please enter Payment Refrence
+                                    </div>
                             </div>
                             <div class="form-group col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="submit" class="btn btn-success" (click)="addPayment()">Submit</button>
+                                <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                             </div>
                         </div>
                     </div>

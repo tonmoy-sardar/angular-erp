@@ -5,6 +5,7 @@ import { LoginService } from './login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -46,7 +47,8 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('logedUserToken', response.token);
                     localStorage.setItem('logedUserUserId', response.user_id);
                     localStorage.setItem('logedUserUserName', response.username);
-                    this.goToPage('company');                    
+                    this.goToPage('landing-page');
+
                 },
                 error => {
                     // console.log('error', error)

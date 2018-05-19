@@ -11,7 +11,7 @@ import { PageHeaderModule } from '../../shared';
 
 import { BsComponentModule } from '../bs-component/bs-component.module';
 import { PaymentService } from './payment.service';
-
+import { CompanyService } from '../company/company.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +24,6 @@ import { PaymentService } from './payment.service';
     BsComponentModule
   ],
   declarations: [PaymentComponent, PaymentAddComponent],
-  providers: [PaymentService]
+  providers: [PaymentService,CompanyService]
 })
 export class PaymentModule { }

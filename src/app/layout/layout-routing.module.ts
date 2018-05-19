@@ -7,7 +7,7 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: '', redirectTo: 'company' },
+            { path: '', redirectTo: 'landing-page' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
@@ -36,7 +36,8 @@ const routes: Routes = [
             { path: 'payment', loadChildren: './payment/payment.module#PaymentModule' },
             { path: 'purchase-invoice', loadChildren: './purchase-invoice/purchase-invoice.module#PurchaseInvoiceModule' },
             { path: 'material', loadChildren: './material/material.module#MaterialModule' },
-            { path: 'vendor', loadChildren: './vendor/vendor.module#VendorModule' }            
+            { path: 'vendor', loadChildren: './vendor/vendor.module#VendorModule' },
+            { path: 'landing-page', loadChildren: './landing-page/landing-page.module#LandingPageModule' }            
         ]
     }
 ];

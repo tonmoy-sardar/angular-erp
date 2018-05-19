@@ -1,3 +1,49 @@
 .fs-12 {
     font-size: 12px;
 }
+
+.main-body .navbar {
+    background-color: #1976d2 !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+
+.main-body .navbar a {
+    color: #fff !important;
+    padding: 15px 0;
+    font-size: 14px;
+}
+
+.main-body .dropdown-menu a {
+    background-color: #1976d2 !important;
+    padding: 10px;
+}
+
+.main-body .dropdown-menu a:hover {
+    background-color: #0c559c !important;
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.main-body .login-page {
+    background: url(../assets/images/login-bg.jpg) no-repeat 0 0 !important;
+    background-size: 100% !important;
+}
+
+.main-body .login-page .login-form {
+    // background: #499bea;
+    background: #1976d2;
+    padding: 20px;
+    border-radius: 14px;
+    margin-top: 12%;
+    -webkit-box-shadow: 1px -1px 50px -1px rgba(0, 0, 0, 0.64);
+    -moz-box-shadow: 1px -1px 50px -1px rgba(0, 0, 0, 0.64);
+    box-shadow: 1px -1px 50px -1px rgba(0, 0, 0, 0.64);
+}
+
+.main-body .main-container {
+    background: url(../assets/images/all-bg.jpg) no-repeat 0 0 !important;
+    background-size: 100% !important;
+    min-height: 630px;
+}
