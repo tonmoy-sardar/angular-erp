@@ -76,7 +76,7 @@
                              <div class="card bg-light mb-3">
                                 <div class="card-header">Material Line</div>
                                 <div class="card-body">
-                                    <div class="row" formArrayName="requisition_detail"  *ngFor="let requisition of form.controls['requisition_detail'].controls; let i = index;">
+                                    <div class="row" formArrayName="requisition_detail"  *ngFor="let requisition of getRequisitionDetail(form); let i = index;">
                                         <div [formGroupName]="i" class="col-md-12">
                                             <div class="row">
                                                 <div class="form-group col-md-2">

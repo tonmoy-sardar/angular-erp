@@ -20,9 +20,9 @@
                 <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/grn']">
                     <i class="fa fa-truck" aria-hidden="true"></i> GRN
                 </a>
-                <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/grn-reverse']">
+                <!--<a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/grn-reverse']">
                     <i class="fa fa-truck" aria-hidden="true"></i> GRN Reverse
-                </a>
+                </a>-->
                 <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/purchase-invoice']">
                     <i class="fa fa-money" aria-hidden="true"></i> Purchase Invoice
                 </a>
@@ -31,7 +31,7 @@
                 </a>
             </div>
         </li>
-        <li class="nav-item">         
+        <!--<li class="nav-item">         
             <a routerLink="/company" [routerLinkActive]="['router-link-active']"  class="nav-link" >
                 <i class="fa fa-rupee"></i>&nbsp;Customer Invoice
             </a>
@@ -90,7 +90,7 @@
             <a routerLink="/company" [routerLinkActive]="['router-link-active']"  class="nav-link" >
                 <i class="fa fa-list-alt"></i>&nbsp;Accounting
             </a>
-        </li>
+        </li>-->
         <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <i class="fa fa-cog"></i> Setting<b class="caret"></b>
@@ -114,7 +114,7 @@
                     <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/banks']">
                         <i class="fa fa-university" aria-hidden="true"></i> Banks
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/department']">
+                    <!--<a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/department']">
                         <i class="fa fa-sitemap" aria-hidden="true"></i> Department
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/designation']">
@@ -122,16 +122,16 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/employees']">
                         <i class="fa fa-users" aria-hidden="true"></i> Employees
-                    </a>
+                    </a>-->
                     <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/material']">
                         <i class="fa fa-list" aria-hidden="true"></i> Material
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <!--<a class="dropdown-item" href="javascript:void(0)">
                         <i class="fa fa-list" aria-hidden="true"></i> Party Types
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)">
                         <i class="fa fa-list" aria-hidden="true"></i> Other Party
-                    </a>
+                    </a>-->
                 </div>
             </li>         
             <li class="nav-item dropdown" ngbDropdown>
@@ -165,9 +165,9 @@
                     <i class="fa fa-user"></i> Admin <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu-right" ngbDropdownMenu>
-                    <a class="dropdown-item" href="javascript:void(0)">
+                    <!--<a class="dropdown-item" href="javascript:void(0)">
                         <i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}
-                    </a>
+                    </a>-->
                     
                     <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
                         <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
