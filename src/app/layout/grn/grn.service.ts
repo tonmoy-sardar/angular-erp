@@ -21,6 +21,11 @@ export class GrnService {
     })
   }  
   
+  getGrnListWithoutPagination(): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'grn_dropdown/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
 
   getGrnDetails(id): Observable<any>{
     return this.http.get(environment.apiEndpoint+'all_grn/'+id+'/', {
