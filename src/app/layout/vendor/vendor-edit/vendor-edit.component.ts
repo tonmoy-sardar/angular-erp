@@ -119,6 +119,10 @@ export class VendorEditComponent implements OnInit {
     });
   }
 
+  getContact(form){
+    return form.get('vendor_address').controls
+  }
+
   addContact() {
     var vndr_addrs = {
       email: '',
@@ -142,6 +146,10 @@ export class VendorEditComponent implements OnInit {
     const control = <FormArray>this.form.controls['vendor_address'];
     control.removeAt(index);
 
+  }
+
+  getBank(form){
+    return form.get('vendor_account').controls
   }
   addBank() {
     var vndr_accnt = {

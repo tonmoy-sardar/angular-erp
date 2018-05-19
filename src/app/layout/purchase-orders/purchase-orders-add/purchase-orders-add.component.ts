@@ -239,6 +239,9 @@ export class PurchaseOrdersAddComponent implements OnInit {
     });
   }
 
+  getPurchaseOrderFreight(form){
+    return form.get('purchase_order_freight').controls
+  }
   add_purchase_order_freight() {
     const control = <FormArray>this.form.controls['purchase_order_freight'];
     control.push(this.create_purchase_order_freight());
