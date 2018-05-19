@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { LandingPageComponent } from './landing-page.component';
 
+import { PageHeaderModule } from '../../shared';
 
 @NgModule({
   imports: [
     CommonModule,
-    LandingPageRoutingModule
+    LandingPageRoutingModule,
+    PageHeaderModule,
   ],
   declarations: [LandingPageComponent]
 })

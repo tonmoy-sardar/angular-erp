@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('logedUserToken', response.token);
                     localStorage.setItem('logedUserUserId', response.user_id);
                     localStorage.setItem('logedUserUserName', response.username);
-                    this.goToPage('company');
+                    this.goToPage('landing-page');
 
                 },
                 error => {
