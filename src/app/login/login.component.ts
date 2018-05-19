@@ -4,6 +4,7 @@ import { routerTransition } from '../router.animations';
 import { LoginService } from './login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
         private loginService: LoginService,
         public router: Router,
         private formBuilder: FormBuilder,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private spinner: NgxSpinnerService
     ) { }
 
     ngOnInit() {
@@ -32,8 +34,10 @@ export class LoginComponent implements OnInit {
 
     onLoggedin() {
         if (this.form.valid) {
+            this.spinner.show();
             this.loginService.login(this.form.value).subscribe(
                 response => {
+                    this.spinner.hide();
                     this.toastr.success('Login successfully', '', {
                         timeOut: 3000,
                     });
@@ -42,14 +46,14 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('logedUserToken', response.token);
                     localStorage.setItem('logedUserUserId', response.user_id);
                     localStorage.setItem('logedUserUserName', response.username);
-                    this.goToPage('company');
-
+                    this.goToPage('company');                    
                 },
                 error => {
                     // console.log('error', error)
+                    this.spinner.hide();
                     this.toastr.error(error.error.non_field_errors[0], '', {
                       timeOut: 3000,
-                    });
+                    });                    
                 }
             );
             // console.log(this.login);

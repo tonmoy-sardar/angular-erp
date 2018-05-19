@@ -6,7 +6,7 @@ import { BsComponentModule } from '../layout/bs-component/bs-component.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
     imports: [
         CommonModule,
@@ -14,7 +14,8 @@ import { LoginService } from './login.service';
         FormsModule,
         ReactiveFormsModule,
         BsComponentModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        NgxSpinnerModule
     ],
     declarations: [LoginComponent],
     providers: [LoginService]
