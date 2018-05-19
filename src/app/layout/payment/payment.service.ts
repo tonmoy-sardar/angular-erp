@@ -25,6 +25,20 @@ export class PaymentService {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }
+
+  getCompanyBankList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_specific_bank_dropdown/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  } 
+
+  getCompanyInvoiceList(id): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'company_specific_invoice_dropdown/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  } 
+  
+
   
 
 }
