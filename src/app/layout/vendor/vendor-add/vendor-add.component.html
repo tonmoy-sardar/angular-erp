@@ -71,7 +71,7 @@
               <div class="card bg-light mb-3">
                 <div class="card-header">Contact Information</div>
                 <div class="card-body">
-                  <div class="row" formArrayName="vendor_address" *ngFor="let contact of form.get('vendor_address').controls; let i = index;">
+                  <div class="row" formArrayName="vendor_address" *ngFor="let contact of form.controls['vendor_address'].controls; let i = index;">
                     <div [formGroupName]="i" class="col-md-12">
                       <div class="row">
                         <div class="form-group col-md-3">
@@ -171,7 +171,7 @@
               <div class="card bg-light mb-3">
                 <div class="card-header">Banking Information</div>
                 <div class="card-body">
-                  <div class="row" formArrayName="vendor_account" *ngFor="let bank of form.get('vendor_account').controls; let i = index;">
+                  <div class="row" formArrayName="vendor_account" *ngFor="let bank of form.controls['vendor_account'].controls; let i = index;">
                     <div [formGroupName]="i" class="col-md-12">
                       <div class="row">
                         <div class="form-group col-md-3">
