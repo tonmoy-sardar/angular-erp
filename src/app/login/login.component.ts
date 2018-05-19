@@ -5,6 +5,7 @@ import { LoginService } from './login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',

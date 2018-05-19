@@ -1,8 +1,30 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class PaymentService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  addNewPayment(data): Observable<any>{
+    return this.http.post(environment.apiEndpoint+'payment/', data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  getPaymentList(params): Observable<any>{
+    return this.http.get(environment.apiEndpoint+'all_payment/?'+params, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  } 
+
+  approveDisapprovePayment(data): Observable<any>{
+    return this.http.patch(environment.apiEndpoint+'payment/'+data.id+'/',data, {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+  
 
 }
