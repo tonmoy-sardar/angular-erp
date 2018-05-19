@@ -72,6 +72,9 @@ export class VendorAddComponent implements OnInit {
     });
   }
 
+  getContact(form){
+    return form.get('vendor_address').controls
+  }
   addContact(){
     const control = <FormArray>this.form.controls['vendor_address'];
     control.push(this.createContactInfo());
@@ -80,7 +83,11 @@ export class VendorAddComponent implements OnInit {
   deleteContact(index: number){
     const control = <FormArray>this.form.controls['vendor_address'];
     control.removeAt(index);
-  } 
+  }
+
+  getBank(form){
+    return form.get('vendor_account').controls
+  }
   addBank(){
     const control = <FormArray>this.form.controls['vendor_account'];
     control.push(this.createBankInfo());

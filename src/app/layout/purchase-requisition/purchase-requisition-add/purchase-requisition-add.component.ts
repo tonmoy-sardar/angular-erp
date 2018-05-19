@@ -70,6 +70,9 @@ export class PurchaseRequisitionAddComponent implements OnInit {
     });
   }
 
+  getRequisitionDetail(form){
+    return form.get('requisition_detail').controls
+  }
   addRequisitionDetail(){
 
     const control = <FormArray>this.form.controls['requisition_detail'];

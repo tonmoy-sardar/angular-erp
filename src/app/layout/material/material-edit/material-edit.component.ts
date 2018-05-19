@@ -133,6 +133,10 @@ export class MaterialEditComponent implements OnInit {
     );
   }
 
+  getMaterialUom(form){
+    return form.get('material_uom').controls
+  }
+
   createmMaterialUom(for_id) {
     return this.formBuilder.group({
       material_for: for_id,
@@ -187,6 +191,10 @@ export class MaterialEditComponent implements OnInit {
       sgst: [''],
       hsn: ['']
     });
+  }
+
+  getMateriaTax(form){
+    return form.get('material_tax').controls
   }
 
   addMateriaTax(){
@@ -311,11 +319,17 @@ export class MaterialEditComponent implements OnInit {
         }
       );
     } else {
-      Object.keys(this.form.controls).forEach(field => {
-        const control = this.form.get(field);
-        control.markAsTouched({ onlySelf: true });
-      });
+      this.markFormGroupTouched(this.form)
     }
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control.controls) {
+        control.controls.forEach(c => this.markFormGroupTouched(c));
+      }
+    });
   }
 
   goToList(toNav) {
