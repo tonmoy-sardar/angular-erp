@@ -23,8 +23,7 @@
                           <ul class="companyList">
                             <li *ngFor="let company of companyBranchTree">{{company.company_name}}
                                 <ul *ngIf="company.company_branch.length>0">
-                                    <li *ngFor="let companyBranch of company.company_branch"><input type="checkbox" [name]="company.id" [value]="company.id"
-                                      [(ngModel)]="companyBranch.checked"/>{{companyBranch.branch_name}}</li>
+                                    <li *ngFor="let companyBranch of company.company_branch"><input type="checkbox" [name]="company.id" [(ngModel)]="companyBranch.checked"/>{{companyBranch.branch_name}}</li>
                                 </ul>
                             </li>
                           </ul>
