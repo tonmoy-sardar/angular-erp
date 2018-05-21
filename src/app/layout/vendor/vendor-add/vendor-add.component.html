@@ -9,7 +9,7 @@
         <i class="fa fa-question" aria-hidden="true"></i> Help</button>
       <button type="button" class="btn btn-secondary">
         <i class="fa fa-refresh"></i> Reload</button>
-      <button type="button" class="btn btn-success" (click)="btnClickNav('vendor')">
+      <button type="button" class="btn btn-primary" (click)="btnClickNav('vendor')">
         <i class="fa fa-arrow-left"></i> Back</button>
     </div>
     <div class="clearfix"></div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group col-md-2">
                       <label>GSTIN</label>
-                      <input type="number" class="form-control" name="gst_no" placeholder="GSTIN" formControlName="gst_no" [ngClass]="displayFieldCss('gst_no')">
+                      <input type="text" class="form-control" name="gst_no" placeholder="GSTIN" formControlName="gst_no" [ngClass]="displayFieldCss('gst_no')">
                       <div class="invalid-feedback" *ngIf="form.controls['gst_no'].hasError('required')">
                         Please enter GSTIN
                       </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group col-md-3">
                           <label>Contact No.</label>
-                          <input class="form-control" placeholder="Contact No." name="mobile" formControlName="mobile" [ngClass]="{
+                          <input appOnlyNumber class="form-control" placeholder="Contact No." name="mobile" formControlName="mobile" [ngClass]="{
                             'is-invalid': contact.get('mobile').invalid && (contact.get('mobile').dirty || contact.get('mobile').touched),
                             'is-valid': contact.get('mobile').valid && (contact.get('mobile').dirty || contact.get('mobile').touched)
                           }">
@@ -116,7 +116,7 @@
                         </div>
                         <div class="form-group col-md-5">
                           <label>Address</label>
-                          <textarea class="form-control" rows="3" placeholder="Address" name="address" formControlName="address" [ngClass]="{
+                          <textarea class="form-control" rows="1" placeholder="Address" name="address" formControlName="address" [ngClass]="{
                             'is-invalid': contact.get('address').invalid && (contact.get('address').dirty || contact.get('address').touched),
                             'is-valid': contact.get('address').valid && (contact.get('address').dirty || contact.get('address').touched)
                           }"></textarea>
@@ -196,7 +196,7 @@
                         </div>
                         <div class="form-group col-md-3">
                           <label>A/c No</label>
-                          <input class="form-control" placeholder="A/c No" name="account_no" formControlName="account_no" [ngClass]="{
+                          <input appOnlyNumber class="form-control" placeholder="A/c No" name="account_no" formControlName="account_no" [ngClass]="{
                             'is-invalid': bank.get('account_no').invalid && (bank.get('account_no').dirty || bank.get('account_no').touched),
                             'is-valid': bank.get('account_no').valid && (bank.get('account_no').dirty || bank.get('account_no').touched)
                           }">
@@ -244,7 +244,7 @@
               </div>
               <div class="row">
                 <div class="form-group col-md-12" style="text-align: right">
-                  <button type="submit" class="btn btn-success" (click)="addVendor()">Submit</button>
+                  <button type="submit" class="btn btn-primary" (click)="addVendor()">Submit</button>
                   <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                 </div>
               </div>

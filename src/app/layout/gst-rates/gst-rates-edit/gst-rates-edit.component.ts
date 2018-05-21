@@ -54,7 +54,7 @@ export class GstRatesEditComponent implements OnInit {
   GetIgst(cgst, sgst){
     if(cgst != "" && sgst != ""){
       this.form.patchValue({
-        igst: Math.round(Math.round(cgst) + Math.round(sgst))
+        igst: parseFloat(cgst) + parseFloat(sgst)
       })
     }
   }
