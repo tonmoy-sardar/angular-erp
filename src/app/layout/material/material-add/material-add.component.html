@@ -93,7 +93,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" formControlName="is_sales" (click)="showHideMaterialUOM()"> For Sale Material
+                                            <input type="checkbox" formControlName="is_sales" (change)="showHideMaterialUOM($event)"> For Sale Material
                                         </label>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="form-group col-md-12">
 
                                     <label>
-                                        <input type="checkbox" formControlName="is_taxable" (click)="showHideMaterialTax()"> Is Taxable?
+                                        <input type="checkbox" formControlName="is_taxable" (change)="showHideMaterialTax($event)"> Is Taxable?
                                     </label>
 
                                 </div>
@@ -112,9 +112,9 @@
                                                 <div class="form-group col-md-3">
                                                     <label><span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> IGST</label>
                                                     <input class="form-control" type="number" formControlName="igst" placeholder="IGST" [ngClass]="{
-                                                'is-invalid':material_taxs.get('igst').invalid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched),
-                                                'is-valid': material_taxs.get('igst').valid && (fmaterial_taxs.get('igst').dirty || material_taxs.get('igst').touched)
-                                              }">
+                                                'is-invalid': material_taxs.get('igst').invalid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched),
+                                                'is-valid': material_taxs.get('igst').valid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched)
+                                              }" readonly>
                                                     <div class="invalid-feedback" *ngIf="material_taxs.get('igst').hasError('required')">
                                                         Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> IGST
                                                     </div>
@@ -124,7 +124,7 @@
                                                     <input class="form-control" type="number" formControlName="cgst" placeholder="CGST" [ngClass]="{
                                                 'is-invalid': material_taxs.get('cgst').invalid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched),
                                                 'is-valid': material_taxs.get('cgst').valid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched)
-                                              }">
+                                              }" (keyup)="getIgst(i)">
                                                     <div class="invalid-feedback" *ngIf="material_taxs.get('cgst').hasError('required')">
                                                         Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> CGST
                                                     </div>
@@ -134,7 +134,7 @@
                                                     <input class="form-control" type="number" formControlName="sgst" placeholder="SGST" [ngClass]="{
                                                 'is-invalid': material_taxs.get('sgst').invalid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched),
                                                 'is-valid': material_taxs.get('sgst').valid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched)
-                                              }">
+                                              }" (keyup)="getIgst(i)">
                                                     <div class="invalid-feedback" *ngIf="material_taxs.get('sgst').hasError('required')">
                                                         Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> SGST
                                                     </div>

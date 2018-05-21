@@ -15,7 +15,7 @@
             <div class="clearfix"></div>
         </div>
         <hr/>
-        <div>
+        <div *ngIf="visible_key">
             <div class="row">
                 <div class="col-md-12">
                     <form role="form" [formGroup]="form" novalidate>
@@ -57,7 +57,7 @@
                                                         'is-invalid': material_uoms.get('base_uom').invalid && (material_uoms.get('base_uom').dirty || material_uoms.get('base_uom').touched),
                                                         'is-valid': material_uoms.get('base_uom').valid && (material_uoms.get('base_uom').dirty || material_uoms.get('base_uom').touched)
                                                       }"  [(ngModel)]="material.material_uom[i].base_uom" name="base_uom">
-                                                        <option value="0">Select UOM</option>
+                                                        <option value="">Select UOM</option>
                                                         <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
                                                     </select>
                                                     <div class="invalid-feedback" *ngIf="material_uoms.get('base_uom').hasError('required')">
@@ -80,7 +80,7 @@
                                                         'is-invalid': material_uoms.get('unit_uom').invalid && (material_uoms.get('unit_uom').dirty || material_uoms.get('unit_uom').touched),
                                                         'is-valid': material_uoms.get('unit_uom').valid && (material_uoms.get('unit_uom').dirty || material_uoms.get('unit_uom').touched)
                                                       }" [(ngModel)]="material.material_uom[i].unit_uom" name="unit_uom">
-                                                        <option value="0">Select UOM</option>
+                                                        <option value="">Select UOM</option>
                                                         <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
                                                     </select>
                                                     <div class="invalid-feedback" *ngIf="material_uoms.get('unit_uom').hasError('required')">
@@ -93,7 +93,7 @@
                                     <div class="form-group col-md-12">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" formControlName="is_sales" (click)="showHideMaterialUOM()" [(ngModel)]="material.is_sales" name="is_sales"> For Sale Material
+                                                <input type="checkbox" formControlName="is_sales" (change)="showHideMaterialUOM($event)" [(ngModel)]="material.is_sales" name="is_sales"> For Sale Material
                                             </label>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                     <div class="form-group col-md-12">
     
                                         <label>
-                                            <input type="checkbox" formControlName="is_taxable" (click)="showHideMaterialTax()" [(ngModel)]="material.is_taxable" name="is_taxable"> Is Taxable?
+                                            <input type="checkbox" formControlName="is_taxable" (change)="showHideMaterialTax($event)" [(ngModel)]="material.is_taxable" name="is_taxable"> Is Taxable?
                                         </label>
     
                                     </div>
@@ -113,8 +113,8 @@
                                                         <label><span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> IGST</label>
                                                         <input class="form-control" type="number" formControlName="igst" placeholder="IGST" [ngClass]="{
                                                             'is-invalid':material_taxs.get('igst').invalid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched),
-                                                            'is-valid': material_taxs.get('igst').valid && (fmaterial_taxs.get('igst').dirty || material_taxs.get('igst').touched)
-                                                          }" [(ngModel)]="material.material_tax[i].igst" name="igst">
+                                                            'is-valid': material_taxs.get('igst').valid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched)
+                                                          }" [(ngModel)]="material.material_tax[i].igst" name="igst" readonly>
                                                         <div class="invalid-feedback" *ngIf=" material_taxs.get('igst').hasError('required')">
                                                             Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> IGST
                                                         </div>
@@ -124,7 +124,7 @@
                                                         <input class="form-control" type="number" formControlName="cgst" placeholder="CGST" [ngClass]="{
                                                             'is-invalid': material_taxs.get('cgst').invalid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched),
                                                             'is-valid': material_taxs.get('cgst').valid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched)
-                                                          }" [(ngModel)]="material.material_tax[i].cgst" name="cgst">
+                                                          }" [(ngModel)]="material.material_tax[i].cgst"  (keyup)="getIgst(i)"> 
                                                         <div class="invalid-feedback" *ngIf="material_taxs.get('cgst').hasError('required')">
                                                             Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> CGST
                                                         </div>
@@ -134,7 +134,7 @@
                                                         <input class="form-control" type="number" formControlName="sgst" placeholder="SGST" [ngClass]="{
                                                             'is-invalid': material_taxs.get('sgst').invalid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched),
                                                             'is-valid': material_taxs.get('sgst').valid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched)
-                                                          }" [(ngModel)]="material.material_tax[i].sgst" name="sgst">
+                                                          }" [(ngModel)]="material.material_tax[i].sgst" name="sgst" (keyup)="getIgst(i)">
                                                         <div class="invalid-feedback" *ngIf="material_taxs.get('sgst').hasError('required')">
                                                             Please enter <span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> SGST
                                                         </div>
@@ -157,7 +157,7 @@
                                     <div class="form-group col-md-6">
                                         <label>Purchase Org: </label>
                                         <select multiple="" class="form-control" formControlName="material_purchase_org" [ngClass]="displayFieldCss('material_purchase_org')" [(ngModel)]="material.material_purchase_org" name="material_purchase_org">
-                                            <option *ngFor="let purchaseOrganization of purchaseOrganizationList" value={{purchaseOrganization.id}}>{{purchaseOrganization.name}} </option>
+                                            <option *ngFor="let purchaseOrganization of purchaseOrganizationList" [ngValue]="purchaseOrganization.id">{{purchaseOrganization.name}} </option>
                                         </select>
                                         <div class="invalid-feedback" *ngIf="form.controls['material_purchase_org'].hasError('required')">
                                             Please select purchase org
@@ -168,7 +168,7 @@
                                         <label>Purchase Group: </label>
                                         
                                         <select multiple="" class="form-control" formControlName="material_purchase_grp" [ngClass]="displayFieldCss('material_purchase_grp')" [(ngModel)]="material.material_purchase_grp" name="material_purchase_grp">
-                                            <option *ngFor="let purchaseGroup of purchaseGroupList;" value={{purchaseGroup.id}}>{{purchaseGroup.name}} </option>
+                                            <option *ngFor="let purchaseGroup of purchaseGroupList;" [ngValue]="purchaseGroup.id">{{purchaseGroup.name}} </option>
                                         </select>
                                         <div class="invalid-feedback" *ngIf="form.controls['material_purchase_grp'].hasError('required')">
                                             Please select purchase group

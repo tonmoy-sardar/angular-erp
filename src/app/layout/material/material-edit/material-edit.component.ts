@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, } from '@angular/forms';
 
 import { CompanyService } from '../../company/company.service';
-import { PurchaseOrganizationService} from '../../purchase-organization/purchase-organization.service';
-import { PurchaseGroupService} from '../../purchase-group/purchase-group.service';
+import { PurchaseOrganizationService } from '../../purchase-organization/purchase-organization.service';
+import { PurchaseGroupService } from '../../purchase-group/purchase-group.service';
 import { MaterialService } from '../material.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,18 +16,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MaterialEditComponent implements OnInit {
   material;
-  materialTypeList=[];
-  UOMList=[];
-  purchaseGroupList=[];
-  purchaseOrganizationList=[];
+  materialTypeList = [];
+  UOMList = [];
+  purchaseGroupList = [];
+  purchaseOrganizationList = [];
   form: FormGroup;
-  is_taxable_value=false;
-
+  is_taxable_value = false;
+  visible_key: boolean;
   constructor(
     private materialService: MaterialService,
-    private purchaseOrganizationService: PurchaseOrganizationService, 
-    private purchaseGroupService: PurchaseGroupService, 
-    private companyService: CompanyService, 
+    private purchaseOrganizationService: PurchaseOrganizationService,
+    private purchaseGroupService: PurchaseGroupService,
+    private companyService: CompanyService,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
@@ -35,105 +35,61 @@ export class MaterialEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.material = {
-      id: '',
-      material_type: '',
-      material_fullname:'',
-      material_code:'',
-      description:'',
-      is_sales:false,
-      is_taxable:false,
-      material_uom: [
-          {   
-            "material_for": '',
-            "base_uom": '',
-            "unit_per_uom":'',
-            "unit_uom":''
-          },
-          {   
-            "material_for": '',
-            "base_uom": '',
-            "unit_per_uom":'',
-            "unit_uom":''
-          }
-        ],
-     material_tax: [
-            {
-              "tax_for":'',
-              "igst":'',
-              "cgst":'',
-              "sgst":'',
-              "hsn":''
-            },
-            {
-              "tax_for":'',
-              "igst":'',
-              "cgst":'',
-              "sgst":'',
-              "hsn":''
-            }
-        ],
-      
-    };
-
     this.form = this.formBuilder.group({
       material_type: [null, Validators.required],
-      material_code:  [null, Validators.required],
+      material_code: [null, Validators.required],
       material_fullname: [null, Validators.required],
-      material_purchase_org:[null, Validators.required],
-      material_purchase_grp:[null, Validators.required],
-      description:[null, Validators.required],
-      material_uom:this.formBuilder.array([ this.createmMaterialUom(1) ]),
+      material_purchase_org: [null, Validators.required],
+      material_purchase_grp: [null, Validators.required],
+      description: [null, Validators.required],
+      material_uom: this.formBuilder.array([this.createmMaterialUom(1)]),
       is_sales: [false],
       is_taxable: [false],
-      material_tax:this.formBuilder.array([ this.createmMaterialTax(1) ])
+      material_tax: this.formBuilder.array([])
     });
-    
+
     this.getMaterialDetails(this.route.snapshot.params['id']);
     this.getUOMList();
     this.getMaterialTypeList();
     this.getPurchaseGroupActiveList();
-    this.getPurchaseOrganizationActiveList();       
+    this.getPurchaseOrganizationActiveList();
   }
 
-  getMaterialDetails = function (id) {
+  getMaterialDetails(id) {
     this.materialService.getMaterialDetails(id).subscribe(
       (data: any[]) => {
         this.material = data;
-        
+        this.visible_key = true
         console.log(this.material);
-        if(this.material.is_sales==true)
-        {
-          this.addMaterialUom();
+        if (this.material.is_sales) {
+          this.addMaterialUom(2);
         }
-        if(this.material.is_taxable==true)
-        {
-          this.is_taxable_value=true;
-
-          this.addMateriaTax();
+        if (this.material.is_sales && this.material.is_taxable) {
+          this.is_taxable_value = true;
+          this.addMateriaTax(1);
+          this.addMateriaTax(2);
+        }
+        else if (this.material.is_taxable) {
+          this.is_taxable_value = true;
+          this.addMateriaTax(1);
         }
 
         let material_purchase_org_arr = [];
-        for (let i=0; i<this.material.material_purchase_org.length; i++)
-        {
-          material_purchase_org_arr.push(this.material.material_purchase_org[i].id);
-        }
+        this.material.material_purchase_org.forEach(x => {
+          material_purchase_org_arr.push(x.pur_org);
+        })
         this.material.material_purchase_org = material_purchase_org_arr;
 
         let material_purchase_grp_arr = [];
-        for (let i=0; i<this.material.material_purchase_grp.length; i++)
-        {
-          material_purchase_grp_arr.push(this.material.material_purchase_grp[i].id);
-        }
+        this.material.material_purchase_grp.forEach(k => {
+          material_purchase_grp_arr.push(k.pur_group);
+        })
         this.material.material_purchase_grp = material_purchase_grp_arr;
-
-        console.log(this.material);
       }
     );
   }
 
-  getMaterialUom(form){
+  getMaterialUom(form) {
     return form.get('material_uom').controls
   }
 
@@ -146,41 +102,52 @@ export class MaterialEditComponent implements OnInit {
     });
   }
 
-  addMaterialUom(){
-
+  addMaterialUom(id) {
     const control = <FormArray>this.form.controls['material_uom'];
-    control.push(this.createmMaterialUom(2));
-
-    // this.material_uom_arr = this.form.get('material_uom') as FormArray;
-    // this.material_uom_arr.push(this.createmMaterialUom(2));
+    control.push(this.createmMaterialUom(id));
   }
 
-  deleteMaterialUom(index:number)
-  {
+  deleteMaterialUom(index: number) {
     const control = <FormArray>this.form.controls['material_uom'];
     control.removeAt(index);
-
-    // this.material_uom_arr.controls.splice(index);
-    // this.form.value.material_uom.splice(index);
   }
 
-  showHideMaterialUOM()
-  {
-    if(this.form.value.is_sales!=true)
-    {
-      this.addMaterialUom();
-      if(this.form.value.is_taxable==true)
-      {
-        this.addMateriaTax();
+  showHideMaterialUOM(val) {
+    var mat_uom = {
+      base_uom: '',
+      id: '',
+      material_for: '',
+      unit_per_uom: '',
+      unit_uom: ''
+    }
+    var mat_tax = {
+      tax_for: '',
+      igst: '',
+      cgst: '',
+      sgst: '',
+      hsn: ''
+    }
+    if (val.currentTarget.checked) {      
+      this.material.material_uom.push(mat_uom)
+      this.addMaterialUom(2);
+      if (this.form.value.is_taxable == true) {
+        this.material.material_tax.push(mat_tax)
+        this.addMateriaTax(2);
       }
     }
-    else{
+    else {
       this.deleteMaterialUom(1);
-      if(this.form.value.is_taxable==true)
-      {
+      this.material.material_uom.splice(1,1)
+      if (this.form.value.is_taxable == true) {
         this.deleteMaterialTax(1);
+        this.material.material_tax.splice(1,1)
       }
     }
+  }
+
+
+  getMateriaTax(form) {
+    return form.get('material_tax').controls
   }
 
   createmMaterialTax(for_id) {
@@ -193,26 +160,14 @@ export class MaterialEditComponent implements OnInit {
     });
   }
 
-  getMateriaTax(form){
-    return form.get('material_tax').controls
-  }
-
-  addMateriaTax(){
-
+  addMateriaTax(id) {
     const control = <FormArray>this.form.controls['material_tax'];
-    control.push(this.createmMaterialTax(2));
-
-    // this.material_tax_arr = this.form.get('material_tax') as FormArray;
-    // this.material_tax_arr.push(this.createmMaterialTax(2));
+    control.push(this.createmMaterialTax(id));
   }
 
-  deleteMaterialTax(index:number)
-  {
+  deleteMaterialTax(index: number) {
     const control = <FormArray>this.form.controls['material_tax'];
     control.removeAt(index);
-
-    // this.material_tax_arr.controls.splice(index);
-    // this.form.value.material_tax.splice(index);
   }
 
   clearFormArray = (formArray: FormArray) => {
@@ -221,103 +176,105 @@ export class MaterialEditComponent implements OnInit {
     }
   }
 
-  showHideMaterialTax()
-  {
-    
-    if(this.form.value.is_taxable!=true)
-    {
-      this.is_taxable_value = true;
-      if(this.form.value.is_sales==true)
-      {
-        this.addMateriaTax();
-      }
-     
+  showHideMaterialTax(val) {
+    var mat_tax = {
+      tax_for: '',
+      igst: '',
+      cgst: '',
+      sgst: '',
+      hsn: ''
     }
-    else{
-      const material_tax_control = <FormArray>this.form.controls['material_tax'];
-      this.is_taxable_value = false;
-      this.clearFormArray(material_tax_control);
-      if(this.form.value.is_sales==true)
-      {
-        this.deleteMaterialTax(1);
+    if (val.currentTarget.checked) {
+      this.material.material_tax.splice(0, 0, mat_tax)
+      this.addMateriaTax(1);
+      if (this.form.value.is_sales == true) {
+        this.material.material_tax.splice(1, 0, mat_tax)
+        this.addMateriaTax(2);
       }
-      
+      this.is_taxable_value = true;
+    }
+    else {
+      this.material.material_tax = []
+      const material_tax_control = <FormArray>this.form.controls['material_tax'];
+      this.clearFormArray(material_tax_control);
+      this.is_taxable_value = false;
     }
   }
 
-  getMaterialTypeList()
-  {
+  getMaterialTypeList() {
     this.materialService.getMaterialTypeList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.materialTypeList = data['results'];
-        
+
       }
-     );
+    );
   }
   btnClickNav(toNav) {
-    this.router.navigateByUrl('/'+toNav);
+    this.router.navigateByUrl('/' + toNav);
   };
 
-  getUOMList(){
+  getUOMList() {
     this.companyService.getUOMList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.UOMList = data['results'];
-       
+
       }
-     );
+    );
   };
 
-  getPurchaseGroupActiveList(){
+  getPurchaseGroupActiveList() {
     this.purchaseGroupService.getPurchaseGroupActiveList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.purchaseGroupList = data;
-       
+
       }
-     );
+    );
   }
 
-  getPurchaseOrganizationActiveList(){
+  getPurchaseOrganizationActiveList() {
     this.purchaseOrganizationService.getPurchaseOrganizationActiveList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.purchaseOrganizationList = data;
-        
+
       }
-     );
+    );
   }
 
-  
+  getIgst(i) {
+    console.log(i)
+    const material_tax_control = <FormArray>this.form.controls['material_tax'];
+    if (this.form.value.material_tax[i].cgst != "" && this.form.value.material_tax[i].sgst != "") {
+      material_tax_control.at(i).patchValue({
+        igst: this.form.value.material_tax[i].cgst + this.form.value.material_tax[i].sgst
+      });
+    }
+  }
 
-  updateMaterial = function () {
+  updateMaterial() {
 
     if (this.form.valid) {
-
       let material_purchase_org_arr = [];
-      for (let i=0; i<this.form.value.material_purchase_org.length; i++)
-      {
-        material_purchase_org_arr.push({pur_org:this.form.value.material_purchase_org[i]});
-      }
+      this.form.value.material_purchase_org.forEach(x => {
+        material_purchase_org_arr.push({ pur_org: x });
+      })
 
       let material_purchase_grp_arr = [];
-      for (let i=0; i<this.form.value.material_purchase_grp.length; i++)
-      {
-        material_purchase_grp_arr.push({pur_group:this.form.value.material_purchase_grp[i]});
-      }
+      this.form.value.material_purchase_grp.forEach(k => {
+        material_purchase_grp_arr.push({ pur_group: k });
+      })
 
       this.form.value.material_purchase_org = material_purchase_org_arr;
       this.form.value.material_purchase_grp = material_purchase_grp_arr;
-
-      if(this.is_taxable_value==false)
-      {
-        this.form.value.material_tax = [];
-      }
-
-      
-      this.materialService.updateMaterial(this.form.value,this.material).subscribe(
+      this.form.patchValue({
+        material_purchase_org: material_purchase_org_arr,
+        material_purchase_grp: material_purchase_grp_arr
+      })
+      this.materialService.updateMaterial(this.form.value, this.material).subscribe(
         response => {
           this.toastr.success('Material updated successfully', '', {
             timeOut: 3000,
           });
-          this.goToList('material');          
+          this.goToList('material');
         },
         error => {
           console.log('error', error)
@@ -343,7 +300,7 @@ export class MaterialEditComponent implements OnInit {
   goToList(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
-  
+
   displayFieldCss(field: string) {
     return {
       'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
