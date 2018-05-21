@@ -23,6 +23,7 @@ export class MaterialEditComponent implements OnInit {
   form: FormGroup;
   is_taxable_value = false;
   visible_key: boolean;
+
   constructor(
     private materialService: MaterialService,
     private purchaseOrganizationService: PurchaseOrganizationService,
@@ -188,8 +189,16 @@ export class MaterialEditComponent implements OnInit {
       this.material.material_tax.splice(0, 0, mat_tax)
       this.addMateriaTax(1);
       if (this.form.value.is_sales == true) {
-        this.material.material_tax.splice(1, 0, mat_tax)
+        var mat_tax2 = {
+          tax_for: '',
+          igst: '',
+          cgst: '',
+          sgst: '',
+          hsn: ''
+        }
+        this.material.material_tax.splice(1, 0, mat_tax2)
         this.addMateriaTax(2);
+       
       }
       this.is_taxable_value = true;
     }
@@ -245,7 +254,7 @@ export class MaterialEditComponent implements OnInit {
     const material_tax_control = <FormArray>this.form.controls['material_tax'];
     if (this.form.value.material_tax[i].cgst != "" && this.form.value.material_tax[i].sgst != "") {
       material_tax_control.at(i).patchValue({
-        igst: this.form.value.material_tax[i].cgst + this.form.value.material_tax[i].sgst
+        igst: parseFloat(this.form.value.material_tax[i].cgst) + parseFloat(this.form.value.material_tax[i].sgst)
       });
     }
   }

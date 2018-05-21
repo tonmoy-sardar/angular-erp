@@ -180,7 +180,7 @@ export class MaterialAddComponent implements OnInit {
     const material_tax_control = <FormArray>this.form.controls['material_tax'];
     if(this.form.value.material_tax[i].cgst != "" && this.form.value.material_tax[i].sgst != ""){
       material_tax_control.at(i).patchValue({
-        igst: this.form.value.material_tax[i].cgst + this.form.value.material_tax[i].sgst
+        igst: parseFloat(this.form.value.material_tax[i].cgst) + parseFloat(this.form.value.material_tax[i].sgst)
       });
     }
   }

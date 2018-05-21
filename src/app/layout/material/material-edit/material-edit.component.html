@@ -9,7 +9,7 @@
                     <i class="fa fa-question" aria-hidden="true"></i> Help</button>
                 <button type="button" class="btn btn-secondary">
                     <i class="fa fa-refresh"></i> Reload</button>
-                <button type="button" class="btn btn-success" (click)="btnClickNav('material')">
+                <button type="button" class="btn btn-primary" (click)="btnClickNav('material')">
                     <i class="fa fa-arrow-left"></i> Back</button>
             </div>
             <div class="clearfix"></div>
@@ -66,7 +66,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>Unit Per UOM</label>
-                                                    <input class="form-control" type="number" formControlName="unit_per_uom" placeholder="Material Name" [ngClass]="{
+                                                    <input class="form-control" type="text" appOnlyNumber formControlName="unit_per_uom" placeholder="Material Name" [ngClass]="{
                                                         'is-invalid': material_uoms.get('unit_per_uom').invalid && (material_uoms.get('unit_per_uom').dirty || material_uoms.get('unit_per_uom').touched),
                                                         'is-valid': material_uoms.get('unit_per_uom').valid && (material_uoms.get('unit_per_uom').dirty || material_uoms.get('unit_per_uom').touched)
                                                       }"  [(ngModel)]="material.material_uom[i].unit_per_uom" name="unit_per_uom">
@@ -111,7 +111,7 @@
                                                 <div class="row" [formGroupName]="i">
                                                     <div class="form-group col-md-3">
                                                         <label><span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> IGST</label>
-                                                        <input class="form-control" type="number" formControlName="igst" placeholder="IGST" [ngClass]="{
+                                                        <input class="form-control" type="text" appOnlyNumber formControlName="igst" placeholder="IGST" [ngClass]="{
                                                             'is-invalid':material_taxs.get('igst').invalid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched),
                                                             'is-valid': material_taxs.get('igst').valid && (material_taxs.get('igst').dirty || material_taxs.get('igst').touched)
                                                           }" [(ngModel)]="material.material_tax[i].igst" name="igst" readonly>
@@ -121,7 +121,7 @@
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label><span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> CGST</label>
-                                                        <input class="form-control" type="number" formControlName="cgst" placeholder="CGST" [ngClass]="{
+                                                        <input class="form-control" type="text" appOnlyNumber formControlName="cgst" placeholder="CGST" [ngClass]="{
                                                             'is-invalid': material_taxs.get('cgst').invalid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched),
                                                             'is-valid': material_taxs.get('cgst').valid && (material_taxs.get('cgst').dirty || material_taxs.get('cgst').touched)
                                                           }" [(ngModel)]="material.material_tax[i].cgst"  (keyup)="getIgst(i)"> 
@@ -131,7 +131,7 @@
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label><span *ngIf="i==0">Purchase</span><span *ngIf="i==1">Sales</span> SGST</label>
-                                                        <input class="form-control" type="number" formControlName="sgst" placeholder="SGST" [ngClass]="{
+                                                        <input class="form-control" type="text" appOnlyNumber formControlName="sgst" placeholder="SGST" [ngClass]="{
                                                             'is-invalid': material_taxs.get('sgst').invalid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched),
                                                             'is-valid': material_taxs.get('sgst').valid && (material_taxs.get('sgst').dirty || material_taxs.get('sgst').touched)
                                                           }" [(ngModel)]="material.material_tax[i].sgst" name="sgst" (keyup)="getIgst(i)">
@@ -184,7 +184,7 @@
                                     </div>
                                     
                                     <div class="form-group col-md-12" style="text-align: right">
-                                        <button type="submit" class="btn btn-success" (click)="updateMaterial()">Submit</button>
+                                        <button type="submit" class="btn btn-primary" (click)="updateMaterial()">Submit</button>
                                         <button type="reset" class="btn btn-secondary">Reset</button>
                                     </div>
                                 </div>
