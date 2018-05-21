@@ -26,6 +26,7 @@ import { BsComponentModule } from '../bs-component/bs-component.module';
 import { CompanyService } from './company.service';
 import { StatesService} from '../states/states.service';
 
+
 @NgModule({
   imports: [
     CommonModule,

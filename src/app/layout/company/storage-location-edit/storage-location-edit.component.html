@@ -3,7 +3,7 @@
       <div class="col-md-6 offset-md-6 pull-right" style="text-align: right">
           <button type="button" class="btn btn-secondary"><i class="fa fa-question" aria-hidden="true"></i> Help</button>
           <button type="button" class="btn btn-secondary"><i class="fa fa-refresh"></i> Reload</button>
-          <button type="button" class="btn btn-success" (click)="btnClickNav()"><i class="fa fa-arrow-left"></i> Back</button>
+          <button type="button" class="btn btn-primary" (click)="btnClickNav()"><i class="fa fa-arrow-left"></i> Back</button>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group col-md-4">
                               <label>Phone</label>
-                              <input type="number" class="form-control" [(ngModel)]="companyStorage.storage_contact_no" name="storage_contact_no" placeholder="Phone" formControlName="storage_contact_no" [ngClass]="displayFieldCss('storage_contact_no')">
+                              <input type="text" appOnlyNumber class="form-control" [(ngModel)]="companyStorage.storage_contact_no" name="storage_contact_no" placeholder="Phone" formControlName="storage_contact_no" [ngClass]="displayFieldCss('storage_contact_no')">
                               <div class="invalid-feedback" *ngIf="isFieldValid('storage_contact_no')">
                                 Please enter phone
                             </div>
@@ -68,14 +68,14 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label>Pin</label>
-                                <input type="text" class="form-control" placeholder="Pin" [(ngModel)]="companyStorage.storage_pincode" name="storage_pincode" formControlName="storage_pincode" [ngClass]="displayFieldCss('storage_pincode')">
+                                <input type="text" appOnlyNumber class="form-control" placeholder="Pin" [(ngModel)]="companyStorage.storage_pincode" name="storage_pincode" formControlName="storage_pincode" [ngClass]="displayFieldCss('storage_pincode')">
                                 <div class="invalid-feedback" *ngIf="isFieldValid('storage_pincode')">
                                     Please enter city
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-success" (click)="updateCompanyStorage()">Submit</button>
+                                <button type="submit" class="btn btn-primary" (click)="updateCompanyStorage()">Submit</button>
                                 <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                             </div>
                         </div>

@@ -9,7 +9,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav('company')">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav('company')">
                 <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
@@ -36,7 +36,7 @@
                                                             <h5>{{company.company_name}}</h5>
                                                         </th>
                                                         <th>
-                                                            <button type="button" class="btn btn-success" [routerLink]="['/company/edit', company.id]">
+                                                            <button type="button" class="btn btn-primary" [routerLink]="['/company/edit', company.id]">
                                                                 <i class="fa fa-edit"></i> Edit</button>
                                                         </th>
                                                     </tr>
