@@ -94,10 +94,10 @@
                                                 <th>IGST(%)</th>
                                                 <th>CGST(%)</th>
                                                 <th>SGST(%)</th>
-                                                <th>GST Amount</th>
                                                 <th>PO Quantity</th>
                                                 <th>Rate</th>
                                                 <th>Discount(%)</th>
+                                                <th>GST Amount</th>
                                                 <th>Delivery Date</th>
                                                 <th>Sub Total</th>
                                             </tr>
@@ -118,9 +118,6 @@
                                                 <td>{{mat.material.material_tax[0].cgst}}</td>
                                                 <td>{{mat.material.material_tax[0].sgst}}</td>
                                                 <td width="80px">
-                                                    <input type="number" class="form-control" name="gst_amount" [(ngModel)]="material_details_list[k].gst_amount" [ngModelOptions]="{standalone: true}">
-                                                </td>
-                                                <td width="80px">
                                                     <input type="number" class="form-control" name="order_quantity" [(ngModel)]="material_details_list[k].order_quantity" (keyup)="getSubTotal(material_details_list[k].order_quantity,material_details_list[k].rate,material_details_list[k].discount_percent, k)" [ngModelOptions]="{standalone: true}">
                                                 </td>
                                                 <td width="80px">
@@ -128,6 +125,9 @@
                                                 </td>
                                                 <td width="80px">
                                                     <input type="number" class="form-control" name="discount_percent" [(ngModel)]="material_details_list[k].discount_percent" (keyup)="getSubTotal(material_details_list[k].order_quantity,material_details_list[k].rate,material_details_list[k].discount_percent, k)" [ngModelOptions]="{standalone: true}">
+                                                </td>
+                                                <td width="80px">
+                                                    <input type="number" class="form-control" name="gst_amount" [(ngModel)]="material_details_list[k].gst_amount" [ngModelOptions]="{standalone: true}" readonly >
                                                 </td>
                                                 <td width="150px">
                                                     <div class="input-group">
