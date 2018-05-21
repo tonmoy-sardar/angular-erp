@@ -15,7 +15,7 @@ export class VendorService {
   }
 
   getVendorList(params): Observable<any>{
-    return this.http.get(environment.apiEndpoint+'vendor_master/?'+params, {
+    return this.http.get(environment.apiEndpoint+'all_vendor/?'+params, {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

@@ -9,7 +9,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav('payment/add')">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav('payment/add')">
                 <i class="fa fa-plus"></i> New Payment</button>
         </div>
         <div class="clearfix"></div>
@@ -45,7 +45,6 @@
                             <th>Company</th>
                             <th>Payment No</th>
                             <th>PO INV No</th>
-                            <th>Grn No</th>
                             <th>PO No</th>
                             <th>Party Name</th>
                             <th>Created At</th>
@@ -57,16 +56,15 @@
                     <tbody>
                         <tr *ngFor="let payment of paymentList ; let i = index">
                             <th scope="row">{{i +1}}</th>
-                            <td>Shyam Futuretech</td>
-                            <td>17-18/11/PAY-0001</td>
-                            <td>17-18/02/POINV-0001</td>
-                            <td>17-18/02/GRN-0001</td>
-                            <td>17-18/02/PO-0001</td>
+                            <td>{{payment.company.company_name}}</td>
+                            <td>{{payment.payment_map[0].payment_no}}</td>
+                            <td>{{payment.purchase_inv_no}}</td>          
+                            <td>{{payment.po_order_no}}</td>
                             <td>Shyam FT</td>
-                            <td>14-02-2018</td>
-                            <td>admin</td>
-                            <td>4275.00</td>
-                            <td>Approved</td>
+                            <td>{{payment.created_at | date: 'dd-MM-yyyy'}}</td>
+                            <td>{{payment.created_by.first_name}}</td>
+                            <td>{{payment.total_amount}}</td>
+                            <td><span *ngIf="payment.status==true">Approved</span></td>
                         </tr>
                     </tbody>
                 </table>

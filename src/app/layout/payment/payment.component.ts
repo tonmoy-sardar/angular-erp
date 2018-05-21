@@ -43,7 +43,7 @@ export class PaymentComponent implements OnInit {
       (data: any[]) => {
         this.totalPaymentList = data['count'];
         this.paymentList = data['results'];
-        // console.log(this.grnList)
+        console.log(this.paymentList)
       }
     );
   }

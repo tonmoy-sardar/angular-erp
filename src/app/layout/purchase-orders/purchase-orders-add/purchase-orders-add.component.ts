@@ -208,11 +208,18 @@ export class PurchaseOrdersAddComponent implements OnInit {
         timeOut: 3000,
       });
     }
+    var igst = Math.round(this.requisition_details.requisition_detail[i].material.material_tax[0].igst)
     if (quantity != "" && rate != "" && discount != "") {
-      this.material_details_list[i].sub_total = Math.round((rate * quantity) - (((rate * quantity) * discount) / 100))
+      var val = Math.round((rate * quantity) - ((rate * quantity * discount) / 100))
+      var gst_amount = Math.round((val * igst)/100)
+      this.material_details_list[i].gst_amount = gst_amount
+      this.material_details_list[i].sub_total = Math.round(val + gst_amount)
     }
     else if (quantity != "" && rate != "") {
-      this.material_details_list[i].sub_total = Math.round((rate * quantity))
+      var val = Math.round((rate * quantity))
+      var gst_amount = Math.round((val * igst)/100)
+      this.material_details_list[i].gst_amount = gst_amount
+      this.material_details_list[i].sub_total = Math.round(val + gst_amount)
     }
     this.sum = 0;
     this.material_details_list.forEach(x => {
@@ -312,7 +319,7 @@ export class PurchaseOrdersAddComponent implements OnInit {
           rate: x.rate,
           order_quantity: x.order_quantity,
           discount_percent: x.discount_percent,
-          discount_value: Math.round((x.rate * x.order_quantity) - x.sub_total),
+          discount_value: Math.round((x.rate * x.order_quantity) - (x.sub_total - x.gst_amount)),
           sub_total: x.sub_total,
           material_value: Math.round((x.rate * x.order_quantity)),
           delivery_date: myDate.toISOString()

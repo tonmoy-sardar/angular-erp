@@ -45,8 +45,20 @@ export class PurchaseOrganizationService {
     })
   }
 
-  getCompanyBranchTree(id): Observable<any>{
+  getCompanyBranchTree(): Observable<any>{
     return this.http.get(environment.apiEndpoint+'company_branch_tree/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+  
+  getPurchaseOrganizationMapingList(id){
+    return this.http.get(environment.apiEndpoint+'specific_purorg_mapping/'+id+'/', {
+      headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
+    })
+  }
+
+  deletePurchaseOrganizationMapping(id){
+    return this.http.delete(environment.apiEndpoint+'del_purorg_mapping/'+id+'/', {
       headers: new HttpHeaders().set('Authorization', 'Token '+localStorage.getItem('logedUserToken'))
     })
   }

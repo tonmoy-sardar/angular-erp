@@ -5,7 +5,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav()">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav()">
                 <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Phone</label>
-                                    <input type="number" class="form-control" [(ngModel)]="companyBranch.branch_contact_no" name="branch_contact_no" placeholder="Phone"
+                                    <input type="text" appOnlyNumber class="form-control" [(ngModel)]="companyBranch.branch_contact_no" name="branch_contact_no" placeholder="Phone"
                                         formControlName="branch_contact_no" [ngClass]="displayFieldCss('branch_contact_no')">
                                     <div class="invalid-feedback" *ngIf="isFieldValid('branch_contact_no')">
                                         Please enter phone
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Pin</label>
-                                    <input type="number" class="form-control" placeholder="Pin" [(ngModel)]="companyBranch.branch_pincode" name="branch_pincode"
+                                    <input type="text" appOnlyNumber class="form-control" placeholder="Pin" [(ngModel)]="companyBranch.branch_pincode" name="branch_pincode"
                                         formControlName="branch_pincode" [ngClass]="displayFieldCss('branch_pincode')">
                                     <div class="invalid-feedback" *ngIf="isFieldValid('branch_pincode')">
                                         Please enter pin
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>GSTIN</label>
-                                    <input type="number" class="form-control" placeholder="GSTIN" [(ngModel)]="companyBranch.branch_gstin" name="branch_gstin"
+                                    <input type="text" class="form-control" placeholder="GSTIN" [(ngModel)]="companyBranch.branch_gstin" name="branch_gstin"
                                         formControlName="branch_gstin" [ngClass]="displayFieldCss('branch_gstin')">
                                     <div class="invalid-feedback" *ngIf="isFieldValid('branch_gstin')">
                                         Please enter GSTIN
@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12" style="text-align: right">
-                                    <button type="submit" class="btn btn-success" (click)="addNewCompanyBranch()">Submit</button>
+                                    <button type="submit" class="btn btn-primary" (click)="addNewCompanyBranch()">Submit</button>
                                     <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                                 </div>
                             </div>

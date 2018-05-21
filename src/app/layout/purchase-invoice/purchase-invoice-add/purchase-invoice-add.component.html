@@ -9,7 +9,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav('purchase-invoice')">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav('purchase-invoice')">
                 <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
@@ -18,7 +18,7 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <form role="form">
+                <form role="form" [formGroup]="form" novalidate>
                     <div class="card bg-light mb-3">
                         <div class="card-header" style="background-color:#868e96; color: #fff;">Purchase Invoice Add</div>
                         <div class="card-body">
@@ -27,13 +27,15 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label>GRN No.</label>
-                                            <select class="form-control">
+                                            <select class="form-control" (change)="grnChange($event.target.value)" name="grn" formControlName="grn" [ngClass]="displayFieldCss('grn')">
                                                 <option value="">Select GRN </option>
-                                                <option value="">17-18/02/GRN-0002</option>
-                                                <option value="">17-18/02/GRN-0002</option>                                                 
+                                                <option value="{{grn.id}}" *ngFor="let grn of grnList">{{grn.grn_map[0].grn_no}}</option>
                                             </select>
+                                            <div class="invalid-feedback" *ngIf="form.controls['grn'].hasError('required')">
+                                                Please select GRN
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <!-- <div class="form-group col-md-3">
                                             <label>Purchase Invoice Date</label>
                                             <div class="input-group datepicker-input">
                                                 <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #d="ngbDatepicker">
@@ -41,11 +43,11 @@
                                                     <span class="fa fa-calendar"></span>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="card bg-light mb-3" *ngIf="visible_key">
+                            <div class="card bg-light mb-3" *ngIf="visible_key">
                                 <div class="card-header">Header Line</div>
                                 <div class="card-body">
                                     <div class="row">
@@ -62,12 +64,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>{{purchase_order_details.pur_org.name}}</td>
-                                                    <td>{{purchase_order_details.pur_grp.name}}</td>
-                                                    <td>{{purchase_order_details.company.company_name}}</td>
-                                                    <td>{{purchase_order_details.created_at | date:'dd-MM-yyyy'}}</td>
-                                                    <td>{{purchase_order_details.vendor.vendor_fullname}}</td>
-                                                    <td>{{purchase_order_details.vendor_address.address}}</td>
+                                                    <td>{{grn_details.pur_org.name}}</td>
+                                                    <td>{{grn_details.pur_grp.name}}</td>
+                                                    <td>{{grn_details.company.company_name}}</td>
+                                                    <td>{{grn_details.created_at | date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{grn_details.vendor.vendor_fullname}}</td>
+                                                    <td>{{grn_details.vendor_address.address}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -83,89 +85,43 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Material</th>
-                                                    <th>Po. Quantity</th>
-                                                    <th>UOM</th>
-                                                    <th>Plant</th>
-                                                    <th>Storage</th>
-                                                    <th>Bin</th>
-                                                    <th>GRN Quantity</th>
+                                                    <th>Rate</th>
+                                                    <th>Quantity</th>
+                                                    <th>Discount (%)</th>
+                                                    <th>Discount amount</th>
+                                                    <th>IGST (%)</th>
+                                                    <th>CGST (%)</th>
+                                                    <th>SGST (%)</th>
+                                                    <th>Total GST</th>
+                                                    <th>Material value</th>
+                                                    <th>Material amount to pay</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let mat of purchase_order_details.purchase_order_detail; let k = index">
+                                                <tr *ngFor="let mat of material_details_list; let k = index">
                                                     <td>
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" (change)="matCheck($event, mat)">
-                                                            </label>
-                                                        </div>
+                                                        {{ k + 1}}
                                                     </td>
-                                                    <td>{{mat.material.material_fullname}}</td>
-                                                    <td>{{mat.order_quantity}}</td>
-                                                    <td>CFT</td>
-                                                    <td>{{mat.company_branch.branch_address}}</td>
-                                                    <td>{{mat.storage_location.storage_address}}</td>
-                                                    <td>{{mat.storage_bin.bin_no}}</td>
-                                                    <td>
-                                                        <input class="form-control" placeholder="GRN Quantity" [(ngModel)]="material_details_list[k].receive_quantity" [ngModelOptions]="{standalone: true}" (keyup)="GnrQuantity(material_details_list[k].order_quantity,material_details_list[k].receive_quantity, k)">
-                                                    </td>
+                                                    <td>{{grn_details.grn_detail[k].material.material_fullname}}</td>
+                                                    <td>{{mat.rate}}</td>
+                                                    <td>{{mat.quantity}}</td>
+                                                    <td>{{mat.discount_per}}</td>
+                                                    <td>{{mat.discount_amount}}</td>
+                                                    <td>{{mat.igst}}</td>
+                                                    <td>{{mat.cgst}}</td>
+                                                    <td>{{mat.sgst}}</td>
+                                                    <td>{{mat.total_gst}}</td>
+                                                    <td>{{mat.material_value}}</td>
+                                                    <td>{{mat.material_amount_pay}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card bg-light mb-3" *ngIf="visible_key">
-                                <div class="card-header">Transport</div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-2">
-                                            <label>Way Bill No.</label>
-                                            <input class="form-control" placeholder="Way Bill No." name="waybill_no" formControlName="waybill_no" [ngClass]="displayFieldCss('waybill_no')">
-                                            <div class="invalid-feedback" *ngIf="form.controls['waybill_no'].hasError('required')">
-                                                Please enter waybill no
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>Vehicle No.</label>
-                                            <input class="form-control" placeholder="Vehicle No." name="vehicle_no" formControlName="vehicle_no" [ngClass]="displayFieldCss('vehicle_no')">
-                                            <div class="invalid-feedback" *ngIf="form.controls['vehicle_no'].hasError('required')">
-                                                Please enter vehicle no
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>Check Post</label>
-                                            <input class="form-control" placeholder="Check Post" name="check_post" formControlName="check_post" [ngClass]="displayFieldCss('check_post')">
-                                            <div class="invalid-feedback" *ngIf="form.controls['check_post'].hasError('required')">
-                                                Please enter check post
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>Challan No.</label>
-                                            <input class="form-control" placeholder="Challan No." name="challan_no" formControlName="challan_no" [ngClass]="displayFieldCss('challan_no')">
-                                            <div class="invalid-feedback" *ngIf="form.controls['challan_no'].hasError('required')">
-                                                Please enter challan no
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>Challan Date</label>
-                                            <div class="input-group datepicker-input">
-                                                <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model" ngbDatepicker #c="ngbDatepicker" name="challan_date"
-                                                    formControlName="challan_date" [ngClass]="displayFieldCss('challan_date')">
-                                                <button class="input-group-addon" (click)="c.toggle()" type="button">
-                                                    <span class="fa fa-calendar"></span>
-                                                </button>
-                                                <div class="invalid-feedback" *ngIf="form.controls['challan_date'].hasError('required')">
-                                                    Please enter challan date
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="row">
                                 <div class="form-group col-md-12" style="text-align: right">
-                                    <button type="submit" class="btn btn-success" (click)="addPurchaseInvoice()">Submit</button>
+                                    <button type="submit" class="btn btn-primary" (click)="addPurchaseInvoice()">Submit</button>
                                     <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                                 </div>
                             </div>
@@ -177,3 +133,9 @@
         </div>
     </div>
 </div>
+<ngx-spinner
+bdColor = "rgba(0, 0, 0, 0.8)"
+size = "default"
+color = "#fff"
+type = "ball-spin"
+></ngx-spinner>

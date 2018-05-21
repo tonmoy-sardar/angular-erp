@@ -9,7 +9,7 @@
         <i class="fa fa-question" aria-hidden="true"></i> Help</button>
       <button type="button" class="btn btn-secondary">
         <i class="fa fa-refresh"></i> Reload</button>
-      <button type="button" class="btn btn-success" (click)="btnClickNav('gst-rates/add')">
+      <button type="button" class="btn btn-primary" (click)="btnClickNav('gst-rates/add')">
         <i class="fa fa-plus"></i> New GST Rate</button>
     </div>
     <div class="clearfix"></div>
@@ -43,9 +43,9 @@
             <tr>
               <th>Sl.No.</th>
               <th>Identifiable Name</th>
-              <th>IGST(%)</th>
               <th>CGST(%)</th>
               <th>SGST(%)</th>
+              <th>IGST(%)</th>
               <th>Created at</th>
               <th>Status</th>
               <th>Action</th>
@@ -55,14 +55,14 @@
             <tr *ngFor="let gst of gstRatesList ; let i = index">
               <th scope="row">{{i +1}}</th>
               <td>{{gst.gst_pattern}}</td>
-              <td>{{gst.igst}}</td>
               <td>{{gst.cgst}}</td>
               <td>{{gst.sgst}}</td>
+              <td>{{gst.igst}}</td>
               <td>{{gst.sgst | date:"dd-MM-yyyy"}}</td>
               <td>
-                  <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveState(gst.id)" *ngIf="gst.status==true">
+                  <a href="javascript:void(0);" title="Active" name="Active" (click)="inactiveGst(gst.id)" *ngIf="gst.status==true">
                       <i class="fa fa-thumbs-up"></i> Active</a>
-                    <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activeState(gst.id)" *ngIf="gst.status==false">
+                    <a href="javascript:void(0);" title="Inactive" name="Inactive" (click)="activeGst(gst.id)" *ngIf="gst.status==false">
                       <i class="fa fa-thumbs-down"></i> Inactive</a></td>
               <td>
                 <a href="javascript:void(0);" title="Edit" name="Edit" [routerLink]="['/gst-rates/edit', gst.id]">

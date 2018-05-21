@@ -47,7 +47,7 @@ export class GstRatesComponent implements OnInit {
     );
   };
 
-  activeState (id) {
+  activeGst (id) {
     let gstRate;
 
     gstRate = {
@@ -70,7 +70,7 @@ export class GstRatesComponent implements OnInit {
     );
   };
 
-  inactiveState (id) {
+  inactiveGst (id) {
     let gstRate;
 
     gstRate = {

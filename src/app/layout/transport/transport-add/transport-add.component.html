@@ -9,7 +9,7 @@
         <i class="fa fa-question" aria-hidden="true"></i> Help</button>
       <button type="button" class="btn btn-secondary">
         <i class="fa fa-refresh"></i> Reload</button>
-      <button type="button" class="btn btn-success" (click)="btnClickNav('transport')">
+      <button type="button" class="btn btn-primary" (click)="btnClickNav('transport')">
         <i class="fa fa-arrow-left"></i> Back</button>
     </div>
     <div class="clearfix"></div>
@@ -106,27 +106,27 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>GSTIN</label>
-                  <input type="number" class="form-control" name="gstin" placeholder="GSTIN" formControlName="gstin" [ngClass]="displayFieldCss('gstin')">
+                  <input type="text" class="form-control" name="gstin" placeholder="GSTIN" formControlName="gstin" [ngClass]="displayFieldCss('gstin')">
                   <div class="invalid-feedback" *ngIf="form.controls['gstin'].hasError('required')">
                       Please enter GSTIN
                   </div>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Amount Credit</label>
-                  <input type="number" class="form-control"  name="amount_credit" placeholder="Amount Credit" formControlName="amount_credit" [ngClass]="displayFieldCss('amount_credit')">
+                  <input type="text" appOnlyNumber class="form-control"  name="amount_credit" placeholder="Amount Credit" formControlName="amount_credit" [ngClass]="displayFieldCss('amount_credit')">
                   <div class="invalid-feedback" *ngIf="form.controls['amount_credit'].hasError('required')">
                       Please enter amount credit
                   </div>
                 </div>
                 <div class="form-group col-md-2">
                   <label>Amount Debit</label>
-                  <input type="number" class="form-control" name="amount_debit" placeholder="Amount Debit" formControlName="amount_debit" [ngClass]="displayFieldCss('amount_debit')">
+                  <input type="text" appOnlyNumber class="form-control" name="amount_debit" placeholder="Amount Debit" formControlName="amount_debit" [ngClass]="displayFieldCss('amount_debit')">
                   <div class="invalid-feedback" *ngIf="form.controls['amount_debit'].hasError('required')">
                       Please enter amount debit
                   </div>
                 </div>
                 <div class="form-group col-md-12" style="text-align: right">
-                  <button type="submit" class="btn btn-success" (click)="addNewTransport()">Submit</button>
+                  <button type="submit" class="btn btn-primary" (click)="addNewTransport()">Submit</button>
                   <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                 </div>
               </div>

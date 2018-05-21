@@ -5,7 +5,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav()">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav()">
                 <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Phone</label>
-                                    <input type="number" class="form-control" [(ngModel)]="companyStorage.storage_contact_no" name="storage_contact_no" placeholder="Phone"
+                                    <input type="text" appOnlyNumber class="form-control" [(ngModel)]="companyStorage.storage_contact_no" name="storage_contact_no" placeholder="Phone"
                                         formControlName="storage_contact_no" [ngClass]="displayFieldCss('storage_contact_no')">
                                     <div class="invalid-feedback" *ngIf="isFieldValid('storage_contact_no')">
                                         Please enter phone
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>City</label>
-                                    <input type="text" class="form-control" placeholder="City Name" [(ngModel)]="companyStorage.storage_city" name="storage_city"
+                                    <input type="text" appOnlyNumber class="form-control" placeholder="City Name" [(ngModel)]="companyStorage.storage_city" name="storage_city"
                                         formControlName="storage_city" [ngClass]="displayFieldCss('storage_city')">
                                     <div class="invalid-feedback" *ngIf="isFieldValid('storage_city')">
                                         Please enter city
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12" style="text-align: right">
-                                    <button type="submit" class="btn btn-success" (click)="addNewCompanyStorage()">Submit</button>
+                                    <button type="submit" class="btn btn-primary" (click)="addNewCompanyStorage()">Submit</button>
                                     <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                                 </div>
                             </div>

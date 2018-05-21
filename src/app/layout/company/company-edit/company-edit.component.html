@@ -9,7 +9,7 @@
                 <i class="fa fa-question" aria-hidden="true"></i> Help</button>
             <button type="button" class="btn btn-secondary">
                 <i class="fa fa-refresh"></i> Reload</button>
-            <button type="button" class="btn btn-success" (click)="btnClickNav('company')">
+            <button type="button" class="btn btn-primary" (click)="btnClickNav('company')">
                 <i class="fa fa-arrow-left"></i> Back</button>
         </div>
         <div class="clearfix"></div>
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Phone</label>
-                                    <input type="text" class="form-control" [(ngModel)]="company.company_contact" name="company_contact" placeholder="Phone"
+                                    <input type="text" appOnlyNumber class="form-control" [(ngModel)]="company.company_contact" name="company_contact" placeholder="Phone"
                                         formControlName="company_contact" [ngClass]="displayFieldCss('company_contact')">
                                     <div class="invalid-feedback" *ngIf="form.controls['company_contact'].hasError('minlength') && !form.controls['company_contact'].hasError('required')">
                                         Please enter at least 10 digit
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Pin</label>
-                                    <input type="text" class="form-control" placeholder="Pin" [(ngModel)]="company.company_pin" name="company_pin" formControlName="company_pin"
+                                    <input type="text" appOnlyNumber class="form-control" placeholder="Pin" [(ngModel)]="company.company_pin" name="company_pin" formControlName="company_pin"
                                         [ngClass]="displayFieldCss('company_pin')">
                                     <div class="invalid-feedback" *ngIf="form.controls['company_pin'].hasError('required')">
                                         Please enter pin
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>GSTIN</label>
-                                    <input type="number" class="form-control" placeholder="GSTIN" [(ngModel)]="company.company_gst" name="company_gst" formControlName="company_gst"
+                                    <input type="text" class="form-control" placeholder="GSTIN" [(ngModel)]="company.company_gst" name="company_gst" formControlName="company_gst"
                                         [ngClass]="displayFieldCss('company_gst')">
                                     <div class="invalid-feedback" *ngIf="form.controls['company_gst'].hasError('required')">
                                         Please enter GSTN
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12" style="text-align: right">
-                                    <button type="submit" class="btn btn-success" (click)="updateCompany()">Submit</button>
+                                    <button type="submit" class="btn btn-primary" (click)="updateCompany()">Submit</button>
                                     <button type="reset" class="btn btn-secondary" (click)="reSet()">Reset</button>
                                 </div>
                             </div>

@@ -11,6 +11,8 @@ import { VendorAddComponent } from './vendor-add/vendor-add.component';
 import { VendorEditComponent } from './vendor-edit/vendor-edit.component';
 import { VendorService } from './vendor.service';
 import { StatesService} from '../states/states.service';
+import { PageHeaderModule } from '../../shared';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { StatesService} from '../states/states.service';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    BsComponentModule
+    BsComponentModule,
+    PageHeaderModule
   ],
   declarations: [VendorComponent, VendorAddComponent, VendorEditComponent],
   providers: [VendorService,StatesService]
