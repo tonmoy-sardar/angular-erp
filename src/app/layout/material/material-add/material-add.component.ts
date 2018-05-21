@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, } from '@angular/forms';
 
 import { CompanyService } from '../../company/company.service';
-import { PurchaseOrganizationService} from '../../purchase-organization/purchase-organization.service';
-import { PurchaseGroupService} from '../../purchase-group/purchase-group.service';
+import { PurchaseOrganizationService } from '../../purchase-organization/purchase-organization.service';
+import { PurchaseGroupService } from '../../purchase-group/purchase-group.service';
 import { MaterialService } from '../material.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -14,47 +14,46 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MaterialAddComponent implements OnInit {
   material;
-  materialTypeList=[];
-  UOMList=[];
-  purchaseGroupList=[];
-  purchaseOrganizationList=[];
+  materialTypeList = [];
+  UOMList = [];
+  purchaseGroupList = [];
+  purchaseOrganizationList = [];
   form: FormGroup;
-  is_taxable_value=false;
-  
+  is_taxable_value = false;
 
   constructor(
-      private materialService: MaterialService,
-      private purchaseOrganizationService: PurchaseOrganizationService, 
-      private purchaseGroupService: PurchaseGroupService, 
-      private companyService: CompanyService, 
-      private router: Router,
-      private toastr: ToastrService,
-      private formBuilder: FormBuilder,
-    ) { }
+    private materialService: MaterialService,
+    private purchaseOrganizationService: PurchaseOrganizationService,
+    private purchaseGroupService: PurchaseGroupService,
+    private companyService: CompanyService,
+    private router: Router,
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit() {
-   
+
     this.form = this.formBuilder.group({
       material_type: ['', Validators.required],
-      material_code:  [null, Validators.required],
+      material_code: [null, Validators.required],
       material_fullname: [null, Validators.required],
-      material_purchase_org:[null, Validators.required],
-      material_purchase_grp:[null, Validators.required],
-      description:[null, Validators.required],
-      material_uom:this.formBuilder.array([ this.createmMaterialUom(1) ]),
+      material_purchase_org: [null, Validators.required],
+      material_purchase_grp: [null, Validators.required],
+      description: [null, Validators.required],
+      material_uom: this.formBuilder.array([this.createmMaterialUom(1)]),
       is_sales: [false],
       is_taxable: [false],
-      material_tax:this.formBuilder.array([ this.createmMaterialTax(1) ])
+      material_tax: this.formBuilder.array([])
     });
-    
+
     this.getUOMList();
     this.getMaterialTypeList();
     this.getPurchaseGroupActiveList();
-    this.getPurchaseOrganizationActiveList();                                                      
+    this.getPurchaseOrganizationActiveList();
   }
 
-  
-  getMaterialUom(form){
+
+  getMaterialUom(form) {
     return form.get('material_uom').controls
   }
 
@@ -67,45 +66,33 @@ export class MaterialAddComponent implements OnInit {
     });
   }
 
-  addMaterialUom(){
-
+  addMaterialUom(id) {
     const control = <FormArray>this.form.controls['material_uom'];
-    control.push(this.createmMaterialUom(2));
-
-    // this.material_uom_arr = this.form.get('material_uom') as FormArray;
-    // this.material_uom_arr.push(this.createmMaterialUom(2));
+    control.push(this.createmMaterialUom(id));
   }
 
-  deleteMaterialUom(index:number)
-  {
+  deleteMaterialUom(index: number) {
     const control = <FormArray>this.form.controls['material_uom'];
     control.removeAt(index);
-
-    // this.material_uom_arr.controls.splice(index);
-    // this.form.value.material_uom.splice(index);
   }
 
-  showHideMaterialUOM()
-  {
-    if(this.form.value.is_sales!=true)
-    {
-      this.addMaterialUom();
-      if(this.form.value.is_taxable==true)
-      {
-        this.addMateriaTax();
+  showHideMaterialUOM(val) {
+    if(val.currentTarget.checked){
+      this.addMaterialUom(2);
+      if(this.form.value.is_taxable == true){
+        this.addMateriaTax(2);
       }
     }
     else{
       this.deleteMaterialUom(1);
-      if(this.form.value.is_taxable==true)
-      {
+      if(this.form.value.is_taxable == true){
         this.deleteMaterialTax(1);
       }
     }
   }
 
 
-  getMateriaTax(form){
+  getMateriaTax(form) {
     return form.get('material_tax').controls
   }
 
@@ -119,22 +106,14 @@ export class MaterialAddComponent implements OnInit {
     });
   }
 
-  addMateriaTax(){
-
+  addMateriaTax(id) {
     const control = <FormArray>this.form.controls['material_tax'];
-    control.push(this.createmMaterialTax(2));
-
-    // this.material_tax_arr = this.form.get('material_tax') as FormArray;
-    // this.material_tax_arr.push(this.createmMaterialTax(2));
+    control.push(this.createmMaterialTax(id));
   }
 
-  deleteMaterialTax(index:number)
-  {
+  deleteMaterialTax(index: number) {
     const control = <FormArray>this.form.controls['material_tax'];
     control.removeAt(index);
-
-    // this.material_tax_arr.controls.splice(index);
-    // this.form.value.material_tax.splice(index);
   }
 
   clearFormArray = (formArray: FormArray) => {
@@ -143,107 +122,94 @@ export class MaterialAddComponent implements OnInit {
     }
   }
 
-  showHideMaterialTax()
-  {
-    
-    if(this.form.value.is_taxable!=true)
-    {
-      this.is_taxable_value = true;
-      if(this.form.value.is_sales==true)
-      {
-        this.addMateriaTax();
+  showHideMaterialTax(val) {
+    if(val.currentTarget.checked){
+      this.addMateriaTax(1);
+      if (this.form.value.is_sales == true) {
+        this.addMateriaTax(2);
       }
-     
+      this.is_taxable_value = true;
     }
     else{
-
       const material_tax_control = <FormArray>this.form.controls['material_tax'];
-      this.is_taxable_value = false;
       this.clearFormArray(material_tax_control);
-      if(this.form.value.is_sales==true)
-      {
-        this.deleteMaterialTax(1);
-      }
-      
+      this.is_taxable_value = false;
     }
   }
 
-  getMaterialTypeList()
-  {
+  getMaterialTypeList() {
     this.materialService.getMaterialTypeList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.materialTypeList = data['results'];
-        
+
       }
-     );
+    );
   }
   btnClickNav(toNav) {
-    this.router.navigateByUrl('/'+toNav);
+    this.router.navigateByUrl('/' + toNav);
   };
 
-  getUOMList(){
+  getUOMList() {
     this.companyService.getUOMList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.UOMList = data['results'];
-       
+
       }
-     );
+    );
   };
 
-  getPurchaseGroupActiveList(){
+  getPurchaseGroupActiveList() {
     this.purchaseGroupService.getPurchaseGroupActiveList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.purchaseGroupList = data;
-       
+
       }
-     );
+    );
   }
 
-  getPurchaseOrganizationActiveList(){
+  getPurchaseOrganizationActiveList() {
     this.purchaseOrganizationService.getPurchaseOrganizationActiveList().subscribe(
-      (data: any[]) =>{   
+      (data: any[]) => {
         this.purchaseOrganizationList = data;
-        
+
       }
-     );
+    );
   }
 
-  
-
-  addMaterial = function () {
-
-    if(this.is_taxable_value==false)
-    {
-      const material_tax_control = <FormArray>this.form.controls['material_tax'];
-      this.clearFormArray(material_tax_control);
-      this.form.value.material_tax = [];
+  getIgst(i){
+    const material_tax_control = <FormArray>this.form.controls['material_tax'];
+    if(this.form.value.material_tax[i].cgst != "" && this.form.value.material_tax[i].sgst != ""){
+      material_tax_control.at(i).patchValue({
+        igst: this.form.value.material_tax[i].cgst + this.form.value.material_tax[i].sgst
+      });
     }
+  }
+
+
+  addMaterial() {
     if (this.form.valid) {
-
       let material_purchase_org_arr = [];
-      for (let i=0; i<this.form.value.material_purchase_org.length; i++)
-      {
-        material_purchase_org_arr.push({pur_org:this.form.value.material_purchase_org[i]});
-      }
-
+      this.form.value.material_purchase_org.forEach(x => {
+        material_purchase_org_arr.push({ pur_org: x });
+      })
+      
       let material_purchase_grp_arr = [];
-      for (let i=0; i<this.form.value.material_purchase_grp.length; i++)
-      {
-        material_purchase_grp_arr.push({pur_group:this.form.value.material_purchase_grp[i]});
-      }
+      this.form.value.material_purchase_grp.forEach(k => {
+        material_purchase_grp_arr.push({ pur_group: k });
+      })
 
       this.form.value.material_purchase_org = material_purchase_org_arr;
       this.form.value.material_purchase_grp = material_purchase_grp_arr;
-
-      
-
-      
+      this.form.patchValue({
+        material_purchase_org: material_purchase_org_arr,
+        material_purchase_grp: material_purchase_grp_arr
+      })
       this.materialService.addNewMaterial(this.form.value).subscribe(
         response => {
           this.toastr.success('Material added successfully', '', {
             timeOut: 3000,
           });
-          this.goToList('material');          
+          this.goToList('material');
         },
         error => {
           console.log('error', error)
@@ -269,7 +235,7 @@ export class MaterialAddComponent implements OnInit {
   goToList(toNav) {
     this.router.navigateByUrl('/' + toNav);
   };
-  
+
   displayFieldCss(field: string) {
     return {
       'is-invalid': this.form.controls[field].invalid && (this.form.controls[field].dirty || this.form.controls[field].touched),
@@ -277,8 +243,8 @@ export class MaterialAddComponent implements OnInit {
     };
   }
 
- 
 
- 
+
+
 
 }
