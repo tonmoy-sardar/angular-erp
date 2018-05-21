@@ -57,7 +57,7 @@
                                                     'is-invalid': material_uoms.get('base_uom').invalid && (material_uoms.get('base_uom').dirty || material_uoms.get('base_uom').touched),
                                                     'is-valid': material_uoms.get('base_uom').valid && (material_uoms.get('base_uom').dirty || material_uoms.get('base_uom').touched)
                                                   }">
-                                                    <option value="0">Select UOM</option>
+                                                    <option value="">Select UOM</option>
                                                     <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
                                                 </select>
                                                 <div class="invalid-feedback" *ngIf="material_uoms.get('base_uom').hasError('required')">
@@ -80,7 +80,7 @@
                                                     'is-invalid': material_uoms.get('unit_uom').invalid && (material_uoms.get('unit_uom').dirty || material_uoms.get('unit_uom').touched),
                                                     'is-valid': material_uoms.get('unit_uom').valid && (material_uoms.get('unit_uom').dirty || material_uoms.get('unit_uom').touched)
                                                   }">
-                                                    <option value="0">Select UOM</option>
+                                                    <option value="">Select UOM</option>
                                                     <option *ngFor="let uom of UOMList;" value="{{uom.id}}">{{uom.name}}</option>
                                                 </select>
                                                 <div class="invalid-feedback" *ngIf="material_uoms.get('unit_uom').hasError('required')">

@@ -35,7 +35,7 @@ export class MaterialAddComponent implements OnInit {
   ngOnInit() {
    
     this.form = this.formBuilder.group({
-      material_type: [null, Validators.required],
+      material_type: ['', Validators.required],
       material_code:  [null, Validators.required],
       material_fullname: [null, Validators.required],
       material_purchase_org:[null, Validators.required],
@@ -112,10 +112,10 @@ export class MaterialAddComponent implements OnInit {
   createmMaterialTax(for_id) {
     return this.formBuilder.group({
       tax_for: for_id,
-      igst: [''],
-      cgst: [''],
-      sgst: [''],
-      hsn: ['']
+      igst: ['', Validators.required],
+      cgst: ['', Validators.required],
+      sgst: ['', Validators.required],
+      hsn: ['', Validators.required]
     });
   }
 
@@ -137,6 +137,12 @@ export class MaterialAddComponent implements OnInit {
     // this.form.value.material_tax.splice(index);
   }
 
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
+
   showHideMaterialTax()
   {
     
@@ -150,7 +156,10 @@ export class MaterialAddComponent implements OnInit {
      
     }
     else{
+
+      const material_tax_control = <FormArray>this.form.controls['material_tax'];
       this.is_taxable_value = false;
+      this.clearFormArray(material_tax_control);
       if(this.form.value.is_sales==true)
       {
         this.deleteMaterialTax(1);
@@ -203,6 +212,12 @@ export class MaterialAddComponent implements OnInit {
 
   addMaterial = function () {
 
+    if(this.is_taxable_value==false)
+    {
+      const material_tax_control = <FormArray>this.form.controls['material_tax'];
+      this.clearFormArray(material_tax_control);
+      this.form.value.material_tax = [];
+    }
     if (this.form.valid) {
 
       let material_purchase_org_arr = [];
@@ -220,10 +235,7 @@ export class MaterialAddComponent implements OnInit {
       this.form.value.material_purchase_org = material_purchase_org_arr;
       this.form.value.material_purchase_grp = material_purchase_grp_arr;
 
-      if(this.is_taxable_value==false)
-      {
-        this.form.value.material_tax = [];
-      }
+      
 
       
       this.materialService.addNewMaterial(this.form.value).subscribe(

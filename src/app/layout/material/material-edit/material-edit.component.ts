@@ -186,10 +186,10 @@ export class MaterialEditComponent implements OnInit {
   createmMaterialTax(for_id) {
     return this.formBuilder.group({
       tax_for: for_id,
-      igst: [''],
-      cgst: [''],
-      sgst: [''],
-      hsn: ['']
+      igst: ['', Validators.required],
+      cgst: ['', Validators.required],
+      sgst: ['', Validators.required],
+      hsn: ['', Validators.required]
     });
   }
 
@@ -215,6 +215,12 @@ export class MaterialEditComponent implements OnInit {
     // this.form.value.material_tax.splice(index);
   }
 
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
+
   showHideMaterialTax()
   {
     
@@ -228,7 +234,9 @@ export class MaterialEditComponent implements OnInit {
      
     }
     else{
+      const material_tax_control = <FormArray>this.form.controls['material_tax'];
       this.is_taxable_value = false;
+      this.clearFormArray(material_tax_control);
       if(this.form.value.is_sales==true)
       {
         this.deleteMaterialTax(1);
